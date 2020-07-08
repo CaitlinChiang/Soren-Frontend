@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+import Navbar from './components/01-Navbar'
 
 
 class App extends Component {
@@ -8,7 +11,10 @@ class App extends Component {
 
 	render() {
 		return (
-			<h1>Hello World!</h1>
+			<Router>
+				<Navbar />
+
+			</Router>
 		)
 	}
 }

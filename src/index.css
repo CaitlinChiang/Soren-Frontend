@@ -1,0 +1,11 @@
+/*General*/
+html { 
+	scroll-behavior: smooth;
+}
+
+body {
+	font: 15px/1.5 Helvetica, sans-serif;
+	color: #000000;
+	margin: 0;
+	padding: 0;
+}

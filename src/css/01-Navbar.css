@@ -1,0 +1,65 @@
+/*Navigation Bar*/
+header {
+	background: #000000;
+	min-height: 45px;
+  	position: relative;
+  	overflow: hidden;
+  	top: 0;
+  	text-align: center;
+  	width: 100%;
+}
+
+header ul {
+	margin: 27px 0px 0px;
+	float: left;
+}
+
+header ul li {
+	list-style: none;
+	display: inline;
+	margin: 0px;
+}
+
+header ul li a {
+	text-decoration: none;
+	font-size: 17px;
+	color: #ffffff;
+	margin: 0px 10px 0px;
+}
+
+.logo {
+	float: left;
+	margin-left: 50px;
+}
+
+.logo img {
+	height: 70px;
+}
+
+.cart {
+	float: right;
+	margin-top: 15px;
+	margin-right: 50px;
+}
+
+.cart img {
+	height: 45px;
+}
+
+
+
+/*Responsive*/
+@media(max-width: 685px) {
+	header ul {
+		float: none;
+		text-align: center;
+		margin: 0px auto 0px;
+		width: 100%;
+	}
+
+	.logo, .cart {
+		float: none;
+		text-align: center;
+		margin: 0px;
+	}
+}

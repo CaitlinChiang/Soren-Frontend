@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import './index.css'
+import './css/01-Navbar.css'
 
 import App from './App'
 
