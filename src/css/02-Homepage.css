@@ -1,0 +1,49 @@
+/*Homepage Design*/
+#home {
+	background-color: #000000;
+	min-height: 100vh;
+	text-align: center;
+}
+
+.mainLogo {
+	padding: 0px;
+	margin: 0px auto 0px;
+}
+
+.mainLogo img {
+	height: 500px;
+}
+
+.description {
+	background-color: #ffffff;
+	width: 500px;
+	min-height: 40px;
+	margin: 20px auto 50px;
+	padding: 20px;
+}
+
+.description h1 {
+	animation: type 2s steps(25);
+	overflow: hidden;
+	white-space: nowrap;
+	font-family: consolas;
+	border-right: 2px solid #000000;
+	width: 25ch;
+	margin: 0px auto 0px;
+}
+
+@keyframes type {
+	0% { width: 0ch; }
+	100% { width: 25ch; }
+}
+
+/*Responsive*/
+@media(max-width: 510px) {
+	.mainLogo { padding-top: 20px; }
+	.mainLogo img { height: 400px; }
+}
+
+@media(max-width: 400px) {
+	.mainLogo { padding-top: 30px; }
+	.mainLogo img { height: 300px; }
+}
