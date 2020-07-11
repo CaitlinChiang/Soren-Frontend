@@ -1,4 +1,4 @@
-/*Homepage Design*/
+/*Home Page Design*/
 #home {
 	background-color: #000000;
 	min-height: 100vh;
@@ -6,7 +6,7 @@
 }
 
 .mainLogo {
-	padding: 0px;
+	padding: 5px 0px 0px;
 	margin: 0px auto 0px;
 }
 
@@ -14,36 +14,116 @@
 	height: 500px;
 }
 
-.description {
-	background-color: #ffffff;
-	width: 500px;
-	min-height: 40px;
-	margin: 20px auto 50px;
-	padding: 20px;
-}
+.mobileTitlePage { display: none; }
 
-.description h1 {
-	animation: type 2s steps(25);
+.desktopTitlePage h1 {
+	color: #ffffff;
+	animation: desktop_type 2s steps(25);
 	overflow: hidden;
 	white-space: nowrap;
 	font-family: consolas;
-	border-right: 2px solid #000000;
+	border-right: 2px solid #ffffff;
 	width: 25ch;
+	font-size: 45px;
 	margin: 0px auto 0px;
 }
 
-@keyframes type {
+@keyframes desktop_type {
 	0% { width: 0ch; }
 	100% { width: 25ch; }
 }
 
+/*About Page Design*/
+#about:before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('/images/AboutBG.jpg');
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+}
+
+#about {
+	background: #000000;
+	background-color: rgba(0, 0, 0, 0.7);
+	min-height: 530px;
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.aboutTitle {
+	padding: 100px 50px 0px;
+}
+
+.aboutTitle h1 {
+	margin: 0;
+	font-size: 50px;
+	color: #ffffff;
+}
+
+.aboutDescription {
+	max-width: 700px;
+	margin: 70px auto 20px;
+	padding: 10px 50px 10px;
+	color: #ffffff;
+	font-size: 25px;
+}
+
 /*Responsive*/
+@media(max-width: 720px) {
+	.desktopTitlePage h1 { font-size: 35px; }
+}
+
 @media(max-width: 510px) {
 	.mainLogo { padding-top: 20px; }
 	.mainLogo img { height: 400px; }
+
+	.desktopTitlePage { display: none; }
+
+	.mobileTitlePage { 
+		display: block; 
+		padding-bottom: 50px;
+		margin-left: 10px;
+	}
+
+	.mobileTitlePage h1 {
+		color: #ffffff;
+		animation: mobile_type 1s steps(9);
+		overflow: hidden;
+		white-space: nowrap;
+		font-family: consolas;
+		width: 9ch;
+		font-size: 35px;
+		margin: 0px auto 20px;
+	}
+
+	@keyframes mobile_type {
+		0% { width: 0ch; }
+		100% { width: 9ch; }
+	}
+}
+
+@media(max-width: 500px) {
+	.aboutTitle h1 { font-size: 40px; }
+	.aboutDescription { font-size: 20px; }
 }
 
 @media(max-width: 400px) {
 	.mainLogo { padding-top: 30px; }
 	.mainLogo img { height: 300px; }
+
+	.mobileTitlePage h1 { font-size: 30px; }
 }
