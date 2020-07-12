@@ -5,6 +5,7 @@ header {
   	text-align: center;
   	width: 100%;
   	min-height: 80px;
+  	position: fixed;
 }
 
 .logo {
@@ -99,9 +100,9 @@ header {
 
 	.mobileNavbar { display: block; }
 
-	.logo {
-		margin: 0px 0px 0px 30px;
-	}
+	header { position: absolute; }
+
+	.logo { margin: 0px 0px 0px 30px; }
 
 	.cart {
 		top: -5px;
