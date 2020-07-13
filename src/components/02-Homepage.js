@@ -8,14 +8,8 @@ function Homepage() {
 			<section id="home">
 				<div class="mainLogo"> <img src="/images/Soren_Logo.png" /> </div>
 
-				<div class="desktopTitlePage">
-					<h1>Quality. Style. Elegance.</h1>
-				</div>
-
-				<div class="mobileTitlePage">
-					<h1>Quality.</h1>
-					<h1>Style.</h1>
-					<h1>Elegance.</h1>
+				<div class="homeTitle">
+					<h1><span>Quality.</span> <span>Style.</span> <span>Elegance.</span></h1>
 				</div>
 			</section>
 

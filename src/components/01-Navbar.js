@@ -20,6 +20,8 @@ class Navbar extends Component {
 					<div class="cart"> <img src="/images/ShoppingCart.png" /> </div>
 				</section>
 
+
+
 				<section class="mobileNavbar">
 					<div class="logo"> <img src="/images/Soren_Logo.png" /> </div>
 					<div class="menu-wrap">

@@ -24,18 +24,152 @@ class Shop extends Component {
 						<option value="Masks">Masks</option>
 						<option value="Shirts">Shirts</option>
 						{/* Test */}
-
 					</select>
 
-					<div class="desktopProductDisplay">
-						
+					<div class="productDisplay">
+
+						<div>
+							{/* Test -> Options should be coming from database */}
+							<div class="category"> <h2>Masks</h2> </div>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+						</div>
+
+						<div>
+							<div class="category"> <h2>Shirts</h2> </div>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+
+							<button>
+						    	<img src="/images/Soren_Logo.png" width="100%;"/>
+								<div class="productDescription">
+									<h1>Product Name</h1>
+									<p>P0.00 (Price)</p>
+								</div>
+							</button>
+						</div>
+						{/* Test */}
 					</div>
 
-					<div class="mobileProductDisplay">
-
-					</div> 
-
 				</section>
+
+				<footer>&#169; 2020 by Soren.</footer>
 			</div>
 		)
 	}

@@ -14,9 +14,7 @@
 	height: 500px;
 }
 
-.mobileTitlePage { display: none; }
-
-.desktopTitlePage h1 {
+.homeTitle h1 {
 	color: #ffffff;
 	animation: desktop_type 2s steps(25);
 	overflow: hidden;
@@ -84,29 +82,27 @@
 
 /*Responsive*/
 @media(max-width: 720px) {
-	.desktopTitlePage h1 { font-size: 35px; }
+	.homeTitle h1 { font-size: 35px; }
 }
 
 @media(max-width: 510px) {
 	.mainLogo { padding-top: 20px; }
 	.mainLogo img { height: 400px; }
 
-	.desktopTitlePage { display: none; }
-
-	.mobileTitlePage { 
-		display: block; 
-		padding-bottom: 50px;
+	.homeTitle { 
 		margin-left: 10px;
 	}
 
-	.mobileTitlePage h1 {
-		color: #ffffff;
-		animation: mobile_type 1s steps(9);
-		overflow: hidden;
-		white-space: nowrap;
-		font-family: consolas;
+	.homeTitle h1 {
+		border: none;
+		margin: 0px auto 20px;
 		width: 9ch;
-		font-size: 35px;
+	}
+
+	.homeTitle h1 span {
+		animation-delay: 1s;
+		animation: mobile_type 1s steps(9);
+		display: block;
 		margin: 0px auto 20px;
 	}
 
