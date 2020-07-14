@@ -108,11 +108,11 @@ header {
 	.cart {
 		top: -5px;
 		right: -30px;
-		position: fixed;
+		position: absolute;
 	}
 
 	.menu-wrap {
-		position: fixed;
+		position: absolute;
 		top: 12px;
 		right: 120px;
 		z-index: 1;
@@ -292,6 +292,9 @@ header {
 		transform: scaleY(0.7);
 	}
 }
+
+/*Contact Us*/
+
 
 /*Footer*/
 footer {

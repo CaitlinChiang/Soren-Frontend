@@ -1,6 +1,6 @@
 /*Shop Design*/
 #shop {
-	background: #595959;
+	background: #F9F9F9;
 	min-height: 100vh;
 	padding: 80px 0px 30px;
 	text-align: center;
@@ -25,14 +25,19 @@
 
 .productDisplay .category {
 	padding: 5px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 20px;
 }
 
 .productDisplay h2 {
 	text-transform: uppercase;
-	color: #ffffff;
+	color: #000000;
 	font-size: 30px;
 	padding: 0;
-	margin: 0px 0px 20px;
+	margin: 0px;
 	letter-spacing: 5px;
 }
 
@@ -41,8 +46,9 @@
 	padding: 0px;
 	max-width: 330px;
 	transition: 0.5s;
-	background: #E9E9E9;
-	border: 1px solid #000000;
+	background: #ffffff;
+	border: 1px solid #CDCDCD;
+	outline: none;
 }
 
 .productDisplay button:hover {
@@ -53,23 +59,24 @@
 .productDisplay button img {
 	object-fit: cover;
 	min-height: 250px;
+	background: #000000;
 }
 
 .productDescription {
 	padding: 3px 10px 3px;
-	background-color: #ffffff;
-	margin: 0px;
+	background-color: #191919;
+	margin: -4px 0px 0px;
 }
 
 .productDescription h1 {
 	font-size: 20px;
-	color: #000000;
+	color: #ffffff;
 }
 
 .productDescription p {
 	font-size: 17px;
 	font-weight: bold;
-	color: #6E6E6E;
+	color: #D7D7D7;
 }
 
 /*Optimized Product Display Design for Tablets and Phones*/
@@ -81,7 +88,7 @@
 	.productDisplay button { width: 50%; }
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1020px) {
 	.productDisplay button { margin: 5px 20px 5px; }
 }
 
@@ -118,6 +125,9 @@
 		background: transparent;
 		margin-top: 25px;
 	}
+
+	.productDescription h1 { color: #000000; }
+	.productDescription p { color: #656565; }
 }
 
 @media(max-width: 400px) {
