@@ -80,7 +80,7 @@
 }
 
 /*Optimized Product Display Design for Tablets and Phones*/
-@media(max-width: 1090px) {
+@media(max-width: 1110px) {
 	.productDisplay button { margin: 5px; }
 }
 
