@@ -294,6 +294,26 @@ header {
 }
 
 /*Contact Us*/
+.contactSidebar {
+	width: 300px;
+	position: fixed;
+	z-index: 1;
+	height: 100vh;
+	top: 0;
+	right: 0;
+	background-color: #111111;
+	transition: 0.5s;
+}
+
+.contactSidebar > div {
+	margin: 100px auto 50px;
+	color: #ffffff;
+	text-align: center;
+}
+
+.contactSidebar > div h1 { font-size: 30px; margin-bottom: 100px; }
+.contactSidebar > div p { font-size: 20px; }
+
 
 
 /*Footer*/
