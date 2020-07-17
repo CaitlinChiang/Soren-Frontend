@@ -4,7 +4,6 @@ import React from 'react'
 function Homepage() {
 	return (
 		<div>
-
 			<section id="home">
 				<div class="mainLogo"> <img src="/images/Soren_Logo.png" /> </div>
 

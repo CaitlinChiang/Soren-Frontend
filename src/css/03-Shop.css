@@ -25,8 +25,8 @@
 
 .productDisplay .category {
 	padding: 5px;
-	border-top: 1px solid #000000;
-	border-bottom: 1px solid #000000;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
 	border-left: none;
 	border-right: none;
 	margin-bottom: 20px;
@@ -34,7 +34,7 @@
 
 .productDisplay h2 {
 	text-transform: uppercase;
-	color: #000000;
+	color: #000;
 	font-size: 30px;
 	padding: 0;
 	margin: 0px;
@@ -46,20 +46,20 @@
 	padding: 0px;
 	max-width: 330px;
 	transition: 0.5s;
-	background: #ffffff;
+	background: #fff;
 	border: 1px solid #CDCDCD;
 	outline: none;
 }
 
 .productDisplay button:hover {
 	transform: translateY(-10px);
-	box-shadow: 0px 15px 20px #000000;
+	box-shadow: 0px 15px 20px #000;
 }
 
 .productDisplay button img {
 	object-fit: cover;
 	min-height: 250px;
-	background: #000000;
+	background: #000;
 }
 
 .productDescription {
@@ -70,7 +70,7 @@
 
 .productDescription h1 {
 	font-size: 20px;
-	color: #ffffff;
+	color: #fff;
 }
 
 .productDescription p {
@@ -126,7 +126,7 @@
 		margin-top: 25px;
 	}
 
-	.productDescription h1 { color: #000000; }
+	.productDescription h1 { color: #000; }
 	.productDescription p { color: #656565; }
 }
 

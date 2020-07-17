@@ -1,6 +1,6 @@
 /*Navigation Bar*/
 header {
-	background: #000000;
+	background: #000;
   	top: 0;
   	text-align: center;
   	width: 100%;
@@ -49,7 +49,7 @@ header {
 	margin: 15px 0;
 	text-decoration: none;
 	text-transform: uppercase;
-	color: #ffffff;
+	color: #fff;
 	font-weight: bold;
 	transition: .5s;
 	z-index: 2;
@@ -66,8 +66,8 @@ header {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	border-top: 1px solid #ffffff;
-	border-bottom: 1px solid #ffffff;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
 	transform: scaleY(2);
 	opacity: 0;
 	transition: .5s;
@@ -85,7 +85,7 @@ header {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #ffffff;
+	background: #fff;
 	transform: scale(0);
 	transition: .5s;
 	z-index: -1;
@@ -145,7 +145,7 @@ header {
 		position: relative;
 		width: 50%;
 		height: 2px;
-		background-color: #ffffff;
+		background-color: #fff;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -209,7 +209,7 @@ header {
 	}
 
 	.menu-wrap .menu > div {
-		background: rgba(0, 0, 0, 0.90);
+		background: rgba(0, 0, 0, 0.93);
 		border-radius: 50%;
 		width: 200vw;
 		height: 200vw;
@@ -235,7 +235,6 @@ header {
 	.mobileNavbar ul li {
 		list-style: none;
 		margin: 50px 20px 50px;
-
 	}
 
 	.mobileNavbar ul li a {
@@ -245,7 +244,7 @@ header {
 		margin: 15px 0;
 		text-decoration: none;
 		text-transform: uppercase;
-		color: #ffffff;
+		color: #fff;
 		font-weight: bold;
 		transition: .5s;
 		z-index: 2;
@@ -253,7 +252,7 @@ header {
 	}
 
 	.mobileNavbar ul li a:hover {
-		color: #000000;
+		color: #000;
 	}
 
 	.mobileNavbar ul li a:before {
@@ -263,8 +262,8 @@ header {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		border-top: 1px solid #ffffff;
-		border-bottom: 1px solid #ffffff;
+		border-top: 1px solid #fff;
+		border-bottom: 1px solid #fff;
 		transform: scaleY(2);
 		opacity: 0;
 		transition: .5s;
@@ -282,7 +281,7 @@ header {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: #ffffff;
+		background: #fff;
 		transform: scale(0);
 		transition: .5s;
 		z-index: -1;
@@ -294,27 +293,98 @@ header {
 }
 
 /*Contact Us*/
-.contactSidebar {
-	width: 300px;
+.contact {
+	width: 0px;
 	position: fixed;
-	z-index: 1;
+	z-index: 5;
 	height: 100vh;
 	top: 0;
 	right: 0;
-	background-color: #111111;
-	transition: 0.5s;
+	background-color: #111;
+	transition: all 0.4s ease;
 }
 
-.contactSidebar > div {
-	margin: 100px auto 50px;
-	color: #ffffff;
+.contact > div {
+	margin: 80px auto 50px;
+	color: #fff;
 	text-align: center;
+	position: fixed;
 }
 
-.contactSidebar > div h1 { font-size: 30px; margin-bottom: 100px; }
-.contactSidebar > div p { font-size: 20px; }
+.contact_close {
+	color: #dbdbdb;
+	font-size: 50px;
+	font-weight: bold;
+	float: left;
+	margin: 10px 20px 0px;
+	transition: all 0.4s ease;
+  }
+  
+.contact_close:hover,
+.contact_close:focus {
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+	transform: rotate(90deg);
+	transition: all 0.4s ease;
+}
 
+.contact > div h1 { font-size: 32px; margin-bottom: 80px; }
+.contact > div p { font-size: 23px; }
 
+.contact > div p, .menu > div > div > div > p {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	font-family: consolas;
+	margin: 0px 20px 20px;
+	border-radius: 10px;
+}
+
+.menu > div > div > div > p { font-size: 27px; padding-top: 50px; }
+
+.contact > div > div a, .menu > div > div > div > div a {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	background: #fff;
+	margin: 30px 10px;
+	text-decoration: none;
+	font-size: 28px;
+	border-radius: 50%;
+	color: #969696;
+	box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.2),
+					   2px 2px 5px rgba(0, 0, 0, 0.2);
+	transition: 0.5s;
+	display: inline-block;
+}
+
+.contact > div > div a:hover, .menu > div > div > div > div a:hover {
+	color: #000;
+	border-color: #1d1d1d;
+	transform: translateY(-15px);
+	box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 0.7),
+					   2px 24px 10px rgba(0, 0, 0, 0.7);
+}
+
+.contact > div > div a:before, .menu > div > div > div > div a:before {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+	border-radius: 50%;
+	border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.contact > div > div a .fa, .menu > div > div > div > div a .fa {
+	position: relative;
+	margin-top: 15px;
+}
 
 /*Footer*/
 footer {
