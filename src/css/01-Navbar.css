@@ -1,4 +1,4 @@
-/*Navigation Bar*/
+/* Navigation Bar */
 header {
 	background: #000;
   	top: 0;
@@ -14,8 +14,8 @@ header {
 	margin: 5px 10px 0px 50px;
 }
 
-.logo img {
-	height: 70px;
+.logo img { 
+	height: 70px; 
 }
 
 .cart {
@@ -23,23 +23,20 @@ header {
 	margin: 20px 50px 0px 0px;
 }
 
-.cart img {
-	height: 40px;
+.cart img { 
+	height: 40px; 
 }
 
-/*Optimized Navigation Bar Design for Desktop*/
+/* Optimized Navigation Bar Design for Desktop */
 .mobileNavbar { display: none; }
 
 .desktopNavbar ul {
 	float: left;
-	margin: 0;
-	padding: 0;
 	display: flex;
 }
 
-.desktopNavbar ul li {
-	list-style: none;
-	margin: 0px 20px 0px;
+.desktopNavbar ul li { 
+	margin: 0px 20px 0px; 
 }
 
 .desktopNavbar ul li a {
@@ -55,8 +52,8 @@ header {
 	z-index: 2;
 }
 
-.desktopNavbar ul li a:hover {
-	color: #000000;
+.desktopNavbar ul li a:hover { 
+	color: #000; 
 }
 
 .desktopNavbar ul li a:before {
@@ -91,19 +88,22 @@ header {
 	z-index: -1;
 }
 
-.desktopNavbar ul li a:hover:after {
-	transform: scaleY(0.7);
+.desktopNavbar ul li a:hover:after { 
+	transform: scaleY(0.7); 
 }
 
-/*Optimized Navigation Bar Design for Tablets and Phones*/
+/* Optimized Navigation Bar Design for Tablets and Phones */
 @media(max-width: 780px) {
 	.desktopNavbar { display: none; }
-
 	.mobileNavbar { display: block; }
 
-	header { position: absolute; }
+	header { 
+		position: absolute; 
+	}
 
-	.logo { margin: 0px 0px 0px 30px; }
+	.logo { 
+		margin: 0px 0px 0px 30px; 
+	}
 
 	.cart {
 		top: -5px;
@@ -111,14 +111,54 @@ header {
 		position: absolute;
 	}
 
-	.menu-wrap {
+	.mobileNavbar ul li a:hover {
+		color: #000;
+	}
+
+	.mobileNavbar ul li a:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-top: 1px solid #fff;
+		border-bottom: 1px solid #fff;
+		transform: scaleY(2);
+		opacity: 0;
+		transition: .5s;
+	}
+
+	.mobileNavbar ul li a:after {
+		content: '';
+		position: absolute;
+		top: 1px;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #fff;
+		transform: scale(0);
+		transition: .5s;
+		z-index: -1;
+	}
+
+	.mobileNavbar ul li a:hover:before {
+		transform: scaleY(0.95);
+		opacity: 1;
+	}
+
+	.mobileNavbar ul li a:hover:after {
+		transform: scaleY(0.7);
+	}
+
+	.mobileMenuContainer {
 		position: absolute;
 		top: 12px;
 		right: 120px;
 		z-index: 1;
 	}
 
-	.menu-wrap .toggler {
+	.mobileMenuContainer .mobileMenuToggler {
 		position: absolute;
 		top: 0;
 		z-index: 2;
@@ -128,7 +168,7 @@ header {
 		opacity: 0;
 	}
 
-	.menu-wrap .hamburger {
+	.mobileMenuContainer .hamburger {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -141,7 +181,7 @@ header {
 		justify-content: center;
 	}
 
-	.menu-wrap .hamburger > div {
+	.mobileMenuContainer .hamburger > div {
 		position: relative;
 		width: 50%;
 		height: 2px;
@@ -152,8 +192,8 @@ header {
 		transition: all 0.4s ease;
 	}
 
-	.menu-wrap .hamburger > div:before,
-	.menu-wrap .hamburger > div:after {
+	.mobileMenuContainer .hamburger > div:before,
+	.mobileMenuContainer .hamburger > div:after {
 		content: '';
 		position: absolute;
 		z-index: 1;
@@ -163,39 +203,39 @@ header {
 		background: inherit;
 	}
 
-	.menu-wrap .hamburger > div:after {
+	.mobileMenuContainer .hamburger > div:after {
 		top: 10px;
 	}
 
-	.menu-wrap .toggler:checked + .hamburger > div {
+	.mobileMenuContainer .mobileMenuToggler:checked + .hamburger > div {
 		transform: rotate(135deg);
 	}
 
-	.menu-wrap .toggler:checked + .hamburger > div:before,
-	.menu-wrap .toggler:checked + .hamburger > div:after {
+	.mobileMenuContainer .mobileMenuToggler:checked + .hamburger > div:before,
+	.mobileMenuContainer .mobileMenuToggler:checked + .hamburger > div:after {
 		top: 0;
 		transform: rotate(90deg);
 	}
 
-	.menu-wrap .toggler:checked:hover + .hamburger > div {
+	.mobileMenuContainer .mobileMenuToggler:checked:hover + .hamburger > div {
 		transform: rotate(225deg);
 	}
 
-	.menu-wrap .toggler:checked ~ .menu {
+	.mobileMenuContainer .mobileMenuToggler:checked ~ .mobileMenu {
 		visibility: visible;
 	}
 
-	.menu-wrap .toggler:checked ~ .menu > div {
+	.mobileMenuContainer .mobileMenuToggler:checked ~ .mobileMenu > div {
 		transform: scale(1);
 		transition-duration: 0.75s;
 	}
 
-	.menu-wrap .toggler:checked ~ .menu > div > div {
+	.mobileMenuContainer .mobileMenuToggler:checked ~ .mobileMenu > div > div {
 		opacity: 1;
 		transition: opacity 0.4s ease;
 	}
 
-	.menu-wrap .menu {
+	.mobileMenuContainer .mobileMenu {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -208,7 +248,7 @@ header {
 		justify-content: center;
 	}
 
-	.menu-wrap .menu > div {
+	.mobileMenuContainer .mobileMenu > div {
 		background: rgba(0, 0, 0, 0.93);
 		border-radius: 50%;
 		width: 200vw;
@@ -221,7 +261,7 @@ header {
 		transition: all 0.4s ease;
 	}
 
-	.menu-wrap .menu > div > div {
+	.mobileMenuContainer .mobileMenu > div > div {
 		text-align: center;
 		max-height: 100vh;
 		transition: opacity 0.4s ease;
@@ -250,49 +290,9 @@ header {
 		z-index: 2;
 		font-size: 25px;
 	}
-
-	.mobileNavbar ul li a:hover {
-		color: #000;
-	}
-
-	.mobileNavbar ul li a:before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		border-top: 1px solid #fff;
-		border-bottom: 1px solid #fff;
-		transform: scaleY(2);
-		opacity: 0;
-		transition: .5s;
-	}
-
-	.mobileNavbar ul li a:hover:before {
-		transform: scaleY(0.95);
-		opacity: 1;
-	}
-
-	.mobileNavbar ul li a:after {
-		content: '';
-		position: absolute;
-		top: 1px;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: #fff;
-		transform: scale(0);
-		transition: .5s;
-		z-index: -1;
-	}
-
-	.mobileNavbar ul li a:hover:after {
-		transform: scaleY(0.7);
-	}
 }
 
-/*Contact Us*/
+/* Contact Us */
 .contact {
 	width: 0px;
 	position: fixed;
@@ -311,7 +311,7 @@ header {
 	position: fixed;
 }
 
-.contact_close {
+.contactClose {
 	color: #dbdbdb;
 	font-size: 50px;
 	font-weight: bold;
@@ -320,8 +320,8 @@ header {
 	transition: all 0.4s ease;
   }
   
-.contact_close:hover,
-.contact_close:focus {
+.contactClose:hover,
+.contactClose:focus {
 	color: #fff;
 	text-decoration: none;
 	cursor: pointer;
@@ -329,10 +329,17 @@ header {
 	transition: all 0.4s ease;
 }
 
-.contact > div h1 { font-size: 32px; margin-bottom: 80px; }
-.contact > div p { font-size: 23px; }
+.contact > div h1 { 
+	font-size: 32px; 
+	margin-bottom: 80px; 
+}
 
-.contact > div p, .menu > div > div > div > p {
+.contact > div p { 
+	font-size: 23px; 
+}
+
+.contact > div p, 
+.mobileMenu > div > div > div > p {
 	color: #fff;
 	text-decoration: none;
 	font-weight: bold;
@@ -341,9 +348,19 @@ header {
 	border-radius: 10px;
 }
 
-.menu > div > div > div > p { font-size: 27px; padding-top: 50px; }
+.mobileMenu > div > div > div > p { 
+	font-size: 27px; 
+	padding-top: 50px; 
+}
 
-.contact > div > div a, .menu > div > div > div > div a {
+@media(max-width: 450px) {
+	.mobileMenu > div > div > div > p {
+		font-size: 21px;
+	}
+}
+
+.contact > div > div a, 
+.mobileMenu > div > div > div > div a {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -362,7 +379,8 @@ header {
 	display: inline-block;
 }
 
-.contact > div > div a:hover, .menu > div > div > div > div a:hover {
+.contact > div > div a:hover, 
+.mobileMenu > div > div > div > div a:hover {
 	color: #000;
 	border-color: #1d1d1d;
 	transform: translateY(-15px);
@@ -370,7 +388,8 @@ header {
 					   2px 24px 10px rgba(0, 0, 0, 0.7);
 }
 
-.contact > div > div a:before, .menu > div > div > div > div a:before {
+.contact > div > div a:before, 
+.mobileMenu > div > div > div > div a:before {
 	content: '';
 	position: absolute;
 	top: 5px;
@@ -381,12 +400,13 @@ header {
 	border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
-.contact > div > div a .fa, .menu > div > div > div > div a .fa {
+.contact > div > div a .fa, 
+.mobileMenu > div > div > div > div a .fa {
 	position: relative;
 	margin-top: 15px;
 }
 
-/*Footer*/
+/* Footer */
 footer {
 	min-height: 50px;
 	color: #ffffff;

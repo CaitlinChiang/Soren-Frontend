@@ -1,16 +1,16 @@
-/*Home Page Design*/
+/* Home Page Design */
 #home {
 	background-color: #000;
 	min-height: 100vh;
 	text-align: center;
 }
 
-.mainLogo {
+.homeLogo {
 	padding: 5px 0px 0px;
 	margin: 0px auto 0px;
 }
 
-.mainLogo img {
+.homeLogo img {
 	height: 500px;
 }
 
@@ -31,7 +31,7 @@
 	100% { width: 25ch; }
 }
 
-/*About Page Design*/
+/* About Page Design */
 #about:before {
 	content: "";
 	position: fixed;
@@ -80,14 +80,21 @@
 	font-size: 25px;
 }
 
-/*Responsive*/
+/* Responsive Home & About Pages */
 @media(max-width: 720px) {
-	.homeTitle h1 { font-size: 35px; }
+	.homeTitle h1 { 
+		font-size: 35px; 
+	}
 }
 
 @media(max-width: 510px) {
-	.mainLogo { padding-top: 20px; }
-	.mainLogo img { height: 400px; }
+	.homeLogo { 
+		padding-top: 20px; 
+	}
+
+	.homeLogo img { 
+		height: 400px; 
+	}
 
 	.homeTitle { 
 		margin-left: 10px;
@@ -113,13 +120,21 @@
 }
 
 @media(max-width: 500px) {
-	.aboutTitle h1 { font-size: 40px; }
-	.aboutDescription { font-size: 20px; }
+	.aboutTitle h1 { 
+		font-size: 40px; 
+	}
+
+	.aboutDescription { 
+		font-size: 20px; 
+	}
 }
 
 @media(max-width: 400px) {
-	.mainLogo { padding-top: 30px; }
-	.mainLogo img { height: 300px; }
+	.homeLogo { 
+		padding-top: 30px; 
+	}
 
-	.mobileTitlePage h1 { font-size: 30px; }
+	.homeLogo img { 
+		height: 300px; 
+	}
 }

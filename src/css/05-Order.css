@@ -1,0 +1,109 @@
+/* Order Form Design */
+#order {
+    min-height: 100vh;
+    background: #0f0f0f;
+    padding: 80px 30px 30px;
+}
+
+#order h1 {
+    color: #fff;
+    margin: 80px auto 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+#order > div {
+    border: 5px solid #fff;
+    padding: 10px;
+    max-width: 850px;
+    margin: 0px auto 0px;
+    text-align: center;
+}
+
+#order form {
+    border: 1px solid #fff;
+    margin: 0px auto 0px;
+    padding: 50px 20px 50px;
+}
+
+#order input, 
+#order select {
+	padding: 10px;
+	font-size: 18px;
+    color: #fff;
+    background: transparent;
+    border-top: none; border-right: none; border-left: none;
+	border-bottom: 1px solid #b8b8b8;
+	outline-style: none;
+	text-align: center;
+	margin: 20px 10px 20px;
+    display: inline-block;
+}
+
+#order select option { 
+    color: #000; 
+}
+
+::placeholder {
+    color: #b8b8b8;
+}
+
+/* Back to Cart & Order Buttons */
+#order > button, 
+#order div form > button {
+    background: #fff;
+    color: #000;
+	padding: 15px;
+	border-radius: 5px;
+	transition: 0.5s;
+	font-size: 20px;
+	cursor: pointer;
+	display: inline-block;
+    margin: 30px auto 0px;
+    border: none;
+}
+
+#order > button {
+    display: block;
+    margin: 30px 0px 30px;
+    padding: 10px;
+}
+
+#order > button:hover, 
+#order div form > button:hover { 
+    background: #6e6e6e;
+    color: #fff;
+}
+
+#order > button a { 
+    color: #000;
+    transition: 0.5s; 
+}
+
+#order > button:hover a { 
+    color: #fff; 
+}
+
+/* Responsive Order Form */
+@media(max-width: 900px) {
+    #order input, 
+    #order select {
+        display: block;
+        margin: 0px auto 30px;
+    }
+
+    #order select {
+        width: 240px;
+        text-align: center;
+    }
+}
+
+@media(max-width: 450px) {
+    #order {
+        padding: 80px 10px 30px;
+    }
+
+    #order form {
+        padding: 50px 0px 50px;
+    }
+}

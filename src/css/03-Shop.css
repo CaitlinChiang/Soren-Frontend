@@ -1,4 +1,4 @@
-/*Shop Design*/
+/* Shop Design */
 #shop {
 	background: #F9F9F9;
 	min-height: 100vh;
@@ -18,12 +18,12 @@
     width: 250px;
 }
 
-/*Optimized Product Display Design for Desktop*/
+/* Optimized Product Display Design for Desktop */
 .productDisplay > div {
 	padding: 0px 0px 100px;
 }
 
-.productDisplay .category {
+.productDisplay > div > div {
 	padding: 5px;
 	border-top: 1px solid #000;
 	border-bottom: 1px solid #000;
@@ -79,32 +79,44 @@
 	color: #D7D7D7;
 }
 
-/*Optimized Product Display Design for Tablets and Phones*/
+/* Optimized Product Display Design for Tablets and Phones */
 @media(max-width: 1110px) {
-	.productDisplay button { margin: 5px; }
+	.productDisplay button { 
+		margin: 5px; 
+	}
 }
 
 @media(max-width: 1030px) {
-	.productDisplay button { width: 50%; }
+	.productDisplay button { 
+		width: 50%; 
+	}
 }
 
 @media(max-width: 1020px) {
-	.productDisplay button { margin: 5px 20px 5px; }
+	.productDisplay button { 
+		margin: 5px 20px 5px; 
+	}
 }
 
 @media(max-width: 800px) {
-	#shop { padding: 80px 10px 30px; }
+	#shop { 
+		padding: 80px 10px 30px; 
+	}
 
 	.productDisplay button {
 		margin: 5px 0px 5px;
 		max-width: 470px;
 	}
 
-	.productDisplay button img { min-height: 200px; }
+	.productDisplay button img { 
+		min-height: 200px; 
+	}
 }
 
 @media(max-width: 500px) {
-	#shop { padding: 80px 5px 30px; }
+	#shop { 
+		padding: 80px 5px 30px; 
+	}
 
 	.productDisplay button {
 		min-width: 100%;
@@ -126,14 +138,27 @@
 		margin-top: 25px;
 	}
 
-	.productDescription h1 { color: #000; }
-	.productDescription p { color: #656565; }
+	.productDescription h1 { 
+		color: #000; 
+	}
+
+	.productDescription p { 
+		color: #656565; 
+	}
 }
 
 @media(max-width: 400px) {
-	.productDescription { margin-top: 30px; }
-	.productDescription h1 { font-size: 18px; }
-	.productDescription p { font-size: 15px; }
+	.productDescription { 
+		margin-top: 30px; 
+	}
+
+	.productDescription h1 { 
+		font-size: 18px; 
+	}
+
+	.productDescription p { 
+		font-size: 15px; 
+	}
 }
 
-/*Product Modal Carousel*/
+/* Product Modal Carousel */

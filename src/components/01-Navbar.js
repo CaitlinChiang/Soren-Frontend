@@ -5,10 +5,10 @@ import { HashLink as Link } from 'react-router-hash-link'
 class Navbar extends Component {
 	state = { }
 
-	//Mobile Menu Toggle
-	mobileMenu_hide = () => document.getElementById('toggler').checked = false
+	// Mobile Menu Toggle
+	mobileMenu_hide = () => document.getElementById('mobileMenuToggler').checked = false
 
-	//Contact Us Toggle
+	// Contact Us Toggle
 	contact_visible = () => document.getElementById('contact').style.width = '370px'
 	contact_hide    = () => document.getElementById('contact').style.width = '0px'
 
@@ -17,20 +17,28 @@ class Navbar extends Component {
 			<header>
 			
 				<section class="desktopNavbar">
-					<div class="logo"> <img src="/images/Soren_Logo.png" /> </div>
+					
+					<div class="logo"> 
+						<img src="/images/Soren_Logo.png" /> 
+					</div>
+
 					<ul>
 						<li> <Link to="/#home">  <a href="#">Home</a>  </Link> </li>
 						<li> <Link to="/#about"> <a href="#">About</a> </Link> </li>
 						<li> <Link to="/shop">   <a href="#">Shop</a>  </Link> </li>
 						<li> <Link> <a href="#" onClick={this.contact_visible}>Contact Us</a> </Link> </li>
 					</ul>
+
 					<div class="cart"> 
 						<Link to="/cart"> <img src="/images/ShoppingCart.png" /> </Link>
 					</div>
+
 				</section>
 
-				<section class="contact slide" id="contact">
-					<span class="contact_close" onClick={this.contact_hide}>&times;</span>
+				<section class="contact" id="contact">
+
+					<span class="contactClose" onClick={this.contact_hide}>&times;</span>
+
 					<div>
 						<h1>CONTACT US</h1>
 						<p>sorenphilippines@gmail.com</p>
@@ -39,25 +47,32 @@ class Navbar extends Component {
 							<a href="https://www.instagram.com/soren.ph/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
 						</div>
 					</div>
+
 				</section>
 
 
 
 				<section class="mobileNavbar">
-					<div class="logo"> <img src="/images/Soren_Logo.png" /> </div>
-					<div class="menu-wrap">
-						<input type="checkbox" class="toggler" id="toggler" />
 
+					<div class="logo"> 
+						<img src="/images/Soren_Logo.png" /> 
+					</div>
+					
+					<div class="mobileMenuContainer">
+
+						<input type="checkbox" class="mobileMenuToggler" id="mobileMenuToggler" />
 						<div class="hamburger"><div></div></div>
 
-						<div class="menu">
+						<div class="mobileMenu">
 							<div>
 								<div>
+
 									<ul>
 										<li> <Link to="/#home">  <a href="#" onClick={this.mobileMenu_hide}>Home</a>  </Link> </li>
 										<li> <Link to="/#about"> <a href="#" onClick={this.mobileMenu_hide}>About</a> </Link> </li>
 										<li> <Link to="/shop">   <a href="#" onClick={this.mobileMenu_hide}>Shop</a>  </Link> </li>
 									</ul>
+
 									<div>
 										<p>sorenphilippines@gmail.com</p>
 										<div>
@@ -65,13 +80,17 @@ class Navbar extends Component {
 											<a href="https://www.instagram.com/soren.ph/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>
+
 					</div>
+
 					<div class="cart"> 
 						<Link to="/cart"> <img src="/images/ShoppingCart.png" /> </Link>
 					</div>
+
 				</section>
 
 			</header>

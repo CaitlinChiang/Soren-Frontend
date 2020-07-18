@@ -1,6 +1,6 @@
 /*Global*/
-html {
-    scroll-behavior: smooth;
+html { 
+	scroll-behavior: smooth; 
 }
 
 body {
@@ -15,15 +15,17 @@ ul, li {
 	margin: 0;
 }
 
-a {
-	text-decoration: none;
+a { 
+	text-decoration: none; 
 }
 
-
+button {
+	outline: none;
+}
 
 /*Animations*/
-.fade-in {
-	animation: fadeIn 2s;
+.fade-in { 
+	animation: fadeIn 2s; 
 }
 
 @keyframes fadeIn {
@@ -32,10 +34,5 @@ a {
 }
 
 /*Scrollbar*/
-html::-webkit-scrollbar {
-    	width: 8px;
-}
-
-html::-webkit-scrollbar-thumb {
-    	background: #4A4A4A;
-}
+html::-webkit-scrollbar { width: 8px; }
+html::-webkit-scrollbar-thumb { background: #a1a1a1; }
