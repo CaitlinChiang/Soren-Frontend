@@ -48,17 +48,26 @@
     color: #b8b8b8;
 }
 
+.datepicker {
+    margin: 30px 0px 10px;
+}
+
+.datepicker h2 {
+    color: #fff;
+    font-size: 20px;
+}
+
 /* Back to Cart & Order Buttons */
 #order > button, 
 #order div form > button {
     background: #fff;
     color: #000;
-	padding: 15px;
+	padding: 10px;
 	border-radius: 5px;
 	transition: 0.5s;
 	font-size: 20px;
 	cursor: pointer;
-	display: inline-block;
+	display: block;
     margin: 30px auto 0px;
     border: none;
 }

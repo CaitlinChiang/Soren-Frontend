@@ -52,6 +52,10 @@ header {
 	z-index: 2;
 }
 
+.desktopNavbar ul li:hover a {
+	color: #000;
+}
+
 .desktopNavbar ul li a:hover { 
 	color: #000; 
 }

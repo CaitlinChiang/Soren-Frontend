@@ -6,15 +6,52 @@
     padding: 120px 0px 30px;
 }
 
+/* Cart Carousel */
 .cartContent {
+    position: relative;
     width: 80%;
-    min-height: 300px;
+    min-height: 400px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
     background: #fff;
-    margin: 0px auto 50px;
-    padding: 50px;
-    text-align: left;
+    margin: 20px auto 50px;
+}
+
+.productSection {
+    min-width: 33.2%;
+    transition: 0.5s;
+    position: relative;
     overflow: hidden;
 }
+
+#cart > div button {
+    font-size: 50px;
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    color: #fff;
+    background: transparent;
+    border: none;
+    transition: 0.5s;
+}
+
+.cartLeftArrow {
+    left: 50px;
+}
+
+.cartRightArrow {
+    right: 50px;
+}
+
+#cart > div button:hover {
+    font-size: 70px;
+}
+
+/* Responsive Cart Carousel */
+
 
 /* Cart Items */
 .cartItem {
@@ -23,9 +60,29 @@
     height: 350px;
     background: #000;
     display: inline-block;
-    margin: 0px 30px 0px;
     box-shadow: 0px 10px 15px #707070;
     text-align: center;
+    overflow: none;
+}
+
+.productClose {
+    color: #646464;
+	font-size: 40px;
+	font-weight: bold;
+    right: 0;
+    margin: 0px 10px 0px 0px;
+    transition: all 0.4s ease;
+    z-index: 2;
+    position: absolute;
+}
+  
+.productClose:hover,
+.productClose:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	transform: rotate(90deg);
+	transition: all 0.4s ease;
 }
 
 .cartItem .cartItemImage {
@@ -44,6 +101,7 @@
     height: 100%;
     object-fit: cover;
     transition: 0.5s;
+    z-index: 1;
 }
 
 .cartItem .cartItemContent {
@@ -58,6 +116,7 @@
     overflow: hidden;
     padding: 12px;
     box-sizing: border-box;
+    z-index: 3;
 }
 
 .cartItem .cartItemContent h1 {
@@ -105,10 +164,13 @@
     transition-delay: 0.5s;
 }
 
+/* Responsive Cart Items */
+
+
 /* Continue Shopping & Checkout Buttons */
 #cart > button {
 	background: #fff;
-	padding: 15px;
+	padding: 10px;
 	border-radius: 5px;
 	transition: 0.5s;
 	font-size: 20px;
@@ -123,7 +185,8 @@
 }
 
 #cart > button a { 
-    color: #000; transition: 0.5s; 
+    color: #000; 
+    transition: 0.5s; 
 }
 
 #cart > button:hover a { 

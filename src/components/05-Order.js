@@ -3,7 +3,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { addMonths, subMonths } from 'date-fns'
+import { addMonths, addDays } from 'date-fns'
 
 
 class Order extends Component {
@@ -55,8 +55,9 @@ class Order extends Component {
 
                             </div>
 
-                            <div>
-                                {/* <DatePicker inline selected={this.state.date} onChange={date => this.setState(prevState => ({ date: !prevState.date, date: date }))} minDate={new Date()} maxDate={addMonths(new Date(), 1)} format='MM-dd-yyyy' id="picker" required /> */}
+                            <div class="datepicker">
+                                <h2>Date of Delivery</h2>
+                                <DatePicker inline selected={this.state.date} onChange={date => this.setState({ date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 1)} format='MM-dd-yyyy' required />
                             </div>
 
                             <button type="submit">Order</button>
