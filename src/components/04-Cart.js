@@ -27,7 +27,7 @@ var cartItem = (
 
 class Cart extends Component {
 	state = {
-		cartList: [cartItem, cartItem, cartItem, cartItem],
+		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem],
 		x: 0
 	 }
 
@@ -60,9 +60,14 @@ class Cart extends Component {
 						{ this.state.cartList.map((product) => <div class="productSection" style={{ transform: `translateX(${this.state.x}%)` }}> { product } </div> )}
 					</div>
 
-					<div>
+					<div class="desktopCarouselArrows">
 						<button class="cartLeftArrow"  onClick={this.desktopCart_left}> &#8592;</button>
 						<button class="cartRightArrow" onClick={this.desktopCart_right}>&#8594;</button>
+					</div>
+
+					<div class="mobileCarouselArrows">
+						<button class="cartUpArrow"  > &#8593;</button>
+						<button class="cartDownArrow" >&#8595;</button>
 					</div>
 
 					<button> <Link to="/shop">  <a href="#">Continue Shopping</a> </Link> </button>
