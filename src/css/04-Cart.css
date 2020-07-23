@@ -143,7 +143,7 @@
     left: 10%;
     width: 80%;
     height: 80px;
-    background: #000;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     transition: 0.5s;
     overflow: hidden;
@@ -232,7 +232,6 @@
     .cartItem .cartItemContent {
         width: 250px;
         bottom: 190px;
-        background: rgba(0, 0, 0, 0.8);
     }
 
     .cartItem .cartItemContent:hover {
