@@ -3,7 +3,7 @@
     min-height: 100vh;
     background: #0f0f0f;
     text-align: center;
-    padding: 120px 0px 30px;
+    padding: 120px 0px 0px;
 }
 
 /* Cart Carousel */
@@ -30,7 +30,7 @@
 #cart > div button {
     font-size: 50px;
     position: absolute;
-    top: 48%;
+    top: 40%;
     transform: translateY(-50%);
     color: #fff;
     background: transparent;
@@ -38,14 +38,22 @@
     transition: 0.5s;
 }
 
-.mobileCarouselArrows { display: none }
+.mobileCarouselArrows { display: none; }
 
 .cartLeftArrow {
-    left: 50px;
+    left: 30px;
 }
 
 .cartRightArrow {
-    right: 50px;
+    right: 30px;
+}
+
+.cartUpArrow {
+    margin: -205px 10px 0px -50px;
+}
+
+.cartDownArrow {
+    margin: -205px 0px 0px 10px;
 }
 
 #cart > div button:hover {
@@ -54,6 +62,10 @@
 
 /* Responsive Cart Carousel */
 @media(max-width: 1240px) {
+    #cart {
+        padding: 150px 10px 100px;
+    }
+
     .cartContent {
         max-height: 648px;
         display: block;
@@ -64,13 +76,12 @@
         width: 50%;
         display: inline-block;
     }
+
+    .desktopCarouselArrows { display: none; }
+    .mobileCarouselArrows  { display: block; }
 }
 
 @media(max-width: 850px) {
-    #cart {
-        padding: 120px 10px 30px;
-    }
-
     .cartContent {
         max-width: 400px;
         max-height: 660px;
@@ -81,9 +92,6 @@
         width: 100%;
         display: block;
     }
-
-    .desktopCarouselArrows { display: none; }
-    /* .mobileCarouselArrows  { display: block; } */
 }
 
 /* Cart Items */
@@ -143,7 +151,7 @@
     left: 10%;
     width: 80%;
     height: 80px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: #fff;
     transition: 0.5s;
     overflow: hidden;
@@ -239,32 +247,23 @@
     }
 
     .cartItem .cartItemContent:hover h1 {
-        margin: 5px 0px -20px;
+        margin: 10px 0px -20px;
     }
 }
 
 /* Continue Shopping & Checkout Buttons */
-#cart > button {
-	background: #fff;
-	padding: 10px;
-	border-radius: 5px;
-	transition: 0.5s;
-	font-size: 20px;
-	cursor: pointer;
-	display: inline-block;
-    margin: 30px 20px 0px;
-    border: none;
+.cartOptionButtons a {
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: absolute;
+    width: 253px;
+    height: 60px;
+    left: 50%;
+    transform: translate(-50%);
+    line-height: 60px;
 }
 
-#cart > button:hover { 
-    background: #6e6e6e; 
-}
-
-#cart > button a { 
-    color: #000; 
-    transition: 0.5s; 
-}
-
-#cart > button:hover a { 
-    color: #fff; 
+.cartOptionButtons a:nth-of-type(2) {
+    margin: 100px 0px 0px;
 }

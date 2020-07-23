@@ -1,4 +1,4 @@
-/*Global*/
+/* Global */
 html { 
 	scroll-behavior: smooth; 
 }
@@ -23,7 +23,7 @@ button {
 	outline: none;
 }
 
-/*Animations*/
+/* Animations */
 .fade-in { 
 	animation: fadeIn 2s; 
 }
@@ -33,6 +33,34 @@ button {
 	to { opacity: 1; }
 }
 
-/*Scrollbar*/
+a svg,
+a svg rect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    fill: transparent;
+}
+
+a svg rect {
+    stroke: #94959c;
+    stroke-width: 4;
+    transition: 0.8s;
+    stroke-dasharray: 90, 220;
+    stroke-dashoffset: 75;
+}
+
+a:hover svg rect {
+    stroke-dasharray: 30, 280;
+    stroke-dashoffset: 325;
+}
+
+a:hover svg rect:nth-child(even) {
+    stroke-dasharray: 30, 280;
+    stroke-dashoffset: 695;
+}
+
+/* Scrollbar */
 html::-webkit-scrollbar { width: 8px; }
 html::-webkit-scrollbar-thumb { background: #a1a1a1; }

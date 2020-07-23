@@ -28,7 +28,8 @@ var cartItem = (
 class Cart extends Component {
 	state = {
 		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem],
-		x: 0
+		x: 0, 
+		y_tablet: 0, y_mobile: 0
 	 }
 
 	// Product Display Carousel
@@ -50,6 +51,17 @@ class Cart extends Component {
 		}
 	}
 
+	mobileCart_up = () => {
+		
+	}
+
+	mobileCart_down = () => {
+	
+	}
+
+	// y_tablet = 1240px width, y_mobile = 850px width
+	//style={{ transform: `translateY(${this.state.y}%)` }}
+
 	render() {
 		return (
 			<div>
@@ -66,13 +78,20 @@ class Cart extends Component {
 					</div>
 
 					<div class="mobileCarouselArrows">
-						<button class="cartUpArrow"  > &#8593;</button>
-						<button class="cartDownArrow" >&#8595;</button>
+						<button class="cartUpArrow"   onClick={this.mobileCart_up}>  &#8593;</button>
+						<button class="cartDownArrow" onClick={this.mobileCart_down}>&#8595;</button>
 					</div>
 
-					<button> <Link to="/shop">  <a href="#">Continue Shopping</a> </Link> </button>
-					<button> <Link to="/order"> <a href="#">Checkout</a>          </Link> </button>
-				
+					<div class="cartOptionButtons">
+						<Link to="/shop">  
+							<a href="#"> <svg> <rect></rect> <rect></rect> </svg> Continue Shopping </a>
+						</Link>
+
+						<Link to="/order">  
+							<a href="#"> <svg> <rect></rect> <rect></rect> </svg> Checkout </a>
+						</Link>
+					</div>
+
 				</section>
 
 				<footer>&#169; 2020 by Soren.</footer>
