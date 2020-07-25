@@ -3,8 +3,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 
 
 class Navbar extends Component {
-	state = { }
-
+	
 	// Mobile Menu Toggle
 	mobileMenu_hide = () => document.getElementById('mobileMenuToggler').checked = false
 
@@ -19,7 +18,7 @@ class Navbar extends Component {
 				<section class="desktopNavbar">
 					
 					<div class="logo"> 
-						<img src="/images/Soren_Logo.png" /> 
+						<img src="/images/logo.png" /> 
 					</div>
 
 					<ul>
@@ -30,7 +29,7 @@ class Navbar extends Component {
 					</ul>
 
 					<div class="cart"> 
-						<Link to="/cart"> <img src="/images/ShoppingCart.png" /> </Link>
+						<Link to="/cart"> <img src="/images/cart.png" /> </Link>
 					</div>
 
 				</section>
@@ -55,7 +54,7 @@ class Navbar extends Component {
 				<section class="mobileNavbar">
 
 					<div class="logo"> 
-						<img src="/images/Soren_Logo.png" /> 
+						<img src="/images/logo.png" /> 
 					</div>
 					
 					<div class="mobileMenuContainer">
@@ -88,7 +87,7 @@ class Navbar extends Component {
 					</div>
 
 					<div class="cart"> 
-						<Link to="/cart"> <img src="/images/ShoppingCart.png" /> </Link>
+						<Link to="/cart"> <img src="/images/cart.png" /> </Link>
 					</div>
 
 				</section>

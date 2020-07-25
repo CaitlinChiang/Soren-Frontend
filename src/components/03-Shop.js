@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
+import { HashLink as Link } from 'react-router-hash-link'
 
 
 class Shop extends Component {
-	state = {
-		category: 'All'
-	}
-
-	handleChange = (event) => {
-		event.preventDefault()
-		const { name, value } = event.target
-		this.setState({ [name]: value })
-	}
 
 	// TEST
 	item = () => {
 		return (
 			<button>
 
-				<img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/428148/item/phgoods_09_428148.jpg?width=1600&impolicy=quality_75" width="100%;"/>
+				<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
 				
 				<div class="productDescription">
 					<h1>Product Name</h1>
@@ -35,19 +27,16 @@ class Shop extends Component {
 				
 				<section id="shop">
 
-					<select value={this.state.category} name="category" onChange={this.handleChange}>
-						<option value="All">All Items</option>
-						{/* Test -> Options should be coming from database */}
-						<option value="Masks">Masks</option>
-						<option value="Shirts">Shirts</option>
-						{/* Test */}
-					</select>
+					<section id="allProducts_header" class="productPage_header">
+						<p>Soren Apparel</p>
+						<Link to="/masks">  <div> Masks  </div> </Link>
+						<Link to="/shirts"> <div> Shirts </div> </Link>
+					</section>
 
 					<div class="productDisplay">
 
 						{/* Test -> Options should be coming from database */}
 						<div>
-							<div> <h2>Masks</h2> </div>
 							{ this.item() }
 							{ this.item() }
 							{ this.item() }
@@ -55,7 +44,6 @@ class Shop extends Component {
 						</div>
 
 						<div>
-							<div> <h2>Shirts</h2> </div>
 							{ this.item() }
 							{ this.item() }
 							{ this.item() }

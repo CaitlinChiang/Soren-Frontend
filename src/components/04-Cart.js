@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
 
 
+// TEST
 var cartItem = (
 	<div class="cartItem">
 		
 		<span class="productClose">&times;</span>
 
 		<div class="cartItemImage">
-			<img src="https://image.uniqlo.com/UQ/ST3/ph/imagesgoods/428148/item/phgoods_09_428148.jpg?width=1600&impolicy=quality_75" width="100%;"/>
+			<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>
 		</div>
 		
 		<div class="cartItemContent">
@@ -24,13 +25,14 @@ var cartItem = (
 
 	</div>
 )
+// TEST
 
 class Cart extends Component {
 	state = {
 		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem],
 		x: 0, 
 		y_tablet: 0, y_mobile: 0
-	 }
+	}
 
 	// Product Display Carousel
 	desktopCart_left  = () => {

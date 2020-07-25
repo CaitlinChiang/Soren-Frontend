@@ -1,164 +1,185 @@
 /* Shop Design */
 #shop {
-	background: #F9F9F9;
+	background: #000;
 	min-height: 100vh;
-	padding: 80px 0px 30px;
+	padding: 80px 0px 0px;
 	text-align: center;
 }
 
-#shop select {
-	padding: 10px;
-    font-size: 20px;
-    color: #707070;
-    border-radius: 5px;
-    outline-style: none;
-    text-align: center;
-    margin: 50px auto 50px;
-    display: block;
-    width: 250px;
-}
-
-/* Optimized Product Display Design for Desktop */
-.productDisplay > div {
-	padding: 0px 0px 100px;
-}
-
-.productDisplay > div > div {
-	padding: 5px;
-	border-top: 1px solid #000;
-	border-bottom: 1px solid #000;
-	border-left: none;
-	border-right: none;
-	margin-bottom: 20px;
-}
-
-.productDisplay h2 {
+/* Shop Header */
+.productPage_header {
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	min-height: 300px;
+	text-align: center;
+	padding: 50px 0px 50px;
+	letter-spacing: 2px;
 	text-transform: uppercase;
+}
+
+.productPage_header p {
+	color: #fff;
+	font-size: 35px;
+	border: 1px solid #fff;
+	width: 370px;
+	margin: 50px auto 100px;
+	padding: 20px;
+}
+
+.productPage_header > a div {
+	width: 200px;
+	display: inline-block;
+	margin: 0px 50px 0px;
+	padding: 10px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	border-right: none;
+	border-left: none;
+	z-index: 1;
+	background: transparent;
+	transition: all 0.3s ease;
+  	position: relative;
+}
+
+.productPage_header > a div:after {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	background: #f1f1f1;
+	transition: all 0.3s ease;
+}
+
+.productPage_header > a div:hover {
 	color: #000;
-	font-size: 30px;
-	padding: 0;
-	margin: 0px;
-	letter-spacing: 5px;
 }
 
-.productDisplay button {
-	margin: 20px;
-	padding: 0px;
-	max-width: 330px;
-	transition: 0.5s;
-	background: #fff;
-	border: 1px solid #CDCDCD;
-	outline: none;
+.productPage_header > a div:hover:after {
+	top: 0;
+	height: 100%;
 }
 
-.productDisplay button:hover {
-	transform: translateY(-10px);
-	box-shadow: 0px 15px 20px #000;
-}
-
-.productDisplay button img {
-	object-fit: cover;
-	min-height: 250px;
-	background: #000;
-}
-
-.productDescription {
-	padding: 3px 10px 3px;
-	background-color: #191919;
-	margin: -4px 0px 0px;
-}
-
-.productDescription h1 {
+.productPage_header a {
 	font-size: 20px;
 	color: #fff;
 }
 
+/* Responsive Shop Header */
+@media(max-width: 650px) {
+	.productPage_header > a div {
+		width: 200px;
+		margin: 30px 20px 0px;
+	}
+}
+
+@media(max-width: 500px) {
+	.productPage_header p {
+		font-size: 25px;
+		width: 250px;
+		padding: 15px;
+	}
+
+	.productPage_header > a div { 
+		width: 180px;
+	}
+}
+
+/* Different Product Page Headers */
+#allProducts_header {
+	background-image: url('/images/TEST_AllProductsHeader.jpg');
+}
+
+#maskProducts_header {
+	background-image: url('/images/TEST_MaskHeader.jpg');
+}
+
+#shirtProducts_header {
+	background-image: url('/images/TEST_ShirtHeader.jpg');
+}
+
+/* Optimized Product Display Design for Desktop */
+.productDisplay {
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	background-image: url('/images/TEST_ShopBG.jpg');
+	min-height: 100vh;
+	text-align: center;
+	padding: 50px 0px 0px;
+
+	border-top: 5px solid #000;
+	border-right: none;
+	border-left: none;
+	border-bottom: none;
+}
+
+.productDisplay > div {
+	padding: 50px 0px 50px;
+	margin: 0px auto 0px;
+}
+
+.productDisplay button {
+	margin: 10px;
+	padding: 0px;
+	max-width: 350px;
+	transition: 0.5s;
+	background: #1a1a1a;
+	outline: none;
+	border: none;
+}
+
+.productDisplay button:hover {
+	transform: translateY(-20px);
+}
+
+.productDisplay button img {
+	object-fit: cover;
+	background: #000;
+}
+
+.productDescription {
+	padding: 0px 10px 0px;
+	background-color: #1a1a1a;
+	margin: -4px 0px 0px;
+	color: #fff;
+}
+
+.productDescription h1 {
+	font-size: 18px;
+	margin: 10px;
+}
+
 .productDescription p {
-	font-size: 17px;
+	font-size: 15px;
 	font-weight: bold;
-	color: #D7D7D7;
+	margin: 10px;
 }
 
 /* Optimized Product Display Design for Tablets and Phones */
-@media(max-width: 1110px) {
+@media(max-width: 1480px) {
 	.productDisplay button { 
 		margin: 5px; 
 	}
 }
 
-@media(max-width: 1030px) {
-	.productDisplay button { 
-		width: 50%; 
-	}
-}
-
-@media(max-width: 1020px) {
-	.productDisplay button { 
-		margin: 5px 20px 5px; 
-	}
-}
-
-@media(max-width: 800px) {
-	#shop { 
-		padding: 80px 10px 30px; 
-	}
-
+@media(max-width: 1440px) {
 	.productDisplay button {
-		margin: 5px 0px 5px;
-		max-width: 470px;
-	}
-
-	.productDisplay button img { 
-		min-height: 200px; 
+		max-width: 300px;
 	}
 }
 
-@media(max-width: 500px) {
-	#shop { 
-		padding: 80px 5px 30px; 
-	}
-
+@media(max-width: 630px) {
 	.productDisplay button {
-		min-width: 100%;
-		height: 150px;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
-
-	.productDisplay button img { 
-		max-width: 150px;
-		object-fit: scale-down;
-		float: left;
-		margin-top: -25px;
-	}
-
-	.productDescription { 
-		background: transparent;
-		margin-top: 25px;
-	}
-
-	.productDescription h1 { 
-		color: #000; 
-	}
-
-	.productDescription p { 
-		color: #656565; 
+		max-width: 250px;
 	}
 }
 
-@media(max-width: 400px) {
-	.productDescription { 
-		margin-top: 30px; 
-	}
-
-	.productDescription h1 { 
-		font-size: 18px; 
-	}
-
-	.productDescription p { 
-		font-size: 15px; 
+@media(max-width: 520px) {
+	.productDisplay button {
+		min-width: 270px;
 	}
 }
-
-/* Product Modal Carousel */

@@ -40,22 +40,15 @@
 	right: 0;
 	z-index: -1;
 	display: block;
-	background-image: url('/images/AboutBG.jpg');
+	background-image: url('/images/TEST_AboutBG.jpg');
 	background-position: center;
 	background-size: cover;
 	width: 100%;
 	height: 100%;
-
-	-webkit-filter: blur(5px);
-	-moz-filter: blur(5px);
-	-o-filter: blur(5px);
-	-ms-filter: blur(5px);
-	filter: blur(5px);
 }
 
 #about {
-	background: #000;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.3);
 	min-height: 530px;
 	text-align: center;
 	padding-top: 50px;

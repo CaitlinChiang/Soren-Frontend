@@ -28,10 +28,7 @@
 }
 
 #cart > div button {
-    font-size: 50px;
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
+    font-size: 70px;
     color: #fff;
     background: transparent;
     border: none;
@@ -41,23 +38,25 @@
 .mobileCarouselArrows { display: none; }
 
 .cartLeftArrow {
-    left: 30px;
+    float: left;
+    margin: -290px 0px 0px 30px;
 }
 
 .cartRightArrow {
-    right: 30px;
+    float: right;
+    margin: -290px 30px 0px 0px;
 }
 
-.cartUpArrow {
+/* .cartUpArrow {
     margin: -205px 10px 0px -50px;
 }
 
 .cartDownArrow {
     margin: -205px 0px 0px 10px;
-}
+} */
 
 #cart > div button:hover {
-    font-size: 70px;
+    color: #94959c;
 }
 
 /* Responsive Cart Carousel */
@@ -66,19 +65,29 @@
         padding: 150px 10px 100px;
     }
 
-    .cartContent {
-        max-height: 648px;
+    /* .cartContent {
+        max-height: 400px;
         display: block;
-    }
+    } */
 
+    .cartContent {
+        max-width: 60%;
+        min-height: 400px;
+    }
+    
     .productSection {
+        min-width: 45%;
+        margin: 0px 18px 0px;
+    }
+    
+
+    /* .productSection {
         max-height: 320px;
         width: 50%;
         display: inline-block;
-    }
+    } */
 
-    .desktopCarouselArrows { display: none; }
-    .mobileCarouselArrows  { display: block; }
+    
 }
 
 @media(max-width: 850px) {
@@ -92,6 +101,9 @@
         width: 100%;
         display: block;
     }
+
+    .desktopCarouselArrows { display: none;  }
+    .mobileCarouselArrows  { display: block; }
 }
 
 /* Cart Items */
@@ -209,7 +221,6 @@
 @media(max-width: 1240px) {
     .cartItem {
         min-width: 100%;
-        border: 1px solid #000;
     }
 
     .cartItem .cartItemImage {

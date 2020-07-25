@@ -8,7 +8,7 @@ function Homepage() {
 			<section id="home">
 
 				<div class="homeLogo"> 
-					<img src="/images/Soren_Logo.png" /> 
+					<img src="/images/logo.png" /> 
 				</div>
 
 				<div class="homeTitle">

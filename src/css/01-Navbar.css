@@ -254,9 +254,8 @@ header {
 
 	.mobileMenuContainer .mobileMenu > div {
 		background: rgba(0, 0, 0, 0.93);
-		border-radius: 50%;
-		width: 200vw;
-		height: 200vw;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex: none;
 		align-items: center;
@@ -412,9 +411,9 @@ header {
 
 /* Footer */
 footer {
-	min-height: 50px;
+	min-height: 40px;
 	color: #ffffff;
 	background: #000000;
 	text-align: center;
-	padding-top: 40px;
+	padding-top: 30px;
 }
