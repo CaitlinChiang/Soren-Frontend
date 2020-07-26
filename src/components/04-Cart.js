@@ -16,14 +16,17 @@ var cartItem = (
 		</div>
 		
 		<div class="cartItemContent">
-			<h1>Product Name</h1>
-			<h6>x</h6>
-			<p>(View Details)</p>
+			<p>View Details</p>
 			<div>
 				<p>Total Price: P0.00</p>
 				<p>Size: </p>
 				<p>Color: </p>
 			</div>
+		</div>
+
+		<div class="cartItemDetails">
+			<p>Product Name</p>
+			<p>x3</p>
 		</div>
 
 	</div>
@@ -41,17 +44,12 @@ const responsive = {
 		breakpoint: { max: 1220, min: 850 },
 		items: 2,
 		slidesToSlide: 2
-	},
-	mobile: {
-		breakpoint: { max: 850, min: 0 },
-		items: 1,
-		slidesToSlide: 1
 	}
 }
 
 class Cart extends Component {
 	state = {
-		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem]
+		cartList: [cartItem, cartItem, cartItem, cartItem]
 	}
 
 	render() {
@@ -60,9 +58,15 @@ class Cart extends Component {
 				
 				<section id="cart">
 
-					<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
+					<div class="largeCartView">
+						<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
+							{ this.state.cartList.map(product => product) }
+						</Carousel>
+					</div>
+
+					<div class="smallCartView">
 						{ this.state.cartList.map(product => product) }
-					</Carousel>
+					</div>
 
 					<div class="cartOptionButtons">
 						<Link to="/shop">  

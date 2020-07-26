@@ -11,10 +11,12 @@
 }
 
 /* Cart Carousel */
+.smallCartView { display: none; }
+
 .cartContent {
-    min-height: 400px;
+    min-height: 460px;
     border: 2px solid #fff;
-    margin: 20px auto 50px;
+    margin: 0px auto 50px;
     background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
@@ -87,9 +89,9 @@
 .cartItem .cartItemContent {
     position: absolute;
     bottom: 5px;
-    left: 10%;
-    width: 80%;
-    height: 110px;
+    left: 20%;
+    width: 60%;
+    height: 50px;
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
     transition: 0.5s;
@@ -99,16 +101,8 @@
     z-index: 3;
 }
 
-.cartItem .cartItemContent h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    transition: 0.5s;
-}
-
-.cartItem .cartItemContent h6 {
-    font-size: 17px;
-    margin: 10px;
+.cartItem .cartItemContent > p {
+    margin: 5px;
 }
 
 .cartItemContent > p { 
@@ -116,7 +110,7 @@
 }
 
 .cartItem .cartItemContent div {
-    margin: 50px 0 0;
+    margin: 100px 0 0;
     padding: 0;
     opacity: 0;
     transition: 0.5s;
@@ -134,10 +128,6 @@
     left: 0;
 }
 
-.cartItem .cartItemContent:hover h1 { 
-    margin-top: 20px; 
-}
-
 .cartItem .cartItemContent:hover > p {
     opacity: 0;
     display: none;
@@ -149,37 +139,133 @@
     transition-delay: 0.5s;
 }
 
+.cartItem .cartItemDetails {
+    background: #000;
+    margin-top: 116%;
+    color: #fff;
+    padding: 1px 5px 1px;
+}
+
+.cartItem .cartItemDetails > p:first-of-type {
+    font-size: 19px;
+    margin: 10px 5px 10px;
+}
+
+.cartItem .cartItemDetails > p:last-of-type {
+    font-size: 17px;
+    margin: 0px 5px 10px;
+}
+
 /* Responsive Cart Carousel & Cart Items */
 @media(max-width: 850px) {
     #cart {
-        padding: 90px 5px 0px;
+        padding: 120px 10px 0px;
     }
 
-    .cartContent { 
-        background: transparent;
+    .largeCartView { display: none; }
+    .smallCartView { display: block; }
+
+    .cartItem {
+        width: 100%;
+        height: 100px;
+        margin: 5px 0px 0px;
+    }
+
+    .cartItem .productClose:hover {
+        color: #fff;
+    }
+
+    .cartItem .cartItemImage img {
+        max-width: 150px;
+    }
+
+    .cartItem .cartItemContent {
+        border-bottom: 1px solid #fff;
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        margin: 0px 45% 0px;
+        width: 150px;
+        bottom: 30px;
+    }
+
+    .cartItem .cartItemContent > p {
+        color: #fff;
+    }
+
+    .cartItem .cartItemContent > div {
+        margin: 5px 0px 0px;
+    }
+
+    .cartItem .cartItemContent > div p {
+        margin: 0px 0px 10px;
+    }
+
+    .cartItem .cartItemContent:hover {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        background: rgba(0, 0, 0, 0.95);
         border: none;
+    }
+
+    .cartItem .cartItemDetails {
+        margin: 25px 30% 0px;
+        color: #fff;
+        padding: 0;
+        width: 150px;
     }
 }
 
-@media(max-width: 500px) {
-    #cart {
-        padding: 80px 10px 0px;
+@media(max-width: 650px) {
+    .cartItem .cartItemContent {
+        margin: 0px 42% 0px;
+    }
+}
+
+@media(max-width: 570px) {
+    .cartItem .productClose {
+        font-size: 35px;
     }
 
-    .cartContent {
-        min-height: 450px;
+    .cartItem .cartItemContent {
+        background: transparent;
+        margin: 0px 28% -35px;
+        border: none;
+        position: absolute;
+    }
+
+    .cartItem .cartItemContent > p {
+        font-size: 15px;
+        text-decoration: underline;
+    }
+
+    .cartItem .cartItemDetails {
+        margin: 0px 48% 0px;
+        position: absolute;
+        bottom: 30px;
+    }
+
+    .cartItem .cartItemDetails > p:first-of-type {
+        font-size: 17px;
+    }
+    
+    .cartItem .cartItemDetails > p:last-of-type {
+        font-size: 15px;
     }
 }
 
 @media(max-width: 400px) {
-    #cart > div button:first-of-type {
-        left: 90px;
-        bottom: 0px;
+    .cartItem .cartItemImage img {
+        max-width: 120px;
     }
-    
-    #cart > div button:last-of-type {
-        right: 90px;
-        bottom: 0px;
+
+    .cartItem .cartItemContent {
+        margin: 0px 21% -35px;
+    }
+
+    .cartItem .cartItemDetails {
+        margin: 0px 40% 0px;
     }
 }
 
@@ -187,6 +273,7 @@
 .cartOptionButtons {
     min-height: 170px;
     padding-bottom: 100px;
+    margin-top: 50px;
 }
 
 .cartOptionButtons a {
