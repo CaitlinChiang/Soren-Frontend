@@ -28,7 +28,7 @@ class Order extends Component {
 
                 <section id="order">
 
-                    <button> <Link to="/cart"> <a href="#">&#8592; Back to Cart</a> </Link> </button>
+                    <Link to="/cart"> <div>&#8592; Back to Cart</div> </Link>
 
                     <h1>Total Cost: P0.00</h1>
 

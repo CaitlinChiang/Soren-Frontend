@@ -7,7 +7,7 @@
 
 #order h1 {
     color: #fff;
-    margin: 80px auto 20px;
+    margin: 50px auto 20px;
     text-align: center;
     font-size: 30px;
 }
@@ -32,8 +32,10 @@
 	font-size: 18px;
     color: #fff;
     background: transparent;
-    border-top: none; border-right: none; border-left: none;
-	border-bottom: 1px solid #b8b8b8;
+    border-bottom: 1px solid #b8b8b8;
+    border-top: none; 
+    border-right: none; 
+    border-left: none;
 	outline-style: none;
 	text-align: center;
 	margin: 20px 10px 20px;
@@ -57,40 +59,67 @@
     font-size: 20px;
 }
 
-/* Back to Cart & Order Buttons */
-#order > button, 
-#order div form > button {
-    background: #fff;
-    color: #000;
+/* Back to Cart Link & Order Button */
+#order > a div {
+    width: 140px;
+	display: block;
+	margin: 15px 0px 0px;
 	padding: 10px;
-	border-radius: 5px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	border-right: none;
+	border-left: none;
+	z-index: 1;
+	background: transparent;
+	transition: all 0.3s ease;
+  	position: relative;
+}
+
+#order > a div:after {
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	background: #fff;
+	transition: all 0.3s ease;
+}
+
+#order > a div:hover {
+	color: #000;
+}
+
+#order > a div:hover:after {
+	top: 0;
+	height: 100%;
+}
+
+#order a {
+	font-size: 20px;
+	color: #fff;
+}
+
+#order div form > button {
+    background: transparent;
+    color: #fff;
+	padding: 10px;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    border-right: none;
+    border-left: none;
 	transition: 0.5s;
 	font-size: 20px;
 	cursor: pointer;
 	display: block;
     margin: 30px auto 0px;
-    border: none;
+    width: 200px;
 }
 
-#order > button {
-    display: block;
-    margin: 30px 0px 30px;
-    padding: 10px;
-}
-
-#order > button:hover, 
 #order div form > button:hover { 
-    background: #6e6e6e;
-    color: #fff;
-}
-
-#order > button a { 
+    background: #ffffff;
     color: #000;
-    transition: 0.5s; 
-}
-
-#order > button:hover a { 
-    color: #fff; 
 }
 
 /* Responsive Order Form */
