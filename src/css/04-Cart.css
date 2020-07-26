@@ -3,107 +3,35 @@
     min-height: 100vh;
     background: #0f0f0f;
     text-align: center;
-    padding: 120px 0px 0px;
+    padding: 120px 50px 0px;
+    background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	background-image: url('/images/TEST_ShopBG.jpg');
 }
 
 /* Cart Carousel */
 .cartContent {
-    position: relative;
-    max-width: 80%;
     min-height: 400px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    background: #fff;
+    border: 2px solid #fff;
     margin: 20px auto 50px;
-}
-
-.productSection {
-    min-width: 33.2%;
-    transition: 0.5s;
-    position: relative;
-    overflow: hidden;
+    background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	background-image: url('/images/TEST_AllProductsHeader.jpg');
 }
 
 #cart > div button {
-    font-size: 70px;
-    color: #fff;
     background: transparent;
-    border: none;
-    transition: 0.5s;
+    z-index: 1;
 }
 
-.mobileCarouselArrows { display: none; }
-
-.cartLeftArrow {
-    float: left;
-    margin: -290px 0px 0px 30px;
+#cart > div button:first-of-type {
+    left: 0;
 }
 
-.cartRightArrow {
-    float: right;
-    margin: -290px 30px 0px 0px;
-}
-
-/* .cartUpArrow {
-    margin: -205px 10px 0px -50px;
-}
-
-.cartDownArrow {
-    margin: -205px 0px 0px 10px;
-} */
-
-#cart > div button:hover {
-    color: #94959c;
-}
-
-/* Responsive Cart Carousel */
-@media(max-width: 1240px) {
-    #cart {
-        padding: 150px 10px 100px;
-    }
-
-    /* .cartContent {
-        max-height: 400px;
-        display: block;
-    } */
-
-    .cartContent {
-        max-width: 60%;
-        min-height: 400px;
-    }
-    
-    .productSection {
-        min-width: 45%;
-        margin: 0px 18px 0px;
-    }
-    
-
-    /* .productSection {
-        max-height: 320px;
-        width: 50%;
-        display: inline-block;
-    } */
-
-    
-}
-
-@media(max-width: 850px) {
-    .cartContent {
-        max-width: 400px;
-        max-height: 660px;
-    }
-
-    .productSection {
-        max-height: 220px;
-        width: 100%;
-        display: block;
-    }
-
-    .desktopCarouselArrows { display: none;  }
-    .mobileCarouselArrows  { display: block; }
+#cart > div button:last-of-type {
+    right: 0;
 }
 
 /* Cart Items */
@@ -113,7 +41,6 @@
     height: 350px;
     background: #000;
     display: inline-block;
-    box-shadow: 0px 10px 15px #707070;
     text-align: center;
     overflow: none;
 }
@@ -159,10 +86,10 @@
 
 .cartItem .cartItemContent {
     position: absolute;
-    bottom: 15px;
+    bottom: 5px;
     left: 10%;
     width: 80%;
-    height: 80px;
+    height: 110px;
     background: rgba(0, 0, 0, 0.9);
     color: #fff;
     transition: 0.5s;
@@ -177,6 +104,11 @@
     padding: 0;
     font-size: 20px;
     transition: 0.5s;
+}
+
+.cartItem .cartItemContent h6 {
+    font-size: 17px;
+    margin: 10px;
 }
 
 .cartItemContent > p { 
@@ -217,52 +149,46 @@
     transition-delay: 0.5s;
 }
 
-/* Responsive Cart Items */
-@media(max-width: 1240px) {
-    .cartItem {
-        min-width: 100%;
+/* Responsive Cart Carousel & Cart Items */
+@media(max-width: 850px) {
+    #cart {
+        padding: 90px 5px 0px;
     }
 
-    .cartItem .cartItemImage {
-        width: 100%;
-        padding: 0px auto 0px;
-    }
-
-    .cartItem .cartItemContent {
-        width: 250px;
-        bottom: 30px;
-        transform: translateX(-50%);
-        left: 50%;
-    }
-
-    .cartItem .cartItemContent:hover {
-        width: 100%;
-        height: 100%;
-        transform: translateX(-50%);
-        left: 50%;
+    .cartContent { 
+        background: transparent;
+        border: none;
     }
 }
 
-@media(max-width: 850px) {
-    .cartItem {
-        border: none;
+@media(max-width: 500px) {
+    #cart {
+        padding: 80px 10px 0px;
     }
 
-    .cartItem .cartItemContent {
-        width: 250px;
-        bottom: 190px;
+    .cartContent {
+        min-height: 450px;
     }
+}
 
-    .cartItem .cartItemContent:hover {
-        width: 100%;
+@media(max-width: 400px) {
+    #cart > div button:first-of-type {
+        left: 90px;
+        bottom: 0px;
     }
-
-    .cartItem .cartItemContent:hover h1 {
-        margin: 10px 0px -20px;
+    
+    #cart > div button:last-of-type {
+        right: 90px;
+        bottom: 0px;
     }
 }
 
 /* Continue Shopping & Checkout Buttons */
+.cartOptionButtons {
+    min-height: 170px;
+    padding-bottom: 100px;
+}
+
 .cartOptionButtons a {
     color: #fff;
     letter-spacing: 2px;

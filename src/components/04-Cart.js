@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
 
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+
 
 // TEST
 var cartItem = (
@@ -14,10 +17,10 @@ var cartItem = (
 		
 		<div class="cartItemContent">
 			<h1>Product Name</h1>
+			<h6>x</h6>
 			<p>(View Details)</p>
 			<div>
 				<p>Total Price: P0.00</p>
-				<p>Quantity: </p>
 				<p>Size: </p>
 				<p>Color: </p>
 			</div>
@@ -27,42 +30,29 @@ var cartItem = (
 )
 // TEST
 
+// Resposive Properties of the Cart Carousel
+const responsive = {
+	desktop: {
+		breakpoint: { max: 3000, min: 1220 },
+		items: 3,
+		slidesToSlide: 3
+	},
+	tablet: {
+		breakpoint: { max: 1220, min: 850 },
+		items: 2,
+		slidesToSlide: 2
+	},
+	mobile: {
+		breakpoint: { max: 850, min: 0 },
+		items: 1,
+		slidesToSlide: 1
+	}
+}
+
 class Cart extends Component {
 	state = {
-		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem],
-		x: 0, 
-		y_tablet: 0, y_mobile: 0
+		cartList: [cartItem, cartItem, cartItem, cartItem, cartItem]
 	}
-
-	// Product Display Carousel
-	desktopCart_left  = () => {
-		if (this.state.x === 0) {
-			this.setState({ x: -300 * ( this.state.cartList.length - Math.floor(this.state.cartList.length * (2 / 3) + 1) ) })
-		}
-		else {
-			this.setState({ x: this.state.x + 300 })
-		} 
-	}
-
-	desktopCart_right = () => { 
-		if (this.state.x === -300 * ( this.state.cartList.length - Math.floor(this.state.cartList.length * (2 / 3) + 1) )) {
-			this.setState({ x: 0 })
-		} 
-		else {
-			this.setState({ x: this.state.x - 300 }) 
-		}
-	}
-
-	mobileCart_up = () => {
-		
-	}
-
-	mobileCart_down = () => {
-	
-	}
-
-	// y_tablet = 1240px width, y_mobile = 850px width
-	//style={{ transform: `translateY(${this.state.y}%)` }}
 
 	render() {
 		return (
@@ -70,19 +60,9 @@ class Cart extends Component {
 				
 				<section id="cart">
 
-					<div class="cartContent">
-						{ this.state.cartList.map((product) => <div class="productSection" style={{ transform: `translateX(${this.state.x}%)` }}> { product } </div> )}
-					</div>
-
-					<div class="desktopCarouselArrows">
-						<button class="cartLeftArrow"  onClick={this.desktopCart_left}> &#8592;</button>
-						<button class="cartRightArrow" onClick={this.desktopCart_right}>&#8594;</button>
-					</div>
-
-					<div class="mobileCarouselArrows">
-						<button class="cartUpArrow"   onClick={this.mobileCart_up}>  &#8593;</button>
-						<button class="cartDownArrow" onClick={this.mobileCart_down}>&#8595;</button>
-					</div>
+					<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
+						{ this.state.cartList.map(product => product) }
+					</Carousel>
 
 					<div class="cartOptionButtons">
 						<Link to="/shop">  
