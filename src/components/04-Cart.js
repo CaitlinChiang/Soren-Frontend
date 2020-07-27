@@ -9,7 +9,7 @@ import 'react-multi-carousel/lib/styles.css'
 var cartItem = (
 	<div class="cartItem">
 		
-		<span class="productClose">&times;</span>
+		<span class="cartItemClose">&times;</span>
 
 		<div class="cartItemImage">
 			<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>

@@ -47,7 +47,7 @@
     overflow: none;
 }
 
-.productClose {
+.cartItemClose {
     color: #646464;
 	font-size: 40px;
 	font-weight: bold;
@@ -58,8 +58,8 @@
     position: absolute;
 }
   
-.productClose:hover,
-.productClose:focus {
+.cartItemClose:hover,
+.cartItemClose:focus {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
@@ -171,7 +171,7 @@
         margin: 5px 0px 0px;
     }
 
-    .cartItem .productClose:hover {
+    .cartItem .cartItemClose:hover {
         color: #fff;
     }
 
@@ -224,7 +224,7 @@
 }
 
 @media(max-width: 570px) {
-    .cartItem .productClose {
+    .cartItem .cartItemClose {
         font-size: 35px;
     }
 
