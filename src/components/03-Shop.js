@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
 
-import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
-
 
 // TEST
 var shopItem = (
@@ -14,15 +11,6 @@ var shopItem = (
 		<div class="productDescription">
 			<h1>Product Name</h1>
 			<p>P0.00 (Price)</p>
-		</div>
-
-		<div class="shopCarouselDescription">
-			<p>Product Name</p>
-			<p>P0.00</p>
-			<p>Color:</p>
-			<p>Size: </p>
-			<p>Quantitiy: </p>
-			<button>Add to Cart</button>
 		</div>
 
 	</button>
@@ -40,8 +28,7 @@ const responsive = {
 
 class Shop extends Component {
 	state = {
-		shopList: [shopItem, shopItem, shopItem, shopItem],
-		showCarousel: false
+		shopList: [shopItem, shopItem, shopItem, shopItem]
 	}
 
 	render() {
@@ -67,14 +54,6 @@ class Shop extends Component {
 							{ this.state.shopList.map(item => item) }
 						</div>
 						{/* Test */}
-
-						{ this.state.showCarousel === true ?
-							<div class="shopCarousel">
-								<Carousel containerClass="shopSlider" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
-									{ this.state.shopList.map(item => item) }
-								</Carousel>
-							</div>
-						: null }
 
 					</div>
 
