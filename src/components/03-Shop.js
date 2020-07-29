@@ -17,15 +17,6 @@ var shopItem = (
 )
 // TEST
 
-// Resposive Properties of the Cart Carousel
-const responsive = {
-	desktop: {
-		breakpoint: { max: 3000, min: 0 },
-		items: 1,
-		slidesToSlide: 1
-	}
-}
-
 class Shop extends Component {
 	state = {
 		shopList: [shopItem, shopItem, shopItem, shopItem]

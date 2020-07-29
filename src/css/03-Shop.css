@@ -136,7 +136,7 @@
 	transition: all 0.5s ease;
 }
 
-.productDisplay button img {
+.productDisplay div button img {
 	object-fit: cover;
 	background: #000;
 	transition: all 0.5s ease;
@@ -172,21 +172,169 @@
 }
 
 @media(max-width: 1440px) {
-	.productDisplay button {
+	.productDisplay div button {
 		max-width: 300px;
 	}
 }
 
 @media(max-width: 630px) {
-	.productDisplay button {
+	.productDisplay div button {
 		max-width: 250px;
 	}
 }
 
 @media(max-width: 520px) {
-	.productDisplay button {
+	.productDisplay div button {
 		min-width: 270px;
 	}
 }
 
 /* Individual Shop Item Pages */
+#items {
+	min-height: 100vh;
+	background: #1a1a1a;
+	text-align: center;
+	padding: 130px 50px 20px;
+}
+
+.individualItem img {
+	width: 500px;
+	margin: 0px 120px 0px 0px;
+	display: inline-block;
+}
+
+.individualItem > .orderItem {
+	color: #fff;
+	text-align: left;
+	font-size: 20px;
+	display: inline-block;
+}
+
+.orderItem > div:first-of-type button {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	background: #fff;
+	border: none;
+	transition: all 0.5s ease;
+	font-size: 17px;
+}
+
+.orderItem > div:first-of-type button:hover {
+	background: #a7a6a6;
+	transition: all 0.5s ease;
+}
+
+.orderItem > div:nth-of-type(2) button {
+	width: 35px;
+	height: 35px;
+	margin-right: 10px;
+	outline: none;
+	border-radius: 50%;
+	border: none;
+}
+
+.orderItem > button {
+	text-transform: uppercase;
+	background: #000;
+	font-size: 18px;
+	color: #fff;
+	padding: 15px 100px 15px;
+	margin-top: 120px;
+	transition: all 0.4s ease;
+	letter-spacing: 2px;
+	border: none;
+}
+
+.orderItem > button:hover {
+	background: #fff;
+	transition: all 0.4s ease;
+	color: #000;
+}
+
+/* Responsive Individual Shop Item Pages */
+@media(max-width: 1065px) {
+	.individualItem img {
+		width: 450px;
+		margin: 0px 80px 0px 0px;
+	}
+
+	.individualItem .orderItem {
+		font-size: 18px;
+	}
+
+	.orderItem > div:first-of-type button {
+		width: 35px;
+		height: 35px;
+		margin-right: 10px;
+		font-size: 15px;
+	}
+
+	.orderItem > div:nth-of-type(2) button {
+		width: 30px;
+		height: 30px;
+	}
+
+	.orderItem > button {
+		font-size: 15px;
+		padding: 15px 80px 15px;
+		margin-top: 100px;
+	}
+}
+
+@media(max-width: 995px) {
+	.individualItem img {
+		width: 400px;
+	}
+
+	.individualItem .orderItem {
+		font-size: 17px;
+	}
+}
+
+@media(max-width: 865px) {
+	#items {
+		padding: 130px 20px 20px;
+	}
+
+	.individualItem img {
+		width: 400px;
+		margin: 0px auto 50px;
+		display: block;
+	}
+
+	.individualItem .orderItem {
+		display: block;
+		text-align: center;
+	}
+
+	.orderItem > button {
+		font-size: 15px;
+		padding: 15px 80px 15px;
+		margin: 50px 0px 50px;
+	}
+}
+
+@media(max-width: 500px) {
+	.individualItem img {
+		width: 300px;
+	}
+
+	.individualItem .orderItem h1 {
+		font-size: 22px;
+	}
+
+	.orderItem > button {
+		padding: 15px 60px 15px;
+	}
+}
+
+@media(max-width: 350px) {
+	#items {
+		padding: 130px 10px 20px;
+	}
+
+	.individualItem img {
+		width: 280px;
+	}
+}

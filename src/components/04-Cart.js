@@ -39,11 +39,6 @@ const responsive = {
 		breakpoint: { max: 3000, min: 1220 },
 		items: 3,
 		slidesToSlide: 3
-	},
-	tablet: {
-		breakpoint: { max: 1220, min: 850 },
-		items: 2,
-		slidesToSlide: 2
 	}
 }
 
