@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { HashLink as Link } from 'react-router-hash-link'
 
 
 class Individual_Item extends Component {
     state = { 
         size: '',
-        color: ''
+        color: '',
+        quantity: 0
     }
 
-    // Add Quantity
+    handleChange = (event) => {
+        event.preventDefault()
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
 
     // TEST
     item = () => {
@@ -34,6 +40,24 @@ class Individual_Item extends Component {
                         <button onClick={() => this.setState({ color: 'Black' })} style={{ background: "#000" }}></button> 
                         <button onClick={() => this.setState({ color: 'White' })} style={{ background: "#fff" }}></button>
                     </div>
+                    <br/>
+                    <p>Quantity: { this.state.quantity }</p>
+                    <div>
+                        <select onChange={this.handleChange} name="quantity" value={ this.state.quanity }> 
+                            <option value="">--Quantity--</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+
                     <button>Add To Cart</button>
                 </div>
 
@@ -46,6 +70,7 @@ class Individual_Item extends Component {
         return (
             <section id="items">
                 <div>
+                    <Link to="/shop">&#8592;</Link>
                     { this.item() }
                 </div>
             </section>
