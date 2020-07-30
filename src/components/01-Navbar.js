@@ -4,12 +4,12 @@ import { HashLink as Link } from 'react-router-hash-link'
 
 class Navbar extends Component {
 	
-	// Mobile Menu Toggle
-	mobileMenu_hide = () => document.getElementById('mobileMenuToggler').checked = false
-
-	// Contact Us Toggle
+	// Desktop Menu Contact Us Toggle
 	contact_visible = () => document.getElementById('contact').style.width = '370px'
 	contact_hide    = () => document.getElementById('contact').style.width = '0px'
+
+	// Mobile Menu Toggle
+	mobileMenu_hide = () => document.getElementById('mobileMenuToggler').checked = false
 
 	render() {
 		return (
@@ -22,10 +22,10 @@ class Navbar extends Component {
 					</div>
 
 					<ul>
-						<li> <Link to="/#home">  <a href="#">Home</a>  </Link> </li>
-						<li> <Link to="/#about"> <a href="#">About</a> </Link> </li>
-						<li> <Link to="/shop">   <a href="#">Shop</a>  </Link> </li>
-						<li> <Link> <a href="#" onClick={this.contact_visible}>Contact Us</a> </Link> </li>
+						<li> <Link to="/#home">  Home  </Link> </li>
+						<li> <Link to="/#about"> About </Link> </li>
+						<li> <Link to="/shop">   Shop  </Link> </li>
+						<li> <Link onClick={this.contact_visible}> Contact Us </Link> </li>
 					</ul>
 
 					<div class="cart"> 
@@ -42,8 +42,8 @@ class Navbar extends Component {
 						<h1>CONTACT US</h1>
 						<p>sorenphilippines@gmail.com</p>
 						<div>
-							<a href="https://www.facebook.com/sorenapparel"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-							<a href="https://www.instagram.com/soren.ph/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+							<a href="https://www.facebook.com/sorenapparel"> <i class="fa fa-facebook" aria-hidden="true"> </i> </a>
+							<a href="https://www.instagram.com/soren.ph/">   <i class="fa fa-instagram" aria-hidden="true"></i> </a>
 						</div>
 					</div>
 
@@ -67,16 +67,16 @@ class Navbar extends Component {
 								<div>
 
 									<ul>
-										<li> <Link to="/#home">  <a href="#" onClick={this.mobileMenu_hide}>Home</a>  </Link> </li>
-										<li> <Link to="/#about"> <a href="#" onClick={this.mobileMenu_hide}>About</a> </Link> </li>
-										<li> <Link to="/shop">   <a href="#" onClick={this.mobileMenu_hide}>Shop</a>  </Link> </li>
+										<li> <Link to="/#home"  onClick={this.mobileMenu_hide}> Home  </Link> </li>
+										<li> <Link to="/#about" onClick={this.mobileMenu_hide}> About </Link> </li>
+										<li> <Link to="/shop"   onClick={this.mobileMenu_hide}> Shop  </Link> </li>
 									</ul>
 
 									<div>
 										<p>sorenphilippines@gmail.com</p>
 										<div>
-											<a href="https://www.facebook.com/sorenapparel"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-											<a href="https://www.instagram.com/soren.ph/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+											<a href="https://www.facebook.com/sorenapparel"> <i class="fa fa-facebook" aria-hidden="true">  </i> </a>
+											<a href="https://www.instagram.com/soren.ph/">   <i class="fa fa-instagram" aria-hidden="true"> </i> </a>
 										</div>
 									</div>
 
