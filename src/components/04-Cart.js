@@ -5,7 +5,7 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
 
-// TEST
+// PLACEHOLDER
 var cartItem = (
 	<div class="cartItem">
 		
@@ -31,7 +31,9 @@ var cartItem = (
 
 	</div>
 )
-// TEST
+// PLACEHOLDER
+
+// CartItem const that accepts props from database for rendering  
 
 // Resposive Properties of the Cart Carousel
 const responsive = {
@@ -42,10 +44,13 @@ const responsive = {
 	}
 }
 
+
 class Cart extends Component {
 	state = {
-		cartList: [cartItem, cartItem, cartItem, cartItem]
+		cartList: [cartItem, cartItem, cartItem, cartItem] // PLACEHOLDER
 	}
+
+	// Function that maps through the cartList array & returns the ShopItem const with its props + key
 
 	render() {
 		return (
@@ -53,14 +58,18 @@ class Cart extends Component {
 				
 				<section id="cart">
 
-					<div class="largeCartView">
+					<div class="desktopCartView">
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
+							{/* PLACEHOLDER */}
 							{ this.state.cartList.map(product => product) }
+							{/* PLACEHOLDER */}
 						</Carousel>
 					</div>
 
-					<div class="smallCartView">
+					<div class="mobileCartView">
+						{/* PLACEHOLDER */}
 						{ this.state.cartList.map(product => product) }
+						{/* PLACEHOLDER */}
 					</div>
 
 					<div class="cartOptionButtons">

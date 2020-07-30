@@ -7,7 +7,7 @@
 }
 
 /* Shop Header */
-.productPage_header {
+.productCategoryPage_header {
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
@@ -18,7 +18,7 @@
 	text-transform: uppercase;
 }
 
-.productPage_header p {
+.productCategoryPage_header p {
 	color: #fff;
 	font-size: 35px;
 	border: 1px solid #fff;
@@ -27,7 +27,12 @@
 	padding: 20px;
 }
 
-.productPage_header > a div {
+.productCategoryPage_header a {
+	font-size: 20px;
+	color: #fff;
+}
+
+.productCategoryPage_header > a div {
 	width: 200px;
 	display: inline-block;
 	margin: 0px 50px 0px;
@@ -42,7 +47,16 @@
   	position: relative;
 }
 
-.productPage_header > a div:after {
+.productCategoryPage_header > a div:hover {
+	color: #000;
+}
+
+.productCategoryPage_header > a div:hover:after {
+	top: 0;
+	height: 100%;
+}
+
+.productCategoryPage_header > a div:after {
 	position: absolute;
 	content: "";
 	width: 100%;
@@ -54,36 +68,22 @@
 	transition: all 0.3s ease;
 }
 
-.productPage_header > a div:hover {
-	color: #000;
-}
-
-.productPage_header > a div:hover:after {
-	top: 0;
-	height: 100%;
-}
-
-.productPage_header a {
-	font-size: 20px;
-	color: #fff;
-}
-
 /* Responsive Shop Header */
 @media(max-width: 650px) {
-	.productPage_header > a div {
+	.productCategoryPage_header > a div {
 		width: 200px;
 		margin: 30px 20px 0px;
 	}
 }
 
 @media(max-width: 500px) {
-	.productPage_header p {
+	.productCategoryPage_header p {
 		font-size: 25px;
 		width: 250px;
 		padding: 15px;
 	}
 
-	.productPage_header > a div { 
+	.productCategoryPage_header > a div { 
 		width: 180px;
 	}
 }
@@ -102,7 +102,7 @@
 }
 
 /* Optimized Product Display Design for Desktop */
-.productDisplay {
+.productsDisplay {
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
@@ -116,12 +116,12 @@
 	border-bottom: none;
 }
 
-.productDisplay > div {
+.productsDisplay > div {
 	padding: 50px 0px 50px;
 	margin: 0px auto 0px;
 }
 
-.productDisplay button {
+.shopItem {
 	margin: 10px;
 	padding: 0px;
 	max-width: 350px;
@@ -131,60 +131,56 @@
 	border: none;
 }
 
-.productDisplay button:hover > img {
-	opacity: 0.5;
-	transition: all 0.5s ease;
-}
-
-.productDisplay div button img {
+.shopItem img {
 	object-fit: cover;
 	background: #000;
 	transition: all 0.5s ease;
 }
 
-.productDescription {
+.shopItem:hover img {
+	opacity: 0.5;
+	transition: all 0.5s ease;
+}
+
+.shopItem_description {
 	padding: 0px 10px 0px;
 	background-color: #1a1a1a;
 	margin: -4px 0px 0px;
 	color: #fff;
 }
 
-.productDescription h1 {
+.shopItem_description h1 {
 	font-size: 18px;
 	margin: 10px;
 }
 
-.productDescription p {
+.shopItem_description p {
 	font-size: 15px;
 	font-weight: bold;
 	margin: 10px;
 }
 
-.shopCarouselDescription {
-	display: none;
-}
-
 /* Optimized Product Display Design for Tablets and Phones */
 @media(max-width: 1480px) {
-	.productDisplay button { 
+	.shopItem { 
 		margin: 5px; 
 	}
 }
 
 @media(max-width: 1440px) {
-	.productDisplay div button {
+	.shopItem {
 		max-width: 300px;
 	}
 }
 
 @media(max-width: 630px) {
-	.productDisplay div button {
+	.shopItem {
 		max-width: 250px;
 	}
 }
 
 @media(max-width: 520px) {
-	.productDisplay div button {
+	.shopItem {
 		min-width: 270px;
 	}
 }
@@ -220,7 +216,7 @@
 	display: inline-block;
 }
 
-.orderItem > div:first-of-type button {
+.orderItem > div:nth-of-type(2) button {
 	width: 40px;
 	height: 40px;
 	margin-right: 10px;
@@ -230,12 +226,12 @@
 	font-size: 17px;
 }
 
-.orderItem > div:first-of-type button:hover {
+.orderItem > div:nth-of-type(2) button:hover {
 	background: #a7a6a6;
 	transition: all 0.5s ease;
 }
 
-.orderItem > div:nth-of-type(2) button {
+.orderItem > div:nth-of-type(3) button {
 	width: 35px;
 	height: 35px;
 	margin-right: 10px;
@@ -244,7 +240,7 @@
 	border: none;
 }
 
-.orderItem > div:nth-of-type(3) select {
+.orderItem > div:nth-of-type(4) select {
 	border: none;
 	width: 200px;
 	height: 40px;
@@ -278,7 +274,7 @@
 		margin: 0px 80px 0px 0px;
 	}
 
-	.individualItem .orderItem {
+	.orderItem {
 		font-size: 18px;
 	}
 
@@ -318,7 +314,7 @@
 		display: block;
 	}
 
-	.individualItem .orderItem {
+	.orderItem {
 		display: block;
 		text-align: center;
 	}
@@ -335,7 +331,7 @@
 		width: 300px;
 	}
 
-	.individualItem .orderItem h1 {
+	.orderItem h1 {
 		font-size: 22px;
 	}
 

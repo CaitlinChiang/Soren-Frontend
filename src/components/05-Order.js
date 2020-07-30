@@ -22,6 +22,10 @@ class Order extends Component {
         this.setState({ [name]: value })
     }
 
+    // NOTE: City options must come from the database, and the total cost must be a universal state
+
+    // Submission Function must include all the properties requried in the database for an order placement
+
     render() {
         return (
             <div>
@@ -47,10 +51,10 @@ class Order extends Component {
                                 
                                 <select value={this.state.city} name="city" onChange={this.handleChange} placeholder="City" required >
                                     <option value="">--Choose a City--</option>
-                                    {/* Test -> Options should be coming from database */}
+                                    {/* PLACEHOLDER */}
                                     <option value="">--Choose a City--</option>
                                     <option value="">--Choose a City--</option>
-                                    {/* TEST */}
+                                    {/* PLACEHOLDER */}
                                 </select>
 
                             </div>

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
 
 
-class Individual_Item extends Component {
+// ShopItem const that accepts props from database for rendering
+
+
+class ShopItem_Individual extends Component {
     state = { 
         size: '',
         color: '',
@@ -15,7 +18,9 @@ class Individual_Item extends Component {
         this.setState({ [name]: value })
     }
 
-    // TEST
+    // NOTE: Sizes, colors & quantity of item should come from the database
+
+    // PLACEHOLDER
     item = () => {
         return (
             <div class="individualItem">
@@ -23,26 +28,29 @@ class Individual_Item extends Component {
                 <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
                 
                 <div class="orderItem">
-                    <h1>Product Name</h1>
-                    <p>P0.00 (Price)</p>
-                    <br/>
-                    <p>Size: { this.state.size }</p>
+
                     <div>
+                        <h1>Product Name</h1>
+                        <p>P0.00 (Price)</p>
+                    </div> <br/>
+                    
+                    <div>
+                        <p>Size: { this.state.size }</p>
                         <button onClick={() => this.setState({ size: 'XS' })}>XS</button> 
                         <button onClick={() => this.setState({ size: 'S'  })}>S </button>
                         <button onClick={() => this.setState({ size: 'M'  })}>M </button>
                         <button onClick={() => this.setState({ size: 'L'  })}>L </button>
                         <button onClick={() => this.setState({ size: 'XL' })}>XL</button>
-                    </div>
-                    <br />
-                    <p>Color: { this.state.color }</p>
+                    </div> <br />
+
                     <div>
+                        <p>Color: { this.state.color }</p>
                         <button onClick={() => this.setState({ color: 'Black' })} style={{ background: "#000" }}></button> 
                         <button onClick={() => this.setState({ color: 'White' })} style={{ background: "#fff" }}></button>
-                    </div>
-                    <br/>
-                    <p>Quantity: { this.state.quantity }</p>
+                    </div> <br/>
+
                     <div>
+                        <p>Quantity: { this.state.quantity }</p>
                         <select onChange={this.handleChange} name="quantity" value={ this.state.quanity }> 
                             <option value="">--Quantity--</option>
                             <option value="1">1</option>
@@ -64,7 +72,7 @@ class Individual_Item extends Component {
             </div>
         )
     }
-    // TEST
+    // PLACEHOLDER
 
     render() {
         return (
@@ -78,4 +86,4 @@ class Individual_Item extends Component {
     }
 }
 
-export default Individual_Item
+export default ShopItem_Individual
