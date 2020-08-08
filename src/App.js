@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
-// Components
-import Navbar from './components/01-Navbar'
-import Homepage from './components/02-Homepage'
-import Shop from './components/03-Shop'
-import Cart from './components/04-Cart'
-import Order from './components/05-Order'
-
-// Product Pages
-import Mask_Products from './products/Masks_Page'
-import Shirt_Products from './products/Shirts_Page'
-import ShopItem_Individual from './products/ShopItem_Page'
+import Client from './client'
+import Admin from './admin'
 
 
 class App extends Component {
@@ -20,19 +11,8 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-				<Navbar />
-
-				<Route path="/" exact component={Homepage} />
-				<Route path="/cart" component={Cart} />
-				<Route path="/order" component={Order} />
-
-				<Route path="/shop" component={Shop} />
-				<Route path="/masks" component={Mask_Products} />
-				<Route path="/shirts" component={Shirt_Products} />
-
-				{/* PLACEHOLDER */}
-				<Route path="/product1" component={ShopItem_Individual} />
-				{/* PLACEHOLDER */}
+				<Route path="/" component={Client} />
+				<Route path="/mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ" component={Admin} />
 			</Router>
 		)
 	}
