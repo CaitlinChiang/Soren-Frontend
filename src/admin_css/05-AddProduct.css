@@ -1,0 +1,106 @@
+/* Admin Product Addition Design */
+#admin_addProduct {
+    min-height: 100vh;
+    background-color: #0f0f0f;
+    padding: 80px 20px 30px;
+}
+
+.editProduct {
+    max-width: 600px;
+    text-align: center;
+    min-height: 500px;
+    margin: 50px auto 50px;
+    color: #fff;
+    padding: 20px;
+}
+
+.editProduct input,
+.editProduct select {
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background: transparent;
+    border-bottom: 1px solid #CECECE;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+	outline-style: none;
+	text-align: center;
+	margin: 0px auto 50px;
+    display: block;
+    width: 300px;
+}
+
+.editProduct select {
+    padding: 10px 10px 10px 0px;
+    width: 320px;
+}
+
+.editProduct select option {
+    color: #000;
+}
+
+.editProduct div p {
+    font-size: 20px;
+}
+
+.editProduct div p > p {
+    display: inline;
+    margin: 0px 10px 0px;
+}
+
+.editProduct div:first-of-type button {
+    font-size: 20px;
+    width: 50px;
+    height: 40px;
+    margin: 0px 10px 0px;
+}
+
+.editProduct div:nth-of-type(2) button {
+    font-size: 20px;
+    padding: 15px;
+    margin: 0px 10px 0px;
+    border: 1px solid #bebebe;
+    border-radius: 50%;
+}
+
+.editProduct > button {
+    padding: 10px 30px;
+    font-size: 20px;
+    color: #fff;
+    border: 1px solid #fff;
+    background: transparent;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin: 50px 10px 0px;
+}
+
+.editProduct > button:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Responsive Admin Product Addition Design */
+@media(max-width: 440px) {
+    .editProduct div:first-of-type button {
+        font-size: 18px;
+        width: 45px;
+        height: 35px;
+        margin: 0px 5px 20px;
+    }
+}
+
+@media(max-width: 420px) {
+    .editProduct {
+        padding: 0;
+    }
+
+    .editProduct input,
+    .editProduct select {
+        width: 250px;
+    }
+
+    .editProduct select {
+        width: 270px;
+    }
+}

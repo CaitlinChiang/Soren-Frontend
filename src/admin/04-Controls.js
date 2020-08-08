@@ -19,7 +19,7 @@ class Controls extends Component {
             <section id="admin_controls">
                 <div class="cities">
 
-                    <form>
+                    <form autoComplete="off">
                         <input  type="text" value={this.state.city} name="city" onChange={this.handleChange} placeholder="City Name" required />
                         <button type="submit">Add</button>
                     </form>

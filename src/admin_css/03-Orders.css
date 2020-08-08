@@ -11,6 +11,10 @@
 	padding: 50px 0px 0px;
 }
 
+.orders > div:first-of-type {
+    margin-bottom: 25px;
+}
+
 .orders > select {
     padding: 10px;
     font-size: 18px;
@@ -71,6 +75,13 @@
 
 .orderTable tbody tr:nth-of-type(even) {
     background-color: #f0f0f0;
+}
+
+.orderTable tbody tr select {
+    font-size: 15px;
+    padding: 5px 10px 5px 0px;
+    width: 100px;
+    outline: none;
 }
 
 .orderTable tbody tr:last-of-type {

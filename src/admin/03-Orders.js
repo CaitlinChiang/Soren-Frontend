@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { addMonths, addDays } from 'date-fns'
+
 
 // PLACEHOLDER
 var order = (
@@ -9,7 +13,21 @@ var order = (
         <td>15 Hon Soliven 3, LGV <br /><br /> Marikina City</td>
         <td>2020-08-08</td>
         <td>Cash on Delivery</td>
-        <td>Pending <br /><br /> Not Paid</td>
+        <td>
+            <select>
+                <option value="Pending"> Pending </option>
+                <option value="Ready">   Ready   </option>
+                <option value="Done">    Done    </option>
+                <option value="Issues">  Issues  </option>
+            </select>
+
+            <br /><br />
+
+            <select>
+                <option value="Not Paid"> Not Paid </option>
+                <option value="Paid">     Paid     </option>
+            </select>
+        </td>
     </tr>
 )
 // PLACEHOLDER
@@ -19,8 +37,10 @@ class Orders extends Component {
     state = { 
         orderList: [order, order, order, order],
 
-        status: '',
-        orderArrangement: ''
+        dateFilter: '',
+        arrangement: '',
+        orderStatus: '',
+        paymentStatus: ''
     }
 
     handleChange = event => {
@@ -29,12 +49,20 @@ class Orders extends Component {
         this.setState({ [name]: value })
     }
 
+    handleDateChange = (date) => {
+		this.setState({ dateFilter: date })
+	}
+
     render() {
         return (
             <section id="admin_orders">
                 <div class="orders">
 
-                    <select value={this.state.orderArrangement} name="orderArrangement" onChange={this.handleChange}>
+                    <div>
+						<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} maxDate={new Date()} format='MM-dd-yyyy' />
+					</div>
+
+                    <select value={this.state.arrangement} name="arrangement" onChange={this.handleChange}>
                         <option value="">-- Arrangement --</option>
                         <option value="Old_to_New">Oldest to Newest</option>
                         <option value="New_to_Old">Newest to Oldest</option>
@@ -42,16 +70,16 @@ class Orders extends Component {
 
                     <select value={this.state.orderStatus} name="orderStatus" onChange={this.handleChange}>
                         <option value="">-- Order Status --</option>
-                        <option value="Ready">   Ready   </option>
                         <option value="Pending"> Pending </option>
+                        <option value="Ready">   Ready   </option>
                         <option value="Done">    Done    </option>
                         <option value="Issues">  Issues  </option>
                     </select>
 
                     <select value={this.state.paymentStatus} name="paymentStatus" onChange={this.handleChange}>
                         <option value="">-- Payment Status --</option>
-                        <option value="Paid">   Paid     </option>
                         <option value="Not Paid"> Not Paid </option>
+                        <option value="Paid">     Paid     </option>
                     </select>
 
                     <div>
@@ -76,7 +104,7 @@ class Orders extends Component {
                             </table>
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
         )

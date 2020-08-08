@@ -37,7 +37,7 @@ class Order extends Component {
                     <h1>Total Cost: P0.00</h1>
 
                     <div>
-                        <form autocomplete="off">
+                        <form autoComplete="off">
 
                             <div>
                                 <input type="text" value={this.state.name}  name="name"  onChange={this.handleChange} placeholder="First Name, Last Name" required />

@@ -22,8 +22,8 @@ class Products extends Component {
         productsList_Masks:  [product, product, product, product, product, product, product, product],
         productsList_Shirts: [product, product, product, product, product, product, product, product],
 
-        category: '',
-        productArrangement: ''
+        arrangement: '',
+        category: ''
     }
 
     handleChange = event => {
@@ -41,13 +41,13 @@ class Products extends Component {
                         <Link to="/mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/add_product"> + </Link>
                     </div>
 
-                    <select value={this.state.productArrangement}  name="productArrangement"  onChange={this.handleChange}>
+                    <select value={this.state.arrangement} name="arrangement" onChange={this.handleChange}>
                         <option value="">-- Arrangement --</option>
                         <option value="Old_to_New"> Oldest to Newest </option>
                         <option value="New_to_Old"> Newest to Oldest </option>
                     </select>
                     
-                    <select value={this.state.category}  name="category"  onChange={this.handleChange}>
+                    <select value={this.state.category} name="category" onChange={this.handleChange}>
                         <option value="">-- Category --</option>
                         <option value="Masks">  Masks  </option>
                         <option value="Shirts"> Shirts </option>
