@@ -1,0 +1,72 @@
+/* Admin Controls Design */
+#admin_controls {
+    min-height: 100vh;
+    background-color: #0f0f0f;
+    padding: 80px 20px 30px;
+    text-align: center;
+}
+
+/* Cities Control */
+.cities {
+    max-width: 1000px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    min-height: 400px;
+    margin: 50px auto 50px;
+    color: #fff;
+    padding: 20px;
+}
+
+.cities form input {
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background: transparent;
+    border-bottom: 1px solid #CECECE;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+	outline-style: none;
+	text-align: center;
+	margin: 0px 10px 20px;
+    display: inline-block;
+}
+
+.cities form button {
+    background: transparent;
+	color: #ffffff;
+	padding: 10px 30px 10px;
+	transition: 0.5s;
+	font-weight: normal;
+	font-size: 20px;
+	cursor: pointer;
+	outline: none;
+	border: 1px solid #fff;
+	display: inline-block;
+	margin: 0px auto 40px;
+}
+
+.cities form button:hover {
+    background: #fff;
+    color: #000;
+}
+
+.cities p {
+    font-size: 20px;
+}
+
+.cities ul li {
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+/* Responsive Cities Control */
+@media(max-width: 370px) {
+    .cities {
+        padding: 20px 5px 20px;
+    }
+
+    .cities form input {
+        margin: 0 0 20px;
+    }
+}

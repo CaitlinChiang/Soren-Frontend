@@ -38,19 +38,19 @@ class Products extends Component {
                 <div class="products">
 
                     <div>
-                        <Link to="/mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/addProduct"> + </Link>
+                        <Link to="/mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/add_product"> + </Link>
                     </div>
-                    
-                    <select value={this.state.category} name="category" onChange={this.handleChange}>
-                        <option value="">--Choose Category--</option>
-                        <option value="Masks">Masks</option>
-                        <option value="Shirts">Shirts</option>
-                    </select>
 
-                    <select value={this.state.productArrangement} name="productArrangement" onChange={this.handleChange}>
-                        <option value="">--Choose Filter--</option>
-                        <option value="Old_to_New">Oldest to Newest</option>
-                        <option value="New_to_Old">Newest to Oldest</option>
+                    <select value={this.state.productArrangement}  name="productArrangement"  onChange={this.handleChange}>
+                        <option value="">-- Arrangement --</option>
+                        <option value="Old_to_New"> Oldest to Newest </option>
+                        <option value="New_to_Old"> Newest to Oldest </option>
+                    </select>
+                    
+                    <select value={this.state.category}  name="category"  onChange={this.handleChange}>
+                        <option value="">-- Category --</option>
+                        <option value="Masks">  Masks  </option>
+                        <option value="Shirts"> Shirts </option>
                     </select>
 
                     <div>

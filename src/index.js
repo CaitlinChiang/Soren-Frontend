@@ -12,7 +12,7 @@ import './client_css/05-Order.css'
 import './admin_css/01-Navbar.css'
 import './admin_css/02-Products.css'
 import './admin_css/03-Orders.css'
-import './admin_css/04-Others.css'
+import './admin_css/04-Controls.css'
 
 import App from './App'
 

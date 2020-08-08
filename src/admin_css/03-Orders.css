@@ -1,0 +1,89 @@
+/* Admin Orders Design */
+#admin_orders {
+    min-height: 100vh;
+    background-color: #0f0f0f;
+    padding: 50px 20px 30px;
+}
+
+.orders {
+	min-height: 100vh;
+	text-align: center;
+	padding: 50px 0px 0px;
+}
+
+.orders > select {
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background: transparent;
+    border-bottom: 1px solid #CECECE;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+	outline-style: none;
+	text-align: center;
+	margin: 0px 10px 20px;
+    display: inline-block;
+}
+
+.orders > select option {
+    color: #000;
+}
+
+.products > div {
+	padding: 50px 0px 50px;
+	margin: 0px auto 0px;
+}
+
+/* Orders Table */
+.table {
+    overflow-x: auto;
+	margin: 20px;
+}
+
+.orderTable {
+    border-collapse: collapse;
+    margin: 10px auto 100px;
+    width: 100%;
+    border-radius: 5px 5px 0px 0px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.orderTable thead tr {
+    background-color: #2c2c2c;
+    color: #fff;
+    font-size: 17px;
+}
+
+.orderTable th {
+    text-transform: uppercase;
+}
+
+.orderTable th, .orderTable td {
+    padding: 10px;
+}
+
+.orderTable tbody tr {
+    border-bottom: 1px solid #2c2c2c;
+    font-size: 15px;
+    background: #fff;
+}
+
+.orderTable tbody tr:nth-of-type(even) {
+    background-color: #f0f0f0;
+}
+
+.orderTable tbody tr:last-of-type {
+    border-bottom: 5px solid #2c2c2c;
+}
+
+/* Responsive Orders Table */
+@media(max-width: 470px) {
+    #admin_orders {
+        padding: 50px 5px 30px;
+    }
+
+    .table {
+        margin: 20px 5px 20px;
+    }
+}
