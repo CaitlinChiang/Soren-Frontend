@@ -26,6 +26,8 @@ class AddProduct extends Component {
         })
     }
 
+    // Filter to render sizes depending on product category
+
     render() {
         return (
             <section id="admin_addProduct">
