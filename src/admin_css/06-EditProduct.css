@@ -1,0 +1,87 @@
+/* Admin Product Edit Design */
+#admin_editProduct {
+    min-height: 100vh;
+    background-color: #0f0f0f;
+    padding: 80px 20px 30px;
+}
+
+#editProduct {
+    float: left;
+    margin-left: 250px;
+    border: 1px solid #fff;
+}
+
+.currentDetails {
+    max-width: 600px;
+    text-align: center;
+    min-height: 585px;
+    margin: 50px auto 50px;
+    color: #fff;
+    padding: 20px;
+    float: right;
+    margin-right: 250px;
+    font-size: 20px;
+    border: 1px solid #fff;
+}
+
+.currentDetails p {
+    margin: 0px auto 20px;
+    padding: 20px;
+}
+
+/* Responsive Admin Product Edit Design */
+@media(max-width: 1300px) {
+    #editProduct {
+        margin-left: 100px;
+    }
+
+    .currentDetails {
+        margin-right: 100px;
+    }
+}
+
+@media(max-width: 1100px) {
+    #editProduct {
+        margin-left: 50px;
+    }
+
+    .currentDetails {
+        margin-right: 50px;
+    }
+}
+
+@media(max-width: 970px) {
+    #editProduct {
+        float: none;
+        margin: 50px auto 20px;
+    }
+
+    .currentDetails {
+        float: none;
+        margin: 50px auto 20px;
+    }
+}
+
+@media(max-width: 440px) {
+    #editProduct div:first-of-type button {
+        font-size: 18px;
+        width: 45px;
+        height: 35px;
+        margin: 0px 5px 20px;
+    }
+}
+
+@media(max-width: 420px) {
+    #editProduct {
+        padding: 20px 0px 20px;
+    }
+
+    #editProduct input,
+    #editProduct select {
+        width: 200px;
+    }
+
+    #editProduct select {
+        width: 220px;
+    }
+}

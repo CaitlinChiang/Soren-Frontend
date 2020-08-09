@@ -15,7 +15,7 @@
 	padding: 40px 0px 10px;
 }
 
-.products > div a {
+.products > div > a {
     color: #fff;
     border: 1px solid #fff;
     background: transparent;
@@ -28,7 +28,7 @@
 	transition: all 0.2s;
 }
 
-.products > div a:hover {
+.products > div > a:hover {
 	color: #000;
 	background: #f0f0f0;
 	border: 1px solid #f0f0f0;

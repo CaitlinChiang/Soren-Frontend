@@ -6,7 +6,9 @@ import { HashLink as Link } from 'react-router-hash-link'
 var product = (
 	<div class="productItem">
 
-		<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
+		<Link to="mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/edit_product">
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
+        </Link>
 		
 		<div class="productItem_description">
 			<h1>Product Name</h1>
