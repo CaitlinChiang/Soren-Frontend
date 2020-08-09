@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 
 class Controls extends Component {
     state = { 
-        cities: ["SanJuan", "Marikina", "Valenzuela", "Quezon", "Taguig"],
+        cities:          [],
+        payment_mediums: [],
 
-        city: ''
+        city: '',
+        payment: ''
     }
 
     handleChange = (event) => {
@@ -17,7 +19,8 @@ class Controls extends Component {
     render() {
         return (
             <section id="admin_controls">
-                <div class="cities">
+
+                <div class="controls">
 
                     <form autoComplete="off">
                         <input  type="text" value={this.state.city} name="city" onChange={this.handleChange} placeholder="City Name" required />
@@ -31,6 +34,22 @@ class Controls extends Component {
                     </ul>
 
                 </div>
+
+                <div class="controls">
+
+                    <form autoComplete="off">
+                        <input  type="text" value={this.state.payment} name="payment" onChange={this.handleChange} placeholder="Payment Method" required />
+                        <button type="submit">Add</button>
+                    </form>
+
+                    <p>PAYMENT METHODS</p>
+
+                    <ul>
+                        { this.state.payment_mediums.map(item => <li>{ item }</li>) }
+                    </ul>
+
+                </div>
+
             </section>
         )
     }

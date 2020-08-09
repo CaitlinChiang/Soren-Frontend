@@ -2,13 +2,22 @@
 #admin_editProduct {
     min-height: 100vh;
     background-color: #0f0f0f;
-    padding: 80px 20px 30px;
+    padding: 80px 20px 100px;
 }
 
 #editProduct {
     float: left;
     margin-left: 250px;
     border: 1px solid #fff;
+}
+
+#editProduct > button:last-of-type {
+    background: #881212;
+}
+
+#editProduct > button:last-of-type:hover {
+    background: #570404;
+    color: #fff;
 }
 
 .currentDetails {
@@ -30,7 +39,7 @@
 }
 
 /* Responsive Admin Product Edit Design */
-@media(max-width: 1300px) {
+@media(max-width: 1530px) {
     #editProduct {
         margin-left: 100px;
     }
@@ -40,7 +49,7 @@
     }
 }
 
-@media(max-width: 1100px) {
+@media(max-width: 1220px) {
     #editProduct {
         margin-left: 50px;
     }
@@ -50,7 +59,7 @@
     }
 }
 
-@media(max-width: 970px) {
+@media(max-width: 1120px) {
     #editProduct {
         float: none;
         margin: 50px auto 20px;

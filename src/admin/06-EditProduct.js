@@ -61,6 +61,7 @@ class EditProduct extends Component {
 
                     <button onClick={() => this.clear()}>RESTART</button>
                     <button type="submit">SAVE CHANGES</button>
+                    <button>DELETE PRODUCT</button>
                     
                 </div>
 
