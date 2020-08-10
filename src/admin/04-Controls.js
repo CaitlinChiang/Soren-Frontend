@@ -10,13 +10,45 @@ class Controls extends Component {
         payment: ''
     }
 
+    componentDidMount = () => {
+        this.getCities()
+        this.getPaymentMethods()
+    }
+
+    getCities = _ => {
+        fetch('http://localhost:5000/city_deliveries')
+            .then(response => response.json())
+            .then(response => this.setState({ cities: response.data }) )
+            .catch(error => console.log(error))
+    }
+
+    getPaymentMethods = _ => {
+        fetch('http://localhost:5000/payment_mediums')
+            .then(response => response.json())
+            .then(response => this.setState({ payment_mediums: response.data }) )
+            .catch(error => console.log(error))
+    }
+
     handleChange = (event) => {
 		event.preventDefault()
 		const { name, value } = event.target
         this.setState({ [name]: value })
     }
 
+    city = item => {
+        return (
+            <li key={ item.city_id }>{ item.city_name }</li>
+        )
+    }
+
+    paymentMedium = item => {
+        return (
+            <li key={ item.payment_id }>{ item.payment_method }</li>
+        )
+    }
+
     render() {
+        const { cities, payment_mediums } = this.state
         return (
             <section id="admin_controls">
 
@@ -30,7 +62,7 @@ class Controls extends Component {
                     <p>CITIES FOR DELIVERY</p>
 
                     <ul>
-                        { this.state.cities.map(item => <li>{ item }</li>) }
+                        { cities.map(this.city) }
                     </ul>
 
                 </div>
@@ -45,7 +77,7 @@ class Controls extends Component {
                     <p>PAYMENT METHODS</p>
 
                     <ul>
-                        { this.state.payment_mediums.map(item => <li>{ item }</li>) }
+                        { payment_mediums.map(this.paymentMedium) }
                     </ul>
 
                 </div>

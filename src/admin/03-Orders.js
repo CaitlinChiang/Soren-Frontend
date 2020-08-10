@@ -5,42 +5,43 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { addMonths, addDays } from 'date-fns'
 
 
-// PLACEHOLDER
-var order = (
-	<tr>
-        <td>15435 <br /><br /> 2020-08-08 05:50:20</td>
-        <td>Conner Chiang <br /><br /> 09988629001 <br /><br /> connerchiang@gmail.com</td>
-        <td>15 Hon Soliven 3, LGV <br /><br /> Marikina City</td>
-        <td>2020-08-08</td>
-        <td>Cash on Delivery</td>
-        <td>
-            <select>
-                <option value="Pending"> Pending </option>
-                <option value="Ready">   Ready   </option>
-                <option value="Done">    Done    </option>
-                <option value="Issues">  Issues  </option>
-            </select>
-
-            <br /><br />
-
-            <select>
-                <option value="Not Paid"> Not Paid </option>
-                <option value="Paid">     Paid     </option>
-            </select>
-        </td>
-    </tr>
-)
-// PLACEHOLDER
-
-
 class Orders extends Component {
     state = { 
-        orderList: [order, order, order, order],
+        orderList: [],
+        orderStatus_list: [],
+        paymentStatus_list: [],
 
         dateFilter: '',
-        arrangement: '',
-        orderStatus: '',
-        paymentStatus: ''
+        arrangement: 'New_to_Old',
+        orderStatus: 'Pending',
+        paymentStatus: 'Not Paid'
+    }
+
+    componentDidMount = () => {
+        this.getOrders()
+        this.getOrderStatus()
+        this.getPaymentStatus()
+    }
+
+    getOrders = _ => {
+        fetch('http://localhost:5000/orders')
+            .then(response => response.json())
+            .then(response => this.setState({ orderList: response.data }) )
+            .catch(error => console.log(error))
+    }
+
+    getOrderStatus = _ => {
+        fetch('http://localhost:5000/order_status')
+            .then(response => response.json())
+            .then(response => this.setState({ orderStatus_list: response.data }) )
+            .catch(error => console.log(error))
+    }
+
+    getPaymentStatus = _ => {
+        fetch('http://localhost:5000/payment_status')
+            .then(response => response.json())
+            .then(response => this.setState({ paymentStatus_list: response.data }) )
+            .catch(error => console.log(error))
     }
 
     handleChange = event => {
@@ -50,10 +51,36 @@ class Orders extends Component {
     }
 
     handleDateChange = (date) => {
-		this.setState({ dateFilter: date })
-	}
+        this.setState({ dateFilter: date })
+    }
+
+
+    
+    item = order => {
+        return (
+            <tr key={ order.order_id }>
+                <td>{ order.order_id } <br /><br /> { order.order_timestamp }</td>
+                <td>{ order.customer_name } <br /><br /> { order.customer_mobile } <br /><br /> { order.customer_email }</td>
+                <td>{ order.customer_address } <br /><br /> { order.city_id }</td>
+                <td>{ order.order_date }</td>
+                <td>{ order.payment_id }</td>
+                <td>
+                    <select selected={ order.orderStatus_id }>
+                        { this.state.orderStatus_list.map(item => <option value={item.orderStatus_id}>{item.orderStatus_label}</option>) }
+                    </select>
+
+                    <br /><br />
+
+                    <select selected={ order.paymentStatus_id }>
+                        { this.state.paymentStatus_list.map(item => <option value={item.paymentStatus_id}>{item.paymentStatus_label}</option>) }
+                    </select>
+                </td>
+            </tr>
+        )
+    }
 
     render() {
+        const { orderList } = this.state
         return (
             <section id="admin_orders">
                 <div class="orders">
@@ -98,7 +125,7 @@ class Orders extends Component {
                                 </thead>
 
                                 <tbody class="dataTable">
-                                    { this.state.orderList.map(item => item) }
+                                    { orderList.map(this.item) }
                                 </tbody>
 
                             </table>
