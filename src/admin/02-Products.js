@@ -31,9 +31,11 @@ class Products extends Component {
             .catch(error => console.log(error))
     }
 
+
+
     item = product => {
         return (
-            <div key={product.product_id} class="productItem">
+            <div key={ product.product_id } class="productItem">
 
                 <Link to="mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/edit_product">
                     <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />

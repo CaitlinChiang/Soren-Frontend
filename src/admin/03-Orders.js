@@ -2,19 +2,28 @@ import React, { Component } from 'react'
 
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { addMonths, addDays } from 'date-fns'
+import moment from 'moment'
 
 
 class Orders extends Component {
     state = { 
         orderList: [],
+        updateOrder: {
+            order_ID: '',
+            newOrderStatus: '',
+            newPaymentStatus: '',
+        },
+        optionChange: '',
+        updateValue: '',
+
+
         orderStatus_list: [],
         paymentStatus_list: [],
 
         dateFilter: '',
         arrangement: 'New_to_Old',
-        orderStatus: 'Pending',
-        paymentStatus: 'Not Paid'
+        orderStatus: '',
+        paymentStatus: ''
     }
 
     componentDidMount = () => {
@@ -23,6 +32,7 @@ class Orders extends Component {
         this.getPaymentStatus()
     }
 
+    // Fetch Data
     getOrders = _ => {
         fetch('http://localhost:5000/orders')
             .then(response => response.json())
@@ -44,6 +54,15 @@ class Orders extends Component {
             .catch(error => console.log(error))
     }
 
+    // Update Data
+    updateOrder = (order_ID, newOrderStatus, newPaymentStatus) => {
+        fetch(`http://localhost:5000/orders/update/${order_ID}?orderStatus=${newOrderStatus}&paymentStatus=${newPaymentStatus}`)
+            .then(response => response.json())
+            .then(this.getOrders)
+            .catch(error => console.log(error))
+    }
+
+    // Functionalities
     handleChange = event => {
         event.preventDefault()
         const {name, value} = event.target
@@ -54,9 +73,13 @@ class Orders extends Component {
         this.setState({ dateFilter: date })
     }
 
+    reverseArrangement = event => {
+        this.handleChange(event)
 
-    
-    item = order => {
+        this.state.orderList.reverse()
+    }
+
+    orderItem = order => {
         return (
             <tr key={ order.order_id }>
                 <td>{ order.order_id } <br /><br /> { order.order_timestamp }</td>
@@ -65,18 +88,50 @@ class Orders extends Component {
                 <td>{ order.order_date }</td>
                 <td>{ order.payment_id }</td>
                 <td>
-                    <select selected={ order.orderStatus_id }>
+                    <select onChange={(event) => this.updateOrder(order.order_id, event.target.value, order.paymentStatus_id)}>
+                        <option value="" selected disabled hidden>{ order.orderStatus_id }</option>
                         { this.state.orderStatus_list.map(item => <option value={item.orderStatus_id}>{item.orderStatus_label}</option>) }
                     </select>
 
                     <br /><br />
 
-                    <select selected={ order.paymentStatus_id }>
+                    <select onChange={(event) => this.updateOrder(order.order_id, order.orderStatus_id, event.target.value)}>
+                        <option value="" selected disabled hidden>{ order.paymentStatus_id }</option>
                         { this.state.paymentStatus_list.map(item => <option value={item.paymentStatus_id}>{item.paymentStatus_label}</option>) }
                     </select>
                 </td>
             </tr>
         )
+    }
+
+    // onChange={() => this.updateOrder(6, 1, 2)}>
+    
+    filters = order => {
+        if (this.state.orderStatus == '') {   
+            if (this.state.paymentStatus == '') {
+                return this.orderItem(order)
+            }
+            else {
+                if (order.paymentStatus_id == this.state.paymentStatus) return this.orderItem(order)
+            }
+        }
+        else {
+            if (this.state.paymentStatus == '') {
+                if (order.orderStatus_id == this.state.orderStatus) return this.orderItem(order)
+            }
+            else {
+                if (order.orderStatus_id == this.state.orderStatus && order.paymentStatus_id == this.state.paymentStatus) return this.orderItem(order)
+            }       
+        }
+    }
+
+    renderedItem = order => {
+        if (this.state.dateFilter == '') {
+            return this.filters(order)
+        }
+        else {
+            if (order.order_timestamp.substring(0, 10) == moment(this.state.dateFilter).format('YYYY-MM-DD')) return this.filters(order)
+        }
     }
 
     render() {
@@ -89,24 +144,19 @@ class Orders extends Component {
 						<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} maxDate={new Date()} format='MM-dd-yyyy' />
 					</div>
 
-                    <select value={this.state.arrangement} name="arrangement" onChange={this.handleChange}>
-                        <option value="">-- Arrangement --</option>
+                    <select value={this.state.arrangement} name="arrangement" onChange={this.reverseArrangement}>
                         <option value="Old_to_New">Oldest to Newest</option>
                         <option value="New_to_Old">Newest to Oldest</option>
                     </select>
 
                     <select value={this.state.orderStatus} name="orderStatus" onChange={this.handleChange}>
-                        <option value="">-- Order Status --</option>
-                        <option value="Pending"> Pending </option>
-                        <option value="Ready">   Ready   </option>
-                        <option value="Done">    Done    </option>
-                        <option value="Issues">  Issues  </option>
+                        <option value="">All Order Statuses</option>
+                        { this.state.orderStatus_list.map(item => <option value={item.orderStatus_id}>{item.orderStatus_label}</option>) }
                     </select>
 
                     <select value={this.state.paymentStatus} name="paymentStatus" onChange={this.handleChange}>
-                        <option value="">-- Payment Status --</option>
-                        <option value="Not Paid"> Not Paid </option>
-                        <option value="Paid">     Paid     </option>
+                        <option value="">All Payment Statuses</option>
+                        { this.state.paymentStatus_list.map(item => <option value={item.paymentStatus_id}>{item.paymentStatus_label}</option>) }
                     </select>
 
                     <div>
@@ -125,7 +175,7 @@ class Orders extends Component {
                                 </thead>
 
                                 <tbody class="dataTable">
-                                    { orderList.map(this.item) }
+                                    { orderList.map(this.renderedItem) }
                                 </tbody>
 
                             </table>
