@@ -22,7 +22,7 @@ class Orders extends Component {
 
         dateFilter: '',
         arrangement: 'New_to_Old',
-        orderStatus: '',
+        orderStatus: '1',
         paymentStatus: ''
     }
 

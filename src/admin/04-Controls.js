@@ -5,14 +5,20 @@ class Controls extends Component {
     state = { 
         cities:          [],
         payment_mediums: [],
+        sizes: [],
+        colors: [],
 
         city: '',
-        payment: ''
+        payment: '',
+        size: '',
+        color: ''
     }
 
     componentDidMount = () => {
         this.getCities()
         this.getPaymentMethods()
+        this.getSizes()
+        this.getColors()
     }
 
     // Fetch Data
@@ -27,6 +33,20 @@ class Controls extends Component {
         fetch('http://localhost:5000/payment_mediums')
             .then(response => response.json())
             .then(response => this.setState({ payment_mediums: response.data }) )
+            .catch(error => console.log(error))
+    }
+
+    getSizes = _ => {
+        fetch('http://localhost:5000/product_sizes')
+            .then(response => response.json())
+            .then(response => this.setState({ sizes: response.data }))
+            .catch(error => console.log(error))
+    }
+
+    getColors = _ => {
+        fetch('http://localhost:5000/product_colors')
+            .then(response => response.json())
+            .then(response => this.setState({ colors: response.data }))
             .catch(error => console.log(error))
     }
 
@@ -49,6 +69,24 @@ class Controls extends Component {
         }
     }
 
+    addSize = (size) => {
+        if (this.state.size !== '') {
+            fetch(`http://localhost:5000/product_sizes/add?size=${size}`)
+                .then(response => response.json())
+                .then(this.getSizes)
+                .catch(error => console.log(error))
+        }
+    }
+
+    addColor = (color) => {
+        if (this.state.color !== '') {
+            fetch(`http://localhost:5000/product_colors/add?color=${color}`)
+                .then(response => response.json())
+                .then(this.getColors)
+                .catch(error => console.log(error))
+        }
+    }
+
     // Delete Data
     removeCity = (city) => {
         if (this.state.city !== '') {
@@ -64,6 +102,24 @@ class Controls extends Component {
             fetch(`http://localhost:5000/payment_mediums/delete/${paymentMethod}`)
                 .then(response => response.json())
                 .then(this.getPaymentMethods)
+                .catch(error => console.log(error))
+        }
+    }
+
+    removeSize = (size) => {
+        if (this.state.size !== '') {
+            fetch(`http://localhost:5000/product_sizes/delete/${size}`)
+                .then(response => response.json())
+                .then(this.getSizes)
+                .catch(error => console.log(error))
+        }
+    }
+
+    removeColor = (color) => {
+        if (this.state.color !== '') {
+            fetch(`http://localhost:5000/product_colors/delete/${color}`)
+                .then(response => response.json())
+                .then(this.getColors)
                 .catch(error => console.log(error))
         }
     }
@@ -88,8 +144,20 @@ class Controls extends Component {
         )
     }
 
+    size = item => {
+        return (
+            <li key={ item.size_id }>{ item.size_label }</li>
+        )
+    }
+
+    color = item => {
+        return (
+            <li key={ item.color_id }>{ item.color_name }</li>
+        )
+    }
+
     render() {
-        const { cities, payment_mediums } = this.state
+        const { cities, payment_mediums, sizes, colors } = this.state
         return (
             <section id="admin_controls">
 
@@ -121,6 +189,38 @@ class Controls extends Component {
 
                     <ul>
                         { payment_mediums.map(this.paymentMedium) }
+                    </ul>
+
+                </div>
+
+                <div class="controls">
+
+                    <form autoComplete="off">
+                        <input  type="text" value={this.state.size} name="size" onChange={this.handleChange} placeholder="Product Size" />
+                        <button onClick={() => this.addSize(this.state.size)}>Add</button>
+                        <button onClick={() => this.removeSize(this.state.size)}>Delete</button>
+                    </form>
+
+                    <p>PRODUCT SIZES</p>
+
+                    <ul>
+                        { sizes.map(this.size) }
+                    </ul>
+
+                </div>
+
+                <div class="controls">
+
+                    <form autoComplete="off">
+                        <input  type="text" value={this.state.color} name="color" onChange={this.handleChange} placeholder="Product Color" />
+                        <button onClick={() => this.addColor(this.state.color)}>Add</button>
+                        <button onClick={() => this.removeColor(this.state.color)}>Delete</button>
+                    </form>
+
+                    <p>PRODUCT COLORS</p>
+
+                    <ul>
+                        { colors.map(this.color) }
                     </ul>
 
                 </div>

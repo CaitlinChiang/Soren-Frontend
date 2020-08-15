@@ -7,12 +7,15 @@ class Products extends Component {
         productsList_Masks:  [],
         productsList_Shirts: [],
 
+        productCategories: [],
+
         arrangement: 'New_to_Old',
         category: ''
     }
 
     componentDidMount = () => {
         this.getProducts()
+        this.getCategories()
     }
 
     getProducts = _ => {
@@ -31,13 +34,21 @@ class Products extends Component {
             .catch(error => console.log(error))
     }
 
-
+    getCategories = _ => {
+        fetch('http://localhost:5000/product_categories')
+            .then(response => response.json())
+            .then(response => this.setState({ productCategories: response.data }))
+            .catch(error => console.log(error))
+    }
 
     item = product => {
         return (
             <div key={ product.product_id } class="productItem">
 
-                <Link to="mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/edit_product">
+                <Link to={{ 
+                    pathname: `mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/${ product.product_id }`,
+                    productID: product.product_id
+                }}>
                     <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
                 </Link>
                 
@@ -79,17 +90,16 @@ class Products extends Component {
                     
                     <select value={this.state.category} name="category" onChange={this.handleChange}>
                         <option value="">All</option>
-                        <option value="Masks">  Masks  </option>
-                        <option value="Shirts"> Shirts </option>
+                        { this.state.productCategories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
-                    { this.state.category === "" || this.state.category === "Masks" ? 
+                    { this.state.category === "" || this.state.category === "1" ? 
                         <div>
                             { productsList_Masks.map(this.item) }
                         </div>
                     : null }
                     
-                    { this.state.category === "" || this.state.category === "Shirts" ? 
+                    { this.state.category === "" || this.state.category === "2" ? 
                         <div>
                             { productsList_Shirts.map(this.item) }
                         </div>
