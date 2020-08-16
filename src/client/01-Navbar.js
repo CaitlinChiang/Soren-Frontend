@@ -5,7 +5,10 @@ import { HashLink as Link } from 'react-router-hash-link'
 class Navbar extends Component {
 	
 	// Desktop Menu Contact Us Toggle
-	contact_visible = () => document.getElementById('contact').style.width = '370px'
+	contact_visible = (event) => {
+		event.preventDefault()
+		document.getElementById('contact').style.width = '370px'
+	}
 	contact_hide    = () => document.getElementById('contact').style.width = '0px'
 
 	// Mobile Menu Toggle
@@ -25,7 +28,7 @@ class Navbar extends Component {
 						<li> <Link to="/#home">  Home  </Link> </li>
 						<li> <Link to="/#about"> About </Link> </li>
 						<li> <Link to="/shop">   Shop  </Link> </li>
-						<li> <Link onClick={this.contact_visible}> Contact Us </Link> </li>
+						<li> <Link onClick={(event) => this.contact_visible(event)}> Contact Us </Link> </li>
 					</ul>
 
 					<div class="cart"> 

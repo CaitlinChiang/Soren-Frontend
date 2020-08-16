@@ -1,39 +1,10 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
+import Navbar   from './01-Navbar'
 
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-
-// PLACEHOLDER
-var cartItem = (
-	<div class="cartItem">
-		
-		<span class="cartItemClose">&times;</span>
-
-		<div class="cartItemImage">
-			<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>
-		</div>
-		
-		<div class="cartItemContent">
-			<p>View Details</p>
-			<div>
-				<p>Total Price: P0.00</p>
-				<p>Size: </p>
-				<p>Color: </p>
-			</div>
-		</div>
-
-		<div class="cartItemDetails">
-			<p>Product Name</p>
-			<p>x3</p>
-		</div>
-
-	</div>
-)
-// PLACEHOLDER
-
-// CartItem const that accepts props from database for rendering  
 
 // Resposive Properties of the Cart Carousel
 const responsive = {
@@ -47,29 +18,64 @@ const responsive = {
 
 class Cart extends Component {
 	state = {
-		cartList: [cartItem, cartItem, cartItem, cartItem] // PLACEHOLDER
+		cartList: this.props.cart
 	}
 
-	// Function that maps through the cartList array & returns the ShopItem const with its props + key
+	item = (cartItem) => {
+		return (
+			<div key={cartItem.timestamp} class="cartItem">
+		
+				<span class="cartItemClose" onClick={() => this.removeItem(cartItem.timestamp)}>&times;</span>
+
+				<div class="cartItemImage">
+					<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>
+				</div>
+				
+				<div class="cartItemContent">
+					<p>View Details</p>
+					<div>
+						<p>Total Price: P{cartItem.price}.00</p>
+						<p>Size: {cartItem.size}</p>
+						<p>Color: {cartItem.color}</p>
+					</div>
+				</div>
+
+				<div class="cartItemDetails">
+					<p>{cartItem.name}</p>
+					<p>x{cartItem.quantity}</p>
+				</div>
+
+			</div>
+		)	
+	}
+
+	removeItem = (timestamp) => {
+		this.props.updateCart_delete(timestamp)
+
+		this.renderList()
+	}
+
+	renderList = () => {
+		const { cartList } = this.state
+
+		return cartList.map(this.item)
+	}
 
 	render() {
+		const { cartList } = this.state
 		return (
 			<div>
-				
+				<Navbar />
 				<section id="cart">
 
 					<div class="desktopCartView">
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
-							{/* PLACEHOLDER */}
-							{ this.state.cartList.map(product => product) }
-							{/* PLACEHOLDER */}
+							{ this.renderList() }
 						</Carousel>
 					</div>
 
 					<div class="mobileCartView">
-						{/* PLACEHOLDER */}
-						{ this.state.cartList.map(product => product) }
-						{/* PLACEHOLDER */}
+						{ this.renderList() }
 					</div>
 
 					<div class="cartOptionButtons">

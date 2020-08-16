@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Navbar   from './01-Navbar'
 
 function Homepage() {
 	return (
 		<div>
-
+			<Navbar />
 			<section id="home">
 
 				<div class="homeLogo"> 

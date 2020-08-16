@@ -8,11 +8,7 @@ import moment from 'moment'
 class Orders extends Component {
     state = { 
         orderList: [],
-        updateOrder: {
-            order_ID: '',
-            newOrderStatus: '',
-            newPaymentStatus: '',
-        },
+        orderItems: [],
         optionChange: '',
         updateValue: '',
 
@@ -28,6 +24,7 @@ class Orders extends Component {
 
     componentDidMount = () => {
         this.getOrders()
+        this.getOrderItems()
         this.getOrderStatus()
         this.getPaymentStatus()
     }
@@ -37,6 +34,13 @@ class Orders extends Component {
         fetch('http://localhost:5000/orders')
             .then(response => response.json())
             .then(response => this.setState({ orderList: response.data }) )
+            .catch(error => console.log(error))
+    }
+
+    getOrderItems = _ => {
+        fetch('http://localhost:5000/order_items')
+            .then(response => response.json())
+            .then(response => this.setState({ orderItems: response.data }) )
             .catch(error => console.log(error))
     }
 
@@ -82,10 +86,12 @@ class Orders extends Component {
     orderItem = order => {
         return (
             <tr key={ order.order_id }>
-                <td>{ order.order_id } <br /><br /> { order.order_timestamp }</td>
+                <td>{ order.order_id } <br /><br /> { order.order_timestamp } </td>
+                <td>{ this.state.orderItems.filter(item => item.order_id === order.order_id).map(item => <p>{item.product_id} ({item.product_size} - {item.product_color})</p>) }</td>
                 <td>{ order.customer_name } <br /><br /> { order.customer_mobile } <br /><br /> { order.customer_email }</td>
                 <td>{ order.customer_address } <br /><br /> { order.city_id }</td>
-                <td>{ order.order_date }</td>
+                <td>{ order.order_date.substring(0, 10) }</td>
+                <td></td>
                 <td>{ order.payment_id }</td>
                 <td>
                     <select onChange={(event) => this.updateOrder(order.order_id, event.target.value, order.paymentStatus_id)}>
@@ -166,9 +172,11 @@ class Orders extends Component {
                                 <thead>
                                     <tr>
                                         <th>Order</th>
+                                        <th>Items</th>
                                         <th>Buyer Details</th>
                                         <th>Address</th>
                                         <th>Delivery Date</th>
+                                        <th>Total</th>
                                         <th>Payment Method</th>
                                         <th>Status</th>
                                     </tr>

@@ -1,37 +1,73 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
-
-
-// PLACEHOLDER
-var shopItem = (
-	<button class="shopItem">
-
-		<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
-		
-		<div class="shopItem_description">
-			<h1>Product Name</h1>
-			<p>P0.00 (Price)</p>
-		</div>
-
-	</button>
-)
-// PLACEHOLDER
-
-// ShopItem const that accepts props from database for rendering
+import Navbar   from './01-Navbar'
 
 
 class Shop extends Component {
 	state = {
-		shopList_Masks:  [shopItem, shopItem, shopItem, shopItem], // PLACEHOLDER
-		shopList_Shirts: [shopItem, shopItem, shopItem, shopItem]  // PLACEHOLDER
+		shopList_Masks:  [], 
+		shopList_Shirts: []
 	}
 
-	// Function that maps through the shopLists array & returns the ShopItem const with its props + key
+	componentDidMount = () => {
+		this.getProducts()
+	}
+
+	getProducts = _ => {
+        fetch('http://localhost:5000/products')
+            .then(response => response.json())
+            .then(response => {
+                for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].category_id == 1) {
+                        this.setState({ shopList_Masks: this.state.shopList_Masks.concat(response.data[i]) })
+                    }
+                    else if (response.data[i].category_id == 2) {
+                        this.setState({ shopList_Shirts: this.state.shopList_Shirts.concat(response.data[i]) })
+                    }
+                }
+            })
+            .catch(error => console.log(error))
+	}
+	
+	item = product => {
+        return (
+			<button key={ product.product_id } class="shopItem">
+
+				{ product.stockStatus_id === 1 ?
+					<Link to={{ 
+						pathname: `/product/${ product.product_id }`,
+						productID: product.product_id
+					}}>
+						<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
+					</Link>
+				: 
+					<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
+				}
+
+				<div class="shopItem_description">
+					{ product.stockStatus_id === 1 ?
+						<div>
+							<h1>{ product.product_name }</h1>
+							<p>P{ product.product_price }.00</p>
+						</div>
+					: 
+						<div>
+							<h1>{ product.product_name }</h1>
+							<p>OUT OF STOCK</p>
+						</div>
+					}
+				</div>
+
+			</button>
+        )
+    }
 
 	render() {
+		const { shopList_Masks, shopList_Shirts } = this.state
 		return (
 			<div>
-				
+				<Navbar />
+
 				<section id="shop">
 
 					<section id="allProducts_header" class="productCategoryPage_header">
@@ -42,16 +78,14 @@ class Shop extends Component {
 
 					<div class="productsDisplay">
 
-						{/* PLACEHOLDER */}
 						<div>
-							{ this.state.shopList_Masks.map(item => item) }
+							{ shopList_Masks.map(this.item) }
 						</div>
 
 						<div>
-							{ this.state.shopList_Shirts.map(item => item) }
+							{ shopList_Shirts.map(this.item) }
 						</div>
-						{/* PLACEHOLDER */}
-
+						
 					</div>
 
 				</section>

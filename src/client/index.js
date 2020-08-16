@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // Client Views
-import Navbar   from './01-Navbar'
 import Homepage from './02-Homepage'
 import Shop     from './03-Shop'
 import Cart     from './04-Cart'
@@ -14,36 +13,39 @@ import Shirt_Products      from '../products/Shirts_Page'
 import ShopItem_Individual from '../products/ShopItem_Page'
 
 
-// Navbar for Client Routes
-export const ClientRoute = ({ component: Component , ...rest}) => {
-    return (
-        <Route {...rest} component={(props) => (
-            <div>
-                <Navbar />
-                <Component {...props} />
-            </div>
-        )} />
-    )
-}
-
-
 class Client extends Component {
-	state = { }
+	state = {
+		cart: []
+	}
+
+	componentDidMount = () => {
+		
+	}
+
+	updateCart_add = (item) => this.setState({ cart: this.state.cart.concat(item) })
+
+	updateCart_delete = (item_timestamp) => {
+		for (let i = 0; i < this.state.cart.length; i++) {
+			if (this.state.cart[i].timestamp === item_timestamp) {
+				this.state.cart.splice(this.state.cart[i], 1)
+			}
+		}
+	}
 
 	render() {
 		return (
 			<Router>
-				<ClientRoute exact path="/"       component={Homepage} />
-				<ClientRoute exact path="/cart"   component={Cart} />
-				<ClientRoute exact path="/order"  component={Order} />
+				<Switch>
+					<Route exact path="/"       component={Homepage} />
+					<Route exact path="/cart"   render={() => <Cart cart={this.state.cart} updateCart_delete={this.updateCart_delete} />} />
+					<Route exact path="/order"  render={() => <Order cart={this.state.cart} />} />
 
-				<ClientRoute exact path="/shop"   component={Shop} />
-				<ClientRoute exact path="/masks"  component={Mask_Products} />
-				<ClientRoute exact path="/shirts" component={Shirt_Products} />
+					<Route exact path="/shop"   component={Shop} />
+					<Route exact path="/masks"  component={Mask_Products} />
+					<Route exact path="/shirts" component={Shirt_Products} />
 
-				{/* PLACEHOLDER */}
-				<ClientRoute exact path="/product1" component={ShopItem_Individual} />
-				{/* PLACEHOLDER */}
+					<Route exact path="/product/:id"  render={(props) => <ShopItem_Individual {...props} cart={this.state.cart} updateCart_add={this.updateCart_add} />} />
+				</Switch>
 			</Router>
 		)
 	}
