@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import '../admin_css/06-EditProduct.css'
 
 class EditProduct extends Component {
     state = { 

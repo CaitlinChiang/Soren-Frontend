@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
-
+import '../admin_css/02-Products.css'
 
 class Products extends Component {
     state = {

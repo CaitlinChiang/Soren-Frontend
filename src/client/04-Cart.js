@@ -1,31 +1,20 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
-import Navbar   from './01-Navbar'
-
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-
-
-// Resposive Properties of the Cart Carousel
-const responsive = {
-	desktop: {
-		breakpoint: { max: 3000, min: 1220 },
-		items: 3,
-		slidesToSlide: 3
-	}
-}
-
+import '../client_css/04-Cart.css'
+import Navbar from './01-Navbar'
 
 class Cart extends Component {
 	state = {
-		cartList: this.props.cart
+		cart: this.props.cart
 	}
 
-	item = (cartItem) => {
+	// Render Data
+	cartItem_render = props => {
 		return (
-			<div key={cartItem.timestamp} class="cartItem">
-		
-				<span class="cartItemClose" onClick={() => this.removeItem(cartItem.timestamp)}>&times;</span>
+			<div key={props.timestamp} class="cartItem">
+				<span class="cartItemClose" onClick={() => this.props.updateCart_delete(props.timestamp)}>&times;</span>
 
 				<div class="cartItemImage">
 					<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>
@@ -34,48 +23,44 @@ class Cart extends Component {
 				<div class="cartItemContent">
 					<p>View Details</p>
 					<div>
-						<p>Total Price: P{cartItem.price}.00</p>
-						<p>Size: {cartItem.size}</p>
-						<p>Color: {cartItem.color}</p>
+						<p>Total Price: P{props.price}.00</p>
+						<p>Size: {props.size}</p>
+						<p>Color: {props.color}</p>
 					</div>
 				</div>
 
 				<div class="cartItemDetails">
-					<p>{cartItem.name}</p>
-					<p>x{cartItem.quantity}</p>
+					<p>{props.name}</p>
+					<p>x{props.quantity}</p>
 				</div>
-
 			</div>
 		)	
 	}
 
-	removeItem = (timestamp) => {
-		this.props.updateCart_delete(timestamp)
-
-		this.renderList()
-	}
-
-	renderList = () => {
-		const { cartList } = this.state
-
-		return cartList.map(this.item)
-	}
-
 	render() {
-		const { cartList } = this.state
+		const { cart } = this.state
+
+		const responsive = {
+			desktop: {
+				breakpoint: { max: 3000, min: 1220 },
+				items: 3,
+				slidesToSlide: 3
+			}
+		}
+
 		return (
 			<div>
 				<Navbar />
-				<section id="cart">
 
+				<section id="cart">
 					<div class="desktopCartView">
-						<Carousel containerClass="cartContent" responsive={responsive} infinite={true} swipeable={false} draggable={false}>
-							{ this.renderList() }
+						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
+							{ cart.map(this.cartItem_render) }
 						</Carousel>
 					</div>
 
 					<div class="mobileCartView">
-						{ this.renderList() }
+						{ cart.map(this.cartItem_render) }
 					</div>
 
 					<div class="cartOptionButtons">
@@ -87,11 +72,9 @@ class Cart extends Component {
 							<a href="#"> <svg> <rect></rect> <rect></rect> </svg> Checkout </a>
 						</Link>
 					</div>
-
 				</section>
 
 				<footer>&#169; 2020 by Soren.</footer>
-
 			</div>
 		)
 	}

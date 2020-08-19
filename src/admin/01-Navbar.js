@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
-
+import '../admin_css/01-Navbar.css'
 
 class Navbar extends Component {
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import '../admin_css/04-Controls.css'
 
 class Controls extends Component {
     state = { 
