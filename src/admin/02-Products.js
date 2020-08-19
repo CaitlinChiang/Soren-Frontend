@@ -4,62 +4,61 @@ import '../admin_css/02-Products.css'
 
 class Products extends Component {
     state = {
-        productsList_Masks:  [],
-        productsList_Shirts: [],
-
-        productCategories: [],
-
         arrangement: 'New_to_Old',
-        category: ''
+        category: '',
+
+        // Data
+        mask_products: [],
+        shirt_products: [],
+        productCategories: []
     }
 
-    componentDidMount = () => {
-        this.getProducts()
-        this.getCategories()
+    componentDidMount = _ => {
+        this.products_fetch()
+        this.categories_fetch()
     }
 
-    getProducts = _ => {
+    // Fetch Data
+    products_fetch = _ => {
         fetch('http://localhost:5000/products')
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
                     if (response.data[i].category_id == 1) {
-                        this.setState({ productsList_Masks: this.state.productsList_Masks.concat(response.data[i]) })
+                        this.setState({ mask_products: this.state.mask_products.concat(response.data[i]) })
                     }
                     else if (response.data[i].category_id == 2) {
-                        this.setState({ productsList_Shirts: this.state.productsList_Shirts.concat(response.data[i]) })
+                        this.setState({ shirt_products: this.state.shirt_products.concat(response.data[i]) })
                     }
                 }
             })
-            .catch(error => console.log(error))
     }
 
-    getCategories = _ => {
+    categories_fetch = _ => {
         fetch('http://localhost:5000/product_categories')
             .then(response => response.json())
             .then(response => this.setState({ productCategories: response.data }))
-            .catch(error => console.log(error))
     }
 
-    item = product => {
+    // Render Data
+    productItem_render = props => {
         return (
-            <div key={ product.product_id } class="productItem">
-
+            <div key={props.product_id} class="productItem">
                 <Link to={{ 
-                    pathname: `mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/${ product.product_id }`,
-                    productID: product.product_id
+                    pathname: `mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/${props.product_id}`,
+                    productID: props.product_id
                 }}>
                     <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
                 </Link>
                 
                 <div class="productItem_description">
-                    <h1>{ product.product_name }</h1>
+                    <h1>{props.product_name}</h1>
                 </div>
-
             </div>
         )
     }
 
+    // Helper Functions
     handleChange = event => {
         event.preventDefault()
         const {name, value} = event.target
@@ -67,44 +66,45 @@ class Products extends Component {
     }
 
     reverseArrangement = event => {
+        const { mask_products, shirt_products } = this.state
+
         this.handleChange(event)
 
-        this.state.productsList_Masks.reverse()
-        this.state.productsList_Shirts.reverse()
+        mask_products.reverse()
+        shirt_products.reverse()
     }
 
     render() {
-        const { productsList_Masks, productsList_Shirts } = this.state
+        const { arrangement, category, productCategories, mask_products, shirt_products } = this.state
+
         return (
             <section id="admin_products">
                 <div class="products">
-
                     <div>
                         <Link to="/mzU4d@tjEacsXzBUKKhwaqtSMY6YVq6ursAnE9L4Xrr725ZcVRKWysVJUZC7DBQE7xky3PbVQU8Dq3q@534fgdgjtsryhhgjlkhynkolhjZAvppAZ/add_product"> + </Link>
                     </div>
 
-                    <select value={this.state.arrangement} name="arrangement" onChange={this.reverseArrangement}>
+                    <select value={arrangement} name="arrangement" onChange={this.reverseArrangement}>
                         <option value="Old_to_New"> Oldest to Newest </option>
                         <option value="New_to_Old"> Newest to Oldest </option>
                     </select>
                     
-                    <select value={this.state.category} name="category" onChange={this.handleChange}>
+                    <select value={category} name="category" onChange={this.handleChange}>
                         <option value="">All</option>
-                        { this.state.productCategories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
+                        { productCategories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
                     { this.state.category === "" || this.state.category === "1" ? 
                         <div>
-                            { productsList_Masks.map(this.item) }
+                            { mask_products.map(this.productItem_render) }
                         </div>
                     : null }
                     
                     { this.state.category === "" || this.state.category === "2" ? 
                         <div>
-                            { productsList_Shirts.map(this.item) }
+                            { shirt_products.map(this.productItem_render) }
                         </div>
                     : null }
-
                 </div>
             </section>
         )
