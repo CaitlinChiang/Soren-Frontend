@@ -53,7 +53,7 @@ class Order extends Component {
     orderID_set = _ => {
         fetch('http://localhost:5000/orders')
             .then(response => response.json())
-            .then(response => this.setState({ orderID: response.data[0].order_id + 1 }))
+            .then(response => this.setState({ orderID: response.data[0].order_id + 1 }) )
     }
 
     cities_fetch = _ => {
@@ -69,7 +69,7 @@ class Order extends Component {
     }
 
     // Save Data
-    order_add = () => {
+    orders_add = () => {
         let timestamp = helpers.timestamp()
         const { cart, orderID, name, mobile, email, address, city, paymentMethod, date } = this.state
         
@@ -134,7 +134,7 @@ class Order extends Component {
                                 <DatePicker inline selected={date} onChange={date => this.setState({ date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.filterDeliveryDates} format='YYYY-MM-DD' required />
                             </div>
 
-                            <button type="submit" onClick={() => this.order_add()}>Order</button>
+                            <button type="submit" onClick={() => this.orders_add()}>Order</button>
                         </form>
                     </div>
 

@@ -2,55 +2,50 @@ import React, { Component } from 'react'
 import '../admin_css/06-EditProduct.css'
 
 class EditProduct extends Component {
-    state = { 
+    state = {
+        // Data
+        productID: this.props.location.productID,
+        product: [],
+        productDetails_sizes: [],
+        productDetails_colors: [],
+
+        categories: [],
+        sizes: [],
+        colors: [],
+        stocks: [],
+
+        // Product Details
         name: '',
         category: '',
         price: '',
         stock: '',
-        sizes: [],
-        colors: [],
-
-        productCategories: [],
-        getSizes: [],
-        getColors: [],
-        getStocks: [],
-
-        products: [],
-        productDetails_sizes: [],
-        productDetails_colors: [],
-        productID: this.props.location.productID
+        productSizes: [],
+        productColors: []
     }
 
     componentDidMount = () => {
-        this.getProducts()
-        this.getProductDetails()
-        this.getCategories()
-        this.getStocks()
-        this.getSizes()
-        this.getColors()
-    }
-
-    handleChange = (event) => {
-		event.preventDefault()
-		const { name, value } = event.target
-        this.setState({ [name]: value })
+        this.product_fetch()
+        this.productDetails_fetch()
+        this.categories_fetch()
+        this.stocks_fetch()
+        this.sizes_fetch()
+        this.colors_fetch()
     }
 
     // Fetch Data
-    getProducts = _ => {
+    product_fetch = _ => {
         fetch('http://localhost:5000/products')
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
                     if (response.data[i].product_id === this.state.productID) {
-                        this.setState({ products: this.state.products.concat(response.data[i]) })
+                        this.setState({ product: this.state.product.concat(response.data[i]) })
                     }
                 }
             })
-            .catch(error => console.log(error))
     }
 
-    getProductDetails = _ => {
+    productDetails_fetch = _ => {
         fetch('http://localhost:5000/product_details')
             .then(response => response.json())
             .then(response => {
@@ -66,144 +61,144 @@ class EditProduct extends Component {
                     }
                 }
             })
-            .catch(error => console.log(error))
     }
 
-    getCategories = _ => {
+    categories_fetch = _ => {
         fetch('http://localhost:5000/product_categories')
             .then(response => response.json())
-            .then(response => this.setState({ productCategories: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ categories: response.data }))
     }
 
-    getStocks = _ => {
+    stocks_fetch = _ => {
         fetch('http://localhost:5000/stock_status')
             .then(response => response.json())
-            .then(response => this.setState({ getStocks: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ stocks: response.data }))
     }
 
-    getSizes = _ => {
+    sizes_fetch = _ => {
         fetch('http://localhost:5000/product_sizes')
             .then(response => response.json())
-            .then(response => this.setState({ getSizes: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ sizes: response.data }))
     }
 
-    getColors = _ => {
+    colors_fetch = _ => {
         fetch('http://localhost:5000/product_colors')
             .then(response => response.json())
-            .then(response => this.setState({ getColors: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ colors: response.data }))
     }
 
-    // Update Product
-    updateProduct = () => {
-        const { productID, category, name, price, stock } = this.state
+    // Render Data
+    product_render = props => {
+        const { productDetails_sizes, productDetails_colors } = this.state
+
+        return (
+            <div key={props.product_id}>
+                <div>{props.product_name}</div>
+                <div>{props.category_id}</div>
+                <div>P{props.product_price}.00</div>
+                <div>{props.stockStatus_id}</div>
+                <div>Sizes: { productDetails_sizes.map(item => <p>{item}</p>) }</div>
+                <div>Colors: { productDetails_colors.map(item => <p>{item}</p>) }</div>
+            </div>
+        )
+    }
+
+    // Update Data
+    product_update = _ => {
+        const { productID, name, category, price, stock } = this.state
+
         fetch(`http://localhost:5000/products/update/${productID}?categoryID=${category}&productName=${name}&productPrice=${price}&stockStatus=${stock}`)
             .then(response => response.json())
-            .catch(error => console.log(error))
 
-        this.updateProductDetails()
+        this.productDetails_update()
     }
 
-    updateProductDetails = () => {
-        const { productID, sizes, colors } = this.state
+    productDetails_update = _ => {
+        const { productID, productSizes, productColors } = this.state
 
         fetch(`http://localhost:5000/product_details/delete/${productID}`)
             .then(response => response.json())
             .then(this.remove)
-            .catch(error => console.log(error))
 
-        for (let i = 0; i < sizes.length; i++) {
-            for (let j = 0; j < colors.length; j++) {
-                fetch(`http://localhost:5000/product_details/add?productID=${productID}&size=${sizes[i]}&color=${colors[j]}`)
+        for (let i = 0; i < productSizes.length; i++) {
+            for (let j = 0; j < productColors.length; j++) {
+                fetch(`http://localhost:5000/product_details/add?productID=${productID}&size=${productSizes[i]}&color=${productColors[j]}`)
                     .then(response => response.json())
-                    .catch(error => console.log(error))
             }
         }
 
         this.clear()
-        this.getProducts()
-        this.getProductDetails()
+        this.product_fetch()
+        this.productDetails_fetch()
     }
 
-    remove = () => {
+    // Helper Functions
+    handleChange = event => {
+		event.preventDefault()
+		const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
+    remove = _ => {
         this.setState({ 
-            products: [],
+            product: [],
             productDetails_sizes: [],
             productDetails_colors: []
         })
     }
 
-    clear = () => {
+    clear = _ => {
         this.setState({
             name: '',
             category: '',
             price: '',
             stock: '',
-            sizes: [],
-            colors: []
+            productSizes: [],
+            productColors: []
         })
     }
 
-    item = product => {
-        return (
-            <div key={ product.product_id }>
-                <div>{ product.product_name }</div>
-                <div>{ product.category_id }</div>
-                <div>P{ product.product_price }.00</div>
-                <div>{ product.stockStatus_id }</div>
-                <div>Sizes: { this.state.productDetails_sizes.map(item => <p>{item}</p>) }</div>
-                <div>Colors: { this.state.productDetails_colors.map(item => <p>{item}</p>) }</div>
-            </div>
-        )
-    }
-
     render() {
-        const { products } = this.state
+        const { product, name, category, price, stock, productSizes, productColors, categories, stocks, sizes, colors } = this.state
+
         return (
             <section id="admin_editProduct">
-
                 <div class="currentDetails">
                     <h3>CURRENT DETAILS</h3>
-                    { products.map(this.item) }
+                    { product.map(this.product_render) }
                 </div>
 
                 <div class="editProduct" id="editProduct">
-
                     <h3>EDIT DETAILS</h3>
 
-                    <input type="text" value={this.state.name} name="name" onChange={this.handleChange} placeholder="Product Name"  autoComplete="off" />
+                    <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" required />
                     
-                    <select value={this.state.category} name="category" onChange={this.handleChange} >
+                    <select value={category} name="category" onChange={this.handleChange} required >
                         <option value="">-- Select Product Category --</option>
-                        { this.state.productCategories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
+                        { categories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
-                    <input type="number" step="0.01" value={this.state.price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)"  />
+                    <input type="number" step="0.01" value={price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)" required />
 
-                    <select value={this.state.stock} name="stock" onChange={this.handleChange} >
+                    <select value={stock} name="stock" onChange={this.handleChange} required >
                         <option value="">-- Select Stock Status --</option>
-                        { this.state.getStocks.map(item => <option value={item.stockStatus_id}>{item.stockStatus_label}</option>) }
+                        { stocks.map(item => <option value={item.stockStatus_id}>{item.stockStatus_label}</option>) }
                     </select>
                     
                     <div>
-                        <p>Sizes: { this.state.sizes.map(item => <p>{ item }</p>) }</p>
-                        { this.state.getSizes.map(item => <button onClick={() => this.setState({ sizes: this.state.sizes.concat(item.size_label) })}>{ item.size_label }</button>) }
+                        <p>Sizes: { productSizes.map(item => <p>{item}</p>) }</p>
+                        { sizes.map(item => <button onClick={() => this.setState({ productSizes: this.state.productSizes.concat(item.size_label) })}>{item.size_label}</button>) }
                     </div> <br />
 
                     <div>
-                        <p>Colors: { this.state.colors.map(item => <p>{ item }</p>) }</p>
-                        { this.state.getColors.map(item => <button onClick={() => this.setState({ colors: this.state.colors.concat(item.color_name) })} style={{ background: `${item.color_name}` }}>{ item.size_label }</button>) }
+                        <p>Colors: { productColors.map(item => <p>{item}</p>) }</p>
+                        { colors.map(item => <button onClick={() => this.setState({ productColors: this.state.productColors.concat(item.color_name) })} style={{ background: `${item.color_name}` }}>{item.size_label}</button>) }
                     </div> <br/>
 
                     <button onClick={() => this.clear()}>RESTART</button>
-                    <button onClick={() => this.updateProduct()}>SAVE CHANGES</button>
+                    <button type="submit" onClick={() => this.product_update()}>SAVE CHANGES</button>
                     <button>DELETE PRODUCT</button>
-                    
                 </div>
-                
             </section>
         )
     }

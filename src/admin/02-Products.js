@@ -10,7 +10,7 @@ class Products extends Component {
         // Data
         mask_products: [],
         shirt_products: [],
-        productCategories: []
+        categories: []
     }
 
     componentDidMount = _ => {
@@ -37,11 +37,11 @@ class Products extends Component {
     categories_fetch = _ => {
         fetch('http://localhost:5000/product_categories')
             .then(response => response.json())
-            .then(response => this.setState({ productCategories: response.data }))
+            .then(response => this.setState({ categories: response.data }) )
     }
 
     // Render Data
-    productItem_render = props => {
+    products_render = props => {
         return (
             <div key={props.product_id} class="productItem">
                 <Link to={{ 
@@ -75,7 +75,7 @@ class Products extends Component {
     }
 
     render() {
-        const { arrangement, category, productCategories, mask_products, shirt_products } = this.state
+        const { arrangement, category, categories, mask_products, shirt_products } = this.state
 
         return (
             <section id="admin_products">
@@ -91,18 +91,18 @@ class Products extends Component {
                     
                     <select value={category} name="category" onChange={this.handleChange}>
                         <option value="">All</option>
-                        { productCategories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
+                        { categories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
                     { this.state.category === "" || this.state.category === "1" ? 
                         <div>
-                            { mask_products.map(this.productItem_render) }
+                            { mask_products.map(this.products_render) }
                         </div>
                     : null }
                     
                     { this.state.category === "" || this.state.category === "2" ? 
                         <div>
-                            { shirt_products.map(this.productItem_render) }
+                            { shirt_products.map(this.products_render) }
                         </div>
                     : null }
                 </div>

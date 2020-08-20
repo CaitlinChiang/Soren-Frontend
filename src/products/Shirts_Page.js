@@ -23,7 +23,7 @@ class Shirt_Products extends Component {
 	}
     
     // Render Data
-	productItem_render = props => {
+	products_render = props => {
         return (
 			<button key={props.product_id} class="shopItem">
 				<Link to={{ 
@@ -57,7 +57,7 @@ class Shirt_Products extends Component {
 
                     <div class="productsDisplay">
                         <div>
-                            { shirt_products.map(this.productItem_render) }
+                            { shirt_products.map(this.products_render) }
                         </div>
                     </div>
                 </section>

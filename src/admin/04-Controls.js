@@ -2,229 +2,168 @@ import React, { Component } from 'react'
 import '../admin_css/04-Controls.css'
 
 class Controls extends Component {
-    state = { 
-        cities:          [],
+    state = {
+        city: '',
+        paymentMethod: '',
+        size: '',
+        color: '',
+
+        // Data
+        cities: [],
         payment_mediums: [],
         sizes: [],
-        colors: [],
-
-        city: '',
-        payment: '',
-        size: '',
-        color: ''
+        colors: []
     }
 
-    componentDidMount = () => {
-        this.getCities()
-        this.getPaymentMethods()
-        this.getSizes()
-        this.getColors()
+    componentDidMount = _ => {
+        this.cities_fetch()
+        this.paymentMediums_fetch()
+        this.sizes_fetch()
+        this.colors_fetch()
     }
 
     // Fetch Data
-    getCities = _ => {
+    cities_fetch = _ => {
         fetch('http://localhost:5000/city_deliveries')
             .then(response => response.json())
             .then(response => this.setState({ cities: response.data }) )
-            .catch(error => console.log(error))
     }
 
-    getPaymentMethods = _ => {
+    paymentMediums_fetch = _ => {
         fetch('http://localhost:5000/payment_mediums')
             .then(response => response.json())
             .then(response => this.setState({ payment_mediums: response.data }) )
-            .catch(error => console.log(error))
     }
 
-    getSizes = _ => {
+    sizes_fetch = _ => {
         fetch('http://localhost:5000/product_sizes')
             .then(response => response.json())
-            .then(response => this.setState({ sizes: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ sizes: response.data }) )
     }
 
-    getColors = _ => {
+    colors_fetch = _ => {
         fetch('http://localhost:5000/product_colors')
             .then(response => response.json())
-            .then(response => this.setState({ colors: response.data }))
-            .catch(error => console.log(error))
+            .then(response => this.setState({ colors: response.data }) )
     }
 
-    // Add Data
-    addCity = (city) => {
-        if (this.state.city !== '') {
-            fetch(`http://localhost:5000/city_deliveries/add?newCity=${city}`)
-                .then(response => response.json())
-                .then(this.getCities)
-                .catch(error => console.log(error))
-        }
+    // Save Data
+    cities_add = city => {
+        fetch(`http://localhost:5000/city_deliveries/add?newCity=${city}`)
+            .then(response => response.json())
+            .then(this.cities_fetch)
     }
 
-    addPaymentMethod = (payment) => {
-        if (this.state.payment !== '') {
-            fetch(`http://localhost:5000/payment_mediums/add?newPaymentMethod=${payment}`)
-                .then(response => response.json())
-                .then(this.getPaymentMethods)
-                .catch(error => console.log(error))
-        }
+    paymentMediums_add = paymentMethod => {
+        fetch(`http://localhost:5000/payment_mediums/add?newPaymentMethod=${paymentMethod}`)
+            .then(response => response.json())
+            .then(this.paymentMediums_fetch)
     }
 
-    addSize = (size) => {
-        if (this.state.size !== '') {
-            fetch(`http://localhost:5000/product_sizes/add?size=${size}`)
-                .then(response => response.json())
-                .then(this.getSizes)
-                .catch(error => console.log(error))
-        }
+    sizes_add = size => {
+        fetch(`http://localhost:5000/product_sizes/add?size=${size}`)
+            .then(response => response.json())
+            .then(this.sizes_fetch)
     }
 
-    addColor = (color) => {
-        if (this.state.color !== '') {
-            fetch(`http://localhost:5000/product_colors/add?color=${color}`)
-                .then(response => response.json())
-                .then(this.getColors)
-                .catch(error => console.log(error))
-        }
+    colors_add = color => {
+        fetch(`http://localhost:5000/product_colors/add?color=${color}`)
+            .then(response => response.json())
+            .then(this.colors_fetch)
     }
 
     // Delete Data
-    removeCity = (city) => {
-        if (this.state.city !== '') {
-            fetch(`http://localhost:5000/city_deliveries/delete/${city}`)
-                .then(response => response.json())
-                .then(this.getCities)
-                .catch(error => console.log(error))
-        }
+    cities_delete = city => {
+        fetch(`http://localhost:5000/city_deliveries/delete/${city}`)
+            .then(response => response.json())
+            .then(this.cities_fetch)
     }
 
-    removePaymentMethod = (paymentMethod) => {
-        if (this.state.payment !== '') {
-            fetch(`http://localhost:5000/payment_mediums/delete/${paymentMethod}`)
-                .then(response => response.json())
-                .then(this.getPaymentMethods)
-                .catch(error => console.log(error))
-        }
+    paymentMediums_delete = paymentMethod => {
+        fetch(`http://localhost:5000/payment_mediums/delete/${paymentMethod}`)
+            .then(response => response.json())
+            .then(this.paymentMediums_fetch)
     }
 
-    removeSize = (size) => {
-        if (this.state.size !== '') {
-            fetch(`http://localhost:5000/product_sizes/delete/${size}`)
-                .then(response => response.json())
-                .then(this.getSizes)
-                .catch(error => console.log(error))
-        }
+    sizes_delete = size => {
+        fetch(`http://localhost:5000/product_sizes/delete/${size}`)
+            .then(response => response.json())
+            .then(this.sizes_fetch)
     }
 
-    removeColor = (color) => {
-        if (this.state.color !== '') {
-            fetch(`http://localhost:5000/product_colors/delete/${color}`)
-                .then(response => response.json())
-                .then(this.getColors)
-                .catch(error => console.log(error))
-        }
+    colors_delete = color => {
+        fetch(`http://localhost:5000/product_colors/delete/${color}`)
+            .then(response => response.json())
+            .then(this.colors_fetch)
     }
 
-
-    // Functionalities
-    handleChange = (event) => {
+    // Helper Functions
+    handleChange = event => {
 		event.preventDefault()
 		const { name, value } = event.target
         this.setState({ [name]: value })
     }
 
-    city = item => {
-        return (
-            <li key={ item.city_id }>{ item.city_name }</li>
-        )
-    }
-
-    paymentMedium = item => {
-        return (
-            <li key={ item.payment_id }>{ item.payment_method }</li>
-        )
-    }
-
-    size = item => {
-        return (
-            <li key={ item.size_id }>{ item.size_label }</li>
-        )
-    }
-
-    color = item => {
-        return (
-            <li key={ item.color_id }>{ item.color_name }</li>
-        )
-    }
-
     render() {
-        const { cities, payment_mediums, sizes, colors } = this.state
+        const { city, paymentMethod, size, color, cities, payment_mediums, sizes, colors } = this.state
+
         return (
             <section id="admin_controls">
-
                 <div class="controls">
-
                     <form autoComplete="off">
-                        <input  type="text" value={this.state.city} name="city" onChange={this.handleChange} placeholder="City Name" />
-                        <button onClick={() => this.addCity(this.state.city)}>Add</button>
-                        <button onClick={() => this.removeCity(this.state.city)}>Delete</button>
+                        <input type="text" value={city} name="city" onChange={this.handleChange} placeholder="City Name" required />
+                        <button type="submit" onClick={() => this.cities_add(city)}>Add</button>
+                        <button type="submit" onClick={() => this.cities_delete(city)}>Delete</button>
                     </form>
 
                     <p>CITIES FOR DELIVERY</p>
 
                     <ul>
-                        { cities.map(this.city) }
+                        { cities.map(item => <li key={item.city_id}>{item.city_name}</li>) }
                     </ul>
-
                 </div>
 
                 <div class="controls">
-
                     <form autoComplete="off">
-                        <input  type="text" value={this.state.payment} name="payment" onChange={this.handleChange} placeholder="Payment Method" />
-                        <button onClick={() => this.addPaymentMethod(this.state.payment)}>Add</button>
-                        <button onClick={() => this.removePaymentMethod(this.state.payment)}>Delete</button>
+                        <input type="text" value={paymentMethod} name="paymentMethod" onChange={this.handleChange} placeholder="Payment Method" required />
+                        <button type="submit" onClick={() => this.paymentMediums_add(paymentMethod)}>Add</button>
+                        <button type="submit" onClick={() => this.paymentMediums_delete(paymentMethod)}>Delete</button>
                     </form>
 
                     <p>PAYMENT METHODS</p>
 
                     <ul>
-                        { payment_mediums.map(this.paymentMedium) }
+                        { payment_mediums.map(item => <li key={item.payment_id}>{item.payment_method}</li>) }
                     </ul>
-
                 </div>
 
                 <div class="controls">
-
                     <form autoComplete="off">
-                        <input  type="text" value={this.state.size} name="size" onChange={this.handleChange} placeholder="Product Size" />
-                        <button onClick={() => this.addSize(this.state.size)}>Add</button>
-                        <button onClick={() => this.removeSize(this.state.size)}>Delete</button>
+                        <input type="text" value={size} name="size" onChange={this.handleChange} placeholder="Product Size" required />
+                        <button type="submit" onClick={() => this.sizes_add(size)}>Add</button>
+                        <button type="submit" onClick={() => this.sizes_delete(size)}>Delete</button>
                     </form>
 
                     <p>PRODUCT SIZES</p>
 
                     <ul>
-                        { sizes.map(this.size) }
+                        { sizes.map(item => <li key={item.size_id}>{item.size_label}</li>) }
                     </ul>
-
                 </div>
 
                 <div class="controls">
-
                     <form autoComplete="off">
-                        <input  type="text" value={this.state.color} name="color" onChange={this.handleChange} placeholder="Product Color" />
-                        <button onClick={() => this.addColor(this.state.color)}>Add</button>
-                        <button onClick={() => this.removeColor(this.state.color)}>Delete</button>
+                        <input type="text" value={color} name="color" onChange={this.handleChange} placeholder="Product Color" required />
+                        <button type="submit" onClick={() => this.colors_add(color)}>Add</button>
+                        <button type="submit" onClick={() => this.colors_delete(color)}>Delete</button>
                     </form>
 
                     <p>PRODUCT COLORS</p>
 
                     <ul>
-                        { colors.map(this.color) }
+                        { colors.map(item => <li key={item.color_id}>{item.color_name}</li>) }
                     </ul>
-
                 </div>
-
             </section>
         )
     }

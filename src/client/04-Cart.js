@@ -11,7 +11,7 @@ class Cart extends Component {
 	}
 
 	// Render Data
-	cartItem_render = props => {
+	cart_render = props => {
 		return (
 			<div key={props.timestamp} class="cartItem">
 				<span class="cartItemClose" onClick={() => this.props.updateCart_delete(props.timestamp)}>&times;</span>
@@ -55,12 +55,12 @@ class Cart extends Component {
 				<section id="cart">
 					<div class="desktopCartView">
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
-							{ cart.map(this.cartItem_render) }
+							{ cart.map(this.cart_render) }
 						</Carousel>
 					</div>
 
 					<div class="mobileCartView">
-						{ cart.map(this.cartItem_render) }
+						{ cart.map(this.cart_render) }
 					</div>
 
 					<div class="cartOptionButtons">

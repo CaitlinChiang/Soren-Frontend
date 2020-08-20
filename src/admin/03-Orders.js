@@ -50,15 +50,8 @@ class Orders extends Component {
             .then(response => this.setState({ statuses_payments: response.data }) )
     }
 
-    // Update Data
-    orderDetails_update = (order_ID, newOrderStatus, newPaymentStatus) => {
-        fetch(`http://localhost:5000/orders/update/${order_ID}?orderStatus=${newOrderStatus}&paymentStatus=${newPaymentStatus}`)
-            .then(response => response.json())
-            .then(this.orderDetails_fetch)
-    }
-    
     // Render Data
-    orderItem_render = props => {
+    orders_render = props => {
         const { orderItems, statuses_orders, statuses_payments } = this.state
 
         return (
@@ -90,23 +83,23 @@ class Orders extends Component {
 
         if (orderStatus === '') {   
             if (paymentStatus === '') {
-                return this.orderItem_render(order)
+                return this.orders_render(order)
             }
             else {
-                if (order.paymentStatus_id === paymentStatus) return this.orderItem_render(order)
+                if (order.paymentStatus_id == paymentStatus) return this.orders_render(order)
             }
         }
         else {
             if (paymentStatus === '') {
-                if (order.orderStatus_id == orderStatus) return this.orderItem_render(order)
+                if (order.orderStatus_id == orderStatus) return this.orders_render(order)
             }
             else {
-                if (order.orderStatus_id == orderStatus && order.paymentStatus_id === paymentStatus) return this.orderItem_render(order)
+                if (order.orderStatus_id == orderStatus && order.paymentStatus_id == paymentStatus) return this.orders_render(order)
             }       
         }
     }
 
-    orderItem_filter = order => {
+    orders_filter = order => {
         const { dateFilter } = this.state
 
         if (dateFilter == '') {
@@ -115,6 +108,13 @@ class Orders extends Component {
         else {
             if (order.order_timestamp.substring(0, 10) == moment(dateFilter).format('YYYY-MM-DD')) return this.filters(order)
         }
+    }
+
+    // Update Data
+    orderDetails_update = (order_ID, newOrderStatus, newPaymentStatus) => {
+        fetch(`http://localhost:5000/orders/update/${order_ID}?orderStatus=${newOrderStatus}&paymentStatus=${newPaymentStatus}`)
+            .then(response => response.json())
+            .then(this.orderDetails_fetch)
     }
 
     // Helper Functions
@@ -172,7 +172,7 @@ class Orders extends Component {
                                 </thead>
 
                                 <tbody class="dataTable">
-                                    { orderDetails.map(this.orderItem_filter) }
+                                    { orderDetails.map(this.orders_filter) }
                                 </tbody>
                             </table>
                         </div>

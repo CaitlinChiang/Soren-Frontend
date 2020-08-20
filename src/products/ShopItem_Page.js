@@ -8,10 +8,12 @@ class ShopItem extends Component {
         productID: this.props.location.productID,
         cart: this.props.cart,
         
+        // Data
         product: [],
         productDetails_sizes: [],
         productDetails_colors: [],
 
+        // Product Details
         size: '',
         color: '',
         quantity: ''
@@ -58,7 +60,7 @@ class ShopItem extends Component {
     }
 
     // Render Data
-    productItem_render = props => {
+    product_render = props => {
         const { productDetails_sizes, productDetails_colors, size, color, quantity } = this.state
 
         return (
@@ -98,14 +100,14 @@ class ShopItem extends Component {
                         </select>
                     </div>
 
-                    <button onClick={() => this.productItem_add(props.product_id, props.product_name, props.product_price)}>Add To Cart</button>
+                    <button onClick={() => this.product_add(props.product_id, props.product_name, props.product_price)}>Add To Cart</button>
                 </div>
             </div>
         )
     }
 
     // Save Data
-    productItem_add = (id, name, price) => {
+    product_add = (id, name, price) => {
         let timestamp = helpers.timestamp()
         const { size, color, quantity } = this.state
 
@@ -153,7 +155,7 @@ class ShopItem extends Component {
                 <section id="items">
                     <div>
                         <Link to="/products">&#8592;</Link>
-                        { product.map(this.productItem_render) }
+                        { product.map(this.product_render) }
                     </div>
                 </section>
             </div>

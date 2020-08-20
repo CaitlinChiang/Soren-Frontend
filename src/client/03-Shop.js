@@ -5,7 +5,7 @@ import Navbar from './01-Navbar'
 
 class Shop extends Component {
 	state = {
-		mask_products:  [], 
+		mask_products: [], 
 		shirt_products: []
 	}
 
@@ -28,7 +28,7 @@ class Shop extends Component {
     }
 	
 	// Render Data
-	productItem_render = props => {
+	products_render = props => {
 		const ImageRedirect = _ => {
 			if (props.stockStatus_id === 1) {
 				return (
@@ -43,7 +43,7 @@ class Shop extends Component {
 			else return <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
 		}
 
-		const ItemDescription = _ => {
+		const ProductDescription = _ => {
 			if (props.stockStatus_id === 1) {
 				return (
 					<div>
@@ -67,7 +67,7 @@ class Shop extends Component {
 				{ ImageRedirect() } 
 				
 				<div class="shopItem_description">
-					{ ItemDescription() }
+					{ ProductDescription() }
 				</div>
 			</button>
         )
@@ -89,11 +89,11 @@ class Shop extends Component {
 
 					<div class="productsDisplay">
 						<div>
-							{ mask_products.map(this.productItem_render) } 
+							{ mask_products.map(this.products_render) } 
 						</div>
 
 						<div>
-							{ shirt_products.map(this.productItem_render) }
+							{ shirt_products.map(this.products_render) }
 						</div>
 					</div>
 				</section>
