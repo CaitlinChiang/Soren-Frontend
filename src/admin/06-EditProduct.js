@@ -168,7 +168,7 @@ class EditProduct extends Component {
                     { product.map(this.product_render) }
                 </div>
 
-                <div class="editProduct" id="editProduct">
+                <div id="editProduct" class="editProduct">
                     <h3>EDIT DETAILS</h3>
 
                     <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" required />

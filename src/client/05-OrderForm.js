@@ -118,12 +118,12 @@ class Order extends Component {
                             <div>
                                 <input type="text" value={address} name="address" onChange={this.handleChange} placeholder="Delivery Address" required />
                                 
-                                <select value={city} name="city" onChange={this.handleChange} required>
+                                <select value={city} name="city" onChange={this.handleChange} required >
                                     <option value="">--Choose a City--</option>
                                     { cities.filter(item => item.city_name !== "").map(item => <option value={item.city_id}>{item.city_name}</option>) }
                                 </select>
 
-                                <select value={paymentMethod} name="paymentMethod" onChange={this.handleChange} required>
+                                <select value={paymentMethod} name="paymentMethod" onChange={this.handleChange} required > 
                                     <option value="">--Choose a Payment Method--</option>
                                     { payment_mediums.map(item => <option value={item.payment_id}>{item.payment_method}</option>) }
                                 </select>
