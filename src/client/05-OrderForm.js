@@ -30,9 +30,9 @@ class Order extends Component {
 
     componentDidMount = _ => {
         this.price_set()
-        this.orderID_set()
-        this.cities_fetch()
-        this.paymentMediums_fetch()
+        // this.orderID_set()
+        // this.cities_fetch()
+        // this.paymentMediums_fetch()
     }
 
     // Fetch Data
@@ -53,7 +53,12 @@ class Order extends Component {
     orderID_set = _ => {
         fetch('http://localhost:5000/orders')
             .then(response => response.json())
-            .then(response => this.setState({ orderID: response.data[0].order_id + 1 }) )
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState({ orderID: response.data[0].order_id + 1 })
+                }
+                else this.setState({ orderID: 1 })
+            })
     }
 
     cities_fetch = _ => {
