@@ -64,7 +64,7 @@ class Cart extends Component {
 					</div>
 
 					<div class="cartOptionButtons">
-						<Link to="/shop">  
+						<Link to="/products">  
 							<a href="#"> <svg> <rect></rect> <rect></rect> </svg> Continue Shopping </a>
 						</Link>
 

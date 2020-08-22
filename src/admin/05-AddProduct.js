@@ -50,24 +50,35 @@ class AddProduct extends Component {
     }
 
     // Save Data
-    product_add = () => {
-        const { productID, name, category, price, productSizes, productColors } = this.state
+    product_add = _ => {
+        const { name, category, price, productSizes, productColors } = this.state
 
         if (productSizes.length > 0 && productColors.length > 0) {
-            fetch(`http://localhost:5000/products/add?product_category=${category}&name=${name}&price=${price}`)
-                .then(response => response.json())
-                .then(this.productID_set())
+            const confirmation = window.confirm("Are you sure you would like to add this product?")
 
-            for (let i = 0; i < productSizes.length; i++) {
-                for (let j = 0; j < productColors.length; j++) {
-                    fetch(`http://localhost:5000/products_variants/add?product_id=${productID}&size=${productSizes[i].size_id}&color=${productColors[j].color_id}`)
-                        .then(response => response.json())
-                }
+            if (confirmation) {
+                fetch(`http://localhost:5000/products/add?product_category=${category}&name=${name}&price=${price}`)
+                    .then(response => response.json())
+               
+                this.productVariants_add()
             }
         }
         else alert("Please fill in all the input fields.")
+    }
+
+    productVariants_add = _ => {
+        const { productID, productSizes, productColors } = this.state
+
+        for (let i = 0; i < productSizes.length; i++) {
+            for (let j = 0; j < productColors.length; j++) {
+                fetch(`http://localhost:5000/products_variants/add?product_id=${productID}&size=${productSizes[i].size_id}&color=${productColors[j].color_id}`)
+                    .then(response => response.json())
+            }
+        }
 
         this.clear()
+        alert("Item has been added.")
+        this.productID_set()
     }
 
     // Helper Functions

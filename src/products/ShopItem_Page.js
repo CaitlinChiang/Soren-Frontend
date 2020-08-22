@@ -10,8 +10,10 @@ class ShopItem extends Component {
         
         // Data
         product: [],
-        productDetails_sizes: [],
-        productDetails_colors: [],
+        productVariants_sizes: [],
+        productVariants_colors: [],
+        sizes: [],
+        colors: [],
 
         // Product Details
         size: '',
@@ -22,6 +24,8 @@ class ShopItem extends Component {
     componentDidMount = _ => {
         this.product_fetch()
         this.productDetails_fetch()
+        this.sizes_fetch()
+        this.colors_fetch()
     }
 
     // Fetch Data
@@ -40,28 +44,74 @@ class ShopItem extends Component {
     }
 
     productDetails_fetch = _ => {
-        const { productID, productDetails_sizes, productDetails_colors } = this.state
-
-        fetch('http://localhost:5000/product_details')
+        fetch('http://localhost:5000/products_variants')
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].product_id === productID) {
-                        if (!productDetails_sizes.includes(response.data[i].detail_size)) {
-                            this.setState({ productDetails_sizes: productDetails_sizes.concat(response.data[i].detail_size) })
+                    if (response.data[i].product_id === this.state.productID) {
+                        if (!this.state.productVariants_sizes.includes(response.data[i].size_id)) {
+                            this.setState({ productVariants_sizes: this.state.productVariants_sizes.concat(response.data[i].size_id) })
                         }
-                        // change spelling of detail
-                        if (!productDetails_colors.includes(response.data[i].deatil_color)) {
-                            this.setState({ productDetails_colors: productDetails_colors.concat(response.data[i].deatil_color) })
+
+                        if (!this.state.productVariants_colors.includes(response.data[i].color_id)) {
+                            this.setState({ productVariants_colors: this.state.productVariants_colors.concat(response.data[i].color_id) })
                         }
                     }
                 }
             })
     }
 
+    sizes_fetch = _ => {
+        fetch('http://localhost:5000/product_sizes')
+            .then(response => response.json())
+            .then(response => this.setState({ sizes: response.data }))
+    }
+
+    colors_fetch = _ => {
+        fetch('http://localhost:5000/product_colors')
+            .then(response => response.json())
+            .then(response => this.setState({ colors: response.data }))
+    }
+
     // Render Data
     product_render = props => {
-        const { productDetails_sizes, productDetails_colors, size, color, quantity } = this.state
+        const { productVariants_sizes, productVariants_colors, sizes, colors, size, color, quantity } = this.state
+
+        const product_sizes = _ => {
+            return productVariants_sizes.map(item => {
+                for (let i = 0; i < sizes.length; i++) {
+                    if (sizes[i].size_id === item) {
+                        return <button onClick={() => this.setState({ size: item })}>{sizes[i].size_name}</button>
+                    }
+                }
+            })
+        }
+
+        const display_size = _ => {
+            for (let i = 0; i < sizes.length; i++) {
+                if (sizes[i].size_id === this.state.size) {
+                    return sizes[i].size_name
+                }
+            }
+        }
+
+        const product_colors = _ => {
+            return productVariants_colors.map(item => {
+                for (let i = 0; i < colors.length; i++) {
+                    if (colors[i].color_id === item) {
+                        return <button onClick={() => this.setState({ color: item })} style={{ background: `${colors[i].color_name}` }}></button>
+                    }
+                }
+            })
+        }
+
+        const display_color = _ => {
+            for (let i = 0; i < colors.length; i++) {
+                if (colors[i].color_id === this.state.color) {
+                    return colors[i].color_name
+                }
+            }
+        }
 
         return (
             <div key={props.product_id} class="individualItem">
@@ -74,13 +124,13 @@ class ShopItem extends Component {
                     </div> <br/>
                     
                     <div>
-                        <p>Size: {size}</p>
-                        { productDetails_sizes.map(item => <button onClick={() => this.setState({ size: item })}>{item}</button>) }
+                        <p>Size: {display_size()}</p>
+                        {product_sizes()}
                     </div> <br />
 
                     <div>
-                        <p>Color: {color}</p>
-                        { productDetails_colors.map(item => <button onClick={() => this.setState({ color: item })} style={{ background: `${item}` }}></button>) }
+                        <p>Color: {display_color()}</p>
+                        {product_colors()}
                     </div> <br/>
 
                     <div>

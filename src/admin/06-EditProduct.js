@@ -25,7 +25,7 @@ class EditProduct extends Component {
 
     componentDidMount = () => {
         this.product_fetch()
-        this.productDetails_fetch()
+        this.productVariants_fetch()
         this.categories_fetch()
         this.stocks_fetch()
         this.sizes_fetch()
@@ -45,18 +45,18 @@ class EditProduct extends Component {
             })
     }
 
-    productDetails_fetch = _ => {
+    productVariants_fetch = _ => {
         fetch('http://localhost:5000/products_variants')
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
                     if (response.data[i].product_id === this.state.productID) {
                         if (!this.state.productVariants_sizes.includes(response.data[i].size_id)) {
-                            this.setState({ productVariants_sizes: this.state.productVariants_sizes.concat(response.data[i]) })
+                            this.setState({ productVariants_sizes: this.state.productVariants_sizes.concat(response.data[i].size_id) })
                         }
 
                         if (!this.state.productVariants_colors.includes(response.data[i].color_id)) {
-                            this.setState({ productVariants_colors: this.state.productVariants_colors.concat(response.data[i]) })
+                            this.setState({ productVariants_colors: this.state.productVariants_colors.concat(response.data[i].color_id) })
                         }
                     }
                 }
@@ -89,31 +89,74 @@ class EditProduct extends Component {
 
     // Render Data
     product_render = props => {
-        const { productVariants_sizes, productVariants_colors } = this.state
+        const { productVariants_sizes, productVariants_colors, categories, sizes, colors, stocks } = this.state
+
+        const category = _ => {
+            for (let i = 0; i < categories.length; i++) {
+                if (categories[i].category_id === props.category_id) {
+                    return categories[i].category_name
+                }
+            }
+        }
+
+        const stock = _ => {
+            for (let i = 0; i < stocks.length; i++) {
+                if (stocks[i].stock_id === props.stock_id) {
+                    return stocks[i].stock_status
+                }
+            }
+        }
+
+        const size = _ => {
+            return productVariants_sizes.map(item => {
+                for (let i = 0; i < sizes.length; i++) {
+                    if (sizes[i].size_id === item) {
+                        return <p>{sizes[i].size_name}</p>
+                    }
+                }
+            })
+        }
+
+        const color = _ => {
+            return productVariants_colors.map(item => {
+                for (let i = 0; i < colors.length; i++) {
+                    if (colors[i].color_id === item) {
+                        return <p>{colors[i].color_name}</p>
+                    }
+                }
+            })
+        }
 
         return (
             <div key={props.product_id}>
                 <div>{props.product_name}</div>
-                <div>{props.category_id}</div>
+                <div>{category()}</div>
                 <div>P{props.product_price}.00</div>
-                <div>{props.stock_id}</div>
-                <div>Sizes: { productVariants_sizes.map(item => <p>{item.size_name}</p>) }</div>
-                <div>Colors: { productVariants_colors.map(item => <p>{item.color_name}</p>) }</div>
+                <div>{stock()}</div>
+                <div>Sizes: {size()}</div>
+                <div>Colors: {color()}</div>
             </div>
         )
     }
 
     // Update Data
     product_update = _ => {
-        const { productID, name, category, price, stock } = this.state
+        const { productID, name, category, price, stock, productSizes, productColors } = this.state
 
-        fetch(`http://localhost:5000/products/update/${productID}?product_category=${category}&name=${name}&price=${price}&stock=${stock}`)
-            .then(response => response.json())
+        if (productSizes.length > 0 && productColors.length > 0) {
+            const confirmation = window.confirm("Are you sure you would like to update this item?")
 
-        this.productDetails_update()
+            if (confirmation) {
+                fetch(`http://localhost:5000/products/update/${productID}?product_category=${category}&name=${name}&price=${price}&stock=${stock}`)
+                    .then(response => response.json())
+
+                this.productVariants_update()
+            }
+        }
+        else alert("Please fill in all the input fields.")
     }
 
-    productDetails_update = _ => {
+    productVariants_update = _ => {
         const { productID, productSizes, productColors } = this.state
 
         fetch(`http://localhost:5000/products_variants/delete/${productID}`)
@@ -128,8 +171,21 @@ class EditProduct extends Component {
         }
 
         this.clear()
+        alert("Item has been updated")
         this.product_fetch()
-        this.productDetails_fetch()
+        this.productVariants_fetch()
+    }
+
+    // Delete Data
+    product_delete = _ => {
+        const confirmation = window.confirm("Are you sure you would like to delete this item?")
+
+        if (confirmation) {
+            fetch(`http://localhost:5000/products/delete/${this.state.productID}`)
+            alert("Item has been deleted.")
+        }
+
+        this.setState({ product: [] })
     }
 
     // Helper Functions
@@ -197,7 +253,7 @@ class EditProduct extends Component {
 
                     <button onClick={() => this.clear()}>RESTART</button>
                     <button type="submit" onClick={() => this.product_update()}>SAVE CHANGES</button>
-                    <button>DELETE PRODUCT</button>
+                    <button type="submit" onClick={() => this.product_delete()}>DELETE PRODUCT</button>
                 </div>
             </section>
         )

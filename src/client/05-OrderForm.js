@@ -53,12 +53,7 @@ class Order extends Component {
     orderID_set = _ => {
         fetch('http://localhost:5000/order_details')
             .then(response => response.json())
-            .then(response => {
-                if (response.data.length > 0) {
-                    this.setState({ orderID: response.data[0].order_id + 1 })
-                }
-                else this.setState({ orderID: 1 })
-            })
+            .then(response => this.setState({ orderID: response.data[0].orderDetail_id + 1 }) )
     }
 
     cities_fetch = _ => {
@@ -76,15 +71,22 @@ class Order extends Component {
     // Save Data
     orders_add = () => {
         let timestamp = helpers.timestamp()
-        const { cart, orderID, name, mobile, email, address, city, paymentMethod, date } = this.state
-        
-        fetch(`http://localhost:5000/order_details/add?timestamp=${timestamp}&name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&paymentMethod=${paymentMethod}&orderDate=${moment(date).format('YYYY-MM-DD')}`)
-            .then(response => response.json())
+        const { cart, orderID, name, mobile, email, address, city, paymentMethod, date, price } = this.state
 
-        for (let i = 0; i < cart.length; i++) {
-            fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}`)
-            .then(response => response.json())
+        if (cart.length > 0) {
+            const confirmation = window.confirm("Proceed?")
+
+            if (confirmation) {
+                fetch(`http://localhost:5000/order_details/add?timestamp=${timestamp}&name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&paymentMethod=${paymentMethod}&orderDate=${moment(date).format('YYYY-MM-DD')}&price=${price}`)
+                    .then(response => response.json())
+
+                for (let i = 0; i < cart.length; i++) {
+                    fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}`)
+                    .then(response => response.json())
+                }
+            }
         }
+        else alert("Your cart is empty.")
     }
 
     // Helper Functions
@@ -101,7 +103,7 @@ class Order extends Component {
     }
 
     render() {
-        const { cities, payment_mediums, price, name, phone, email, address, city, paymentMethod, date } = this.state
+        const { cities, payment_mediums, price, name, mobile, email, address, city, paymentMethod, date } = this.state
 
         return (
             <div>
@@ -116,7 +118,7 @@ class Order extends Component {
                         <form autoComplete="off">
                             <div>
                                 <input type="text" value={name}  name="name"  onChange={this.handleChange} placeholder="First Name, Last Name" required />
-                                <input type="text" value={phone} name="phone" onChange={this.handleChange} placeholder="Phone Number" required />
+                                <input type="text" value={mobile} name="mobile" onChange={this.handleChange} placeholder="Phone Number" required />
                                 <input type="text" value={email} name="email" onChange={this.handleChange} placeholder="Email Address" required />
                             </div>
 

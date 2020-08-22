@@ -14,6 +14,8 @@ class Orders extends Component {
         // Data
         orderDetails: [],
         orderItems: [],
+        cities: [],
+        payment_mediums: [],
         statuses_orders: [],
         statuses_payments: []
     }
@@ -21,6 +23,8 @@ class Orders extends Component {
     componentDidMount = _ => {
         this.orderDetails_fetch()
         this.orderItems_fetch()
+        this.cities_fetch()
+        this.paymentMediums_fetch()
         this.orderStatuses_fetch()
         this.paymentStatuses_fetch()
     }
@@ -29,13 +33,25 @@ class Orders extends Component {
     orderDetails_fetch = _ => {
         fetch('http://localhost:5000/order_details')
             .then(response => response.json())
-            .then(response => this.setState({ orderDetails: response.data }) )
+            .then(response => this.setState({ orderDetails: response.data }) ) 
     }
 
     orderItems_fetch = _ => {
         fetch('http://localhost:5000/order_items')
             .then(response => response.json())
             .then(response => this.setState({ orderItems: response.data }) )
+    }
+
+    cities_fetch = _ => {
+        fetch('http://localhost:5000/city_deliveries')
+            .then(response => response.json())
+            .then(response => this.setState({ cities: response.data }) )
+    }
+
+    paymentMediums_fetch = _ => {
+        fetch('http://localhost:5000/payment_mediums')
+            .then(response => response.json())
+            .then(response => this.setState({ payment_mediums: response.data }) )
     }
 
     orderStatuses_fetch = _ => {
@@ -52,69 +68,57 @@ class Orders extends Component {
 
     // Render Data
     orders_render = props => {
-        const { orderItems, statuses_orders, statuses_payments } = this.state
+        const { orderItems, cities, payment_mediums, statuses_orders, statuses_payments } = this.state
 
-        let city_name = ''
-        fetch('http://localhost:5000/city_deliveries')
-            .then(response => response.json())
-            .then(response => {
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].city_id === props.city_id) {
-                        city_name = response.data[i].city_name
-                    }
+        const city = _ => {
+            for (let i = 0; i < cities.length; i++) {
+                if (cities[i].city_id === props.city_id) {
+                    return cities[i].city_name
                 }
-            })
+            }
+        }
 
-        let paymentMethod = ''
-        fetch('http://localhost:5000/payment_mediums')
-            .then(response => response.json())
-            .then(response => {
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].paymentMethod_id === props.paymentMethod_id) {
-                        paymentMethod = response.data[i].paymentMethod_name
-                    }
+        const paymentMethod = _ => {
+            for (let i = 0; i < payment_mediums.length; i++) {
+                if (payment_mediums[i].paymentMethod_id === props.paymentMethod_id) {
+                    return payment_mediums[i].paymentMethod_name
                 }
-            })
+            }
+        }
 
-        let orderStatus = ''
-        fetch('http://localhost:5000/status_order')
-            .then(response => response.json())
-            .then(response => {
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].orderStatus_id === props.orderStatus_id) {
-                        orderStatus = response.data[i].orderStatus_name
-                    }
+        const orderStatus = _ => {
+            for (let i = 0; i < statuses_orders.length; i++) {
+                if (statuses_orders[i].orderStatus_id === props.orderStatus_id) {
+                    return statuses_orders[i].orderStatus_name
                 }
-            })
+            }
+        }
 
-        let paymentStatus = ''
-        fetch('http://localhost:5000/status_payment')
-            .then(response => response.json())
-            .then(response => {
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].paymentStatus_id === props.paymentStatus_id) {
-                        paymentStatus = response.data[i].paymentStatus_name
-                    }
+        const paymentStatus = _ => {
+            for (let i = 0; i < statuses_payments.length; i++) {
+                if (statuses_payments[i].paymentStatus_id === props.paymentStatus_id) {
+                    return statuses_payments[i].paymentStatus_name
                 }
-            })
+            }
+        }
 
         return (
             <tr key={props.orderDetail_id}>
                 <td>{props.orderDetail_id} <br /><br /> {props.timestamp} </td>
                 <td>{orderItems.filter(item => item.orderDetail_id === props.orderDetail_id).map(item => <p>{item.product_name} ({item.product_size} - {item.product_color})</p>) }</td>
                 <td>{props.customer_name} <br /><br /> {props.customer_mobile} <br /><br /> {props.customer_email}</td>
-                <td>{props.customer_address} <br /><br /> {city_name}</td>
+                <td>{props.customer_address} <br /><br /> {city()}</td>
                 <td>{props.delivery_date.substring(0, 10)}</td>
-                <td></td>
-                <td>{paymentMethod}</td>
+                <td>P{props.price}.00</td>
+                <td>{paymentMethod()}</td>
                 <td>
                     <select onChange={(event) => this.orderDetails_update(props.orderDetail_id, event.target.value, props.paymentStatus_id)}>
-                        <option value="" selected disabled hidden>{orderStatus}</option>
+                        <option value="" selected disabled hidden>{orderStatus()}</option>
                         { statuses_orders.map(item => <option value={item.orderStatus_id}>{item.orderStatus_name}</option>) }
                     </select> <br /><br />
 
                     <select onChange={(event) => this.orderDetails_update(props.orderDetail_id, props.orderStatus_id, event.target.value)}>
-                        <option value="" selected disabled hidden>{paymentStatus}</option>
+                        <option value="" selected disabled hidden>{paymentStatus()}</option>
                         { statuses_payments.map(item => <option value={item.paymentStatus_id}>{item.paymentStatus_name}</option>) }
                     </select>
                 </td>
@@ -150,7 +154,7 @@ class Orders extends Component {
             return this.filters(order)
         }
         else {
-            if (order.order_timestamp.substring(0, 10) == moment(dateFilter).format('YYYY-MM-DD')) return this.filters(order)
+            if (order.timestamp.substring(0, 10) == moment(dateFilter).format('YYYY-MM-DD')) return this.filters(order)
         }
     }
 
