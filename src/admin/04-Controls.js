@@ -49,13 +49,13 @@ class Controls extends Component {
 
     // Save Data
     cities_add = city => {
-        fetch(`http://localhost:5000/city_deliveries/add?newCity=${city}`)
+        fetch(`http://localhost:5000/city_deliveries/add?city=${city}`)
             .then(response => response.json())
             .then(this.cities_fetch)
     }
 
     paymentMediums_add = paymentMethod => {
-        fetch(`http://localhost:5000/payment_mediums/add?newPaymentMethod=${paymentMethod}`)
+        fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}`)
             .then(response => response.json())
             .then(this.paymentMediums_fetch)
     }
@@ -133,7 +133,7 @@ class Controls extends Component {
                     <p>PAYMENT METHODS</p>
 
                     <ul>
-                        { payment_mediums.map(item => <li key={item.payment_id}>{item.payment_method}</li>) }
+                        { payment_mediums.map(item => <li key={item.paymentMethod_id}>{item.paymentMethod_name}</li>) }
                     </ul>
                 </div>
 
@@ -147,7 +147,7 @@ class Controls extends Component {
                     <p>PRODUCT SIZES</p>
 
                     <ul>
-                        { sizes.map(item => <li key={item.size_id}>{item.size_label}</li>) }
+                        { sizes.map(item => <li key={item.size_id}>{item.size_name}</li>) }
                     </ul>
                 </div>
 

@@ -24,10 +24,10 @@ class Products extends Component {
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].category_id == 1) {
+                    if (response.data[i].category_id === 1) {
                         this.setState({ mask_products: this.state.mask_products.concat(response.data[i]) })
                     }
-                    else if (response.data[i].category_id == 2) {
+                    else if (response.data[i].category_id === 2) {
                         this.setState({ shirt_products: this.state.shirt_products.concat(response.data[i]) })
                     }
                 }
@@ -35,7 +35,7 @@ class Products extends Component {
     }
 
     categories_fetch = _ => {
-        fetch('http://localhost:5000/product_categories')
+        fetch('http://localhost:5000/categories')
             .then(response => response.json())
             .then(response => this.setState({ categories: response.data }) )
     }

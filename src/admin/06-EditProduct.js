@@ -6,8 +6,8 @@ class EditProduct extends Component {
         // Data
         productID: this.props.location.productID,
         product: [],
-        productDetails_sizes: [],
-        productDetails_colors: [],
+        productVariants_sizes: [],
+        productVariants_colors: [],
 
         categories: [],
         sizes: [],
@@ -46,17 +46,17 @@ class EditProduct extends Component {
     }
 
     productDetails_fetch = _ => {
-        fetch('http://localhost:5000/product_details')
+        fetch('http://localhost:5000/products_variants')
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
                     if (response.data[i].product_id === this.state.productID) {
-                        if (!this.state.productDetails_sizes.includes(response.data[i].detail_size)) {
-                            this.setState({ productDetails_sizes: this.state.productDetails_sizes.concat(response.data[i].detail_size) })
+                        if (!this.state.productVariants_sizes.includes(response.data[i].size_id)) {
+                            this.setState({ productVariants_sizes: this.state.productVariants_sizes.concat(response.data[i]) })
                         }
-                        // change spelling of detail down the line
-                        if (!this.state.productDetails_colors.includes(response.data[i].deatil_color)) {
-                            this.setState({ productDetails_colors: this.state.productDetails_colors.concat(response.data[i].deatil_color) })
+
+                        if (!this.state.productVariants_colors.includes(response.data[i].color_id)) {
+                            this.setState({ productVariants_colors: this.state.productVariants_colors.concat(response.data[i]) })
                         }
                     }
                 }
@@ -64,13 +64,13 @@ class EditProduct extends Component {
     }
 
     categories_fetch = _ => {
-        fetch('http://localhost:5000/product_categories')
+        fetch('http://localhost:5000/categories')
             .then(response => response.json())
             .then(response => this.setState({ categories: response.data }))
     }
 
     stocks_fetch = _ => {
-        fetch('http://localhost:5000/stock_status')
+        fetch('http://localhost:5000/product_stocks')
             .then(response => response.json())
             .then(response => this.setState({ stocks: response.data }))
     }
@@ -89,16 +89,16 @@ class EditProduct extends Component {
 
     // Render Data
     product_render = props => {
-        const { productDetails_sizes, productDetails_colors } = this.state
+        const { productVariants_sizes, productVariants_colors } = this.state
 
         return (
             <div key={props.product_id}>
                 <div>{props.product_name}</div>
                 <div>{props.category_id}</div>
                 <div>P{props.product_price}.00</div>
-                <div>{props.stockStatus_id}</div>
-                <div>Sizes: { productDetails_sizes.map(item => <p>{item}</p>) }</div>
-                <div>Colors: { productDetails_colors.map(item => <p>{item}</p>) }</div>
+                <div>{props.stock_id}</div>
+                <div>Sizes: { productVariants_sizes.map(item => <p>{item.size_name}</p>) }</div>
+                <div>Colors: { productVariants_colors.map(item => <p>{item.color_name}</p>) }</div>
             </div>
         )
     }
@@ -107,7 +107,7 @@ class EditProduct extends Component {
     product_update = _ => {
         const { productID, name, category, price, stock } = this.state
 
-        fetch(`http://localhost:5000/products/update/${productID}?categoryID=${category}&productName=${name}&productPrice=${price}&stockStatus=${stock}`)
+        fetch(`http://localhost:5000/products/update/${productID}?product_category=${category}&name=${name}&price=${price}&stock=${stock}`)
             .then(response => response.json())
 
         this.productDetails_update()
@@ -116,13 +116,13 @@ class EditProduct extends Component {
     productDetails_update = _ => {
         const { productID, productSizes, productColors } = this.state
 
-        fetch(`http://localhost:5000/product_details/delete/${productID}`)
+        fetch(`http://localhost:5000/products_variants/delete/${productID}`)
             .then(response => response.json())
             .then(this.remove)
 
         for (let i = 0; i < productSizes.length; i++) {
             for (let j = 0; j < productColors.length; j++) {
-                fetch(`http://localhost:5000/product_details/add?productID=${productID}&size=${productSizes[i]}&color=${productColors[j]}`)
+                fetch(`http://localhost:5000/products_variants/add?product_id=${productID}&size=${productSizes[i].size_id}&color=${productColors[j].color_id}`)
                     .then(response => response.json())
             }
         }
@@ -142,8 +142,8 @@ class EditProduct extends Component {
     remove = _ => {
         this.setState({ 
             product: [],
-            productDetails_sizes: [],
-            productDetails_colors: []
+            productVariants_sizes: [],
+            productVariants_colors: []
         })
     }
 
@@ -182,17 +182,17 @@ class EditProduct extends Component {
 
                     <select value={stock} name="stock" onChange={this.handleChange} required >
                         <option value="">-- Select Stock Status --</option>
-                        { stocks.map(item => <option value={item.stockStatus_id}>{item.stockStatus_label}</option>) }
+                        { stocks.map(item => <option value={item.stock_id}>{item.stock_status}</option>) }
                     </select>
                     
                     <div>
-                        <p>Sizes: { productSizes.map(item => <p>{item}</p>) }</p>
-                        { sizes.map(item => <button onClick={() => this.setState({ productSizes: this.state.productSizes.concat(item.size_label) })}>{item.size_label}</button>) }
+                        <p>Sizes: { productSizes.map(item => <p>{item.size_name}</p>) }</p>
+                        { sizes.map(item => <button onClick={() => this.setState({ productSizes: this.state.productSizes.concat(item) })}>{item.size_name}</button>) }
                     </div> <br />
 
                     <div>
-                        <p>Colors: { productColors.map(item => <p>{item}</p>) }</p>
-                        { colors.map(item => <button onClick={() => this.setState({ productColors: this.state.productColors.concat(item.color_name) })} style={{ background: `${item.color_name}` }}>{item.size_label}</button>) }
+                        <p>Colors: { productColors.map(item => <p>{item.color_name}</p>) }</p>
+                        { colors.map(item => <button onClick={() => this.setState({ productColors: this.state.productColors.concat(item) })} style={{ background: `${item.color_name}` }}></button>) }
                     </div> <br/>
 
                     <button onClick={() => this.clear()}>RESTART</button>

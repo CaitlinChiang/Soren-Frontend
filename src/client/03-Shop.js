@@ -17,10 +17,10 @@ class Shop extends Component {
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].category_id == 1) {
+                    if (response.data[i].category_id === 1) {
                         this.setState({ mask_products: this.state.mask_products.concat(response.data[i]) })
                     }
-                    else if (response.data[i].category_id == 2) {
+                    else if (response.data[i].category_id === 2) {
                         this.setState({ shirt_products: this.state.shirt_products.concat(response.data[i]) })
                     }
                 }
@@ -30,7 +30,7 @@ class Shop extends Component {
 	// Render Data
 	products_render = props => {
 		const ImageRedirect = _ => {
-			if (props.stockStatus_id === 1) {
+			if (props.stock_id === 1) {
 				return (
 					<Link to={{ 
 						pathname: `/products/${props.product_id}`,
@@ -44,7 +44,7 @@ class Shop extends Component {
 		}
 
 		const ProductDescription = _ => {
-			if (props.stockStatus_id === 1) {
+			if (props.stock_id === 1) {
 				return (
 					<div>
 						<h1>{props.product_name}</h1>

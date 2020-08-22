@@ -30,9 +30,9 @@ class Order extends Component {
 
     componentDidMount = _ => {
         this.price_set()
-        // this.orderID_set()
-        // this.cities_fetch()
-        // this.paymentMediums_fetch()
+        this.orderID_set()
+        this.cities_fetch()
+        this.paymentMediums_fetch()
     }
 
     // Fetch Data
@@ -51,7 +51,7 @@ class Order extends Component {
     }
 
     orderID_set = _ => {
-        fetch('http://localhost:5000/orders')
+        fetch('http://localhost:5000/order_details')
             .then(response => response.json())
             .then(response => {
                 if (response.data.length > 0) {
@@ -78,11 +78,11 @@ class Order extends Component {
         let timestamp = helpers.timestamp()
         const { cart, orderID, name, mobile, email, address, city, paymentMethod, date } = this.state
         
-        fetch(`http://localhost:5000/orders/add?name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&orderDate=${moment(date).format('YYYY-MM-DD')}&paymentMethod=${paymentMethod}&timestamp=${timestamp}&orderStatus=1&paymentStatus=1`)
+        fetch(`http://localhost:5000/order_details/add?timestamp=${timestamp}&name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&paymentMethod=${paymentMethod}&orderDate=${moment(date).format('YYYY-MM-DD')}`)
             .then(response => response.json())
 
         for (let i = 0; i < cart.length; i++) {
-            fetch(`http://localhost:5000/order_items/add?orderID=${orderID}&productID=${cart[i].id}&color=${cart[i].color}&size=${cart[i].size}`)
+            fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}`)
             .then(response => response.json())
         }
     }
@@ -125,12 +125,12 @@ class Order extends Component {
                                 
                                 <select value={city} name="city" onChange={this.handleChange} required >
                                     <option value="">--Choose a City--</option>
-                                    { cities.filter(item => item.city_name !== "").map(item => <option value={item.city_id}>{item.city_name}</option>) }
+                                    { cities.map(item => <option value={item.city_id}>{item.city_name}</option>) }
                                 </select>
 
                                 <select value={paymentMethod} name="paymentMethod" onChange={this.handleChange} required > 
                                     <option value="">--Choose a Payment Method--</option>
-                                    { payment_mediums.map(item => <option value={item.payment_id}>{item.payment_method}</option>) }
+                                    { payment_mediums.map(item => <option value={item.paymentMethod_id}>{item.paymentMethod_name}</option>) }
                                 </select>
                             </div>
 
