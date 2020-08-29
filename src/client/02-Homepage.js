@@ -1,12 +1,9 @@
 import React from 'react'
 import '../client_css/02-Homepage.css'
-import Navbar from './01-Navbar'
 
 function Homepage() {
 	return (
 		<div>
-			<Navbar />
-
 			<section id="home">
 				<div class="homeLogo"> 
 					<img src="/images/logo.png" /> 

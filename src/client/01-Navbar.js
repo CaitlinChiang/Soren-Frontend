@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
+import { withRouter } from 'react-router-dom'
 import '../client_css/01-Navbar.css'
 
 class Navbar extends Component {
@@ -25,7 +26,7 @@ class Navbar extends Component {
 						<li> <Link to="/products">Shop</Link> </li>
 						<li> <Link onClick={() => this.contact_show()}>Contact Us</Link> </li>
 					</ul>
-
+					
 					<div class="cart"> 
 						<Link to="/cart"> <img src="/images/cart.png" /> </Link>
 					</div>
@@ -84,4 +85,4 @@ class Navbar extends Component {
 	}
 }
 
-export default Navbar
+export default withRouter(Navbar)

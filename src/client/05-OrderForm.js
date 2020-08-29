@@ -5,7 +5,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { addMonths, addDays, getDay } from 'date-fns'
 import moment from 'moment'
 import '../client_css/05-Order.css'
-import Navbar from './01-Navbar'
 import helpers from './helper'
 
 class Order extends Component {
@@ -133,8 +132,6 @@ class Order extends Component {
 
         return (
             <div>
-                <Navbar />
-
                 <section id="order">
                     <Link to="/cart"> <div>&#8592; Back to Cart</div> </Link>
 

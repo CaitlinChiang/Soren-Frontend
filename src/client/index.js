@@ -1,5 +1,6 @@
-import React, { Component, createElement } from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Navbar from './01-Navbar'
 import Homepage from './02-Homepage'
 import Shop from './03-Shop'
 import ShopItem from '../products/ShopItem_Page'
@@ -30,6 +31,7 @@ class Client extends Component {
 
 		return (
 			<Router>
+				<Navbar />
 				<Switch>
 					<Route exact path="/" component={Homepage} />
 					<Route exact path="/products" component={Shop} />

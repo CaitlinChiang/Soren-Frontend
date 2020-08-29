@@ -3,7 +3,6 @@ import { HashLink as Link } from 'react-router-hash-link'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import '../client_css/04-Cart.css'
-import Navbar from './01-Navbar'
 
 class Cart extends Component {
 	state = {
@@ -90,8 +89,6 @@ class Cart extends Component {
 
 		return (
 			<div>
-				<Navbar />
-
 				<section id="cart">
 					<div class="desktopCartView">
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>

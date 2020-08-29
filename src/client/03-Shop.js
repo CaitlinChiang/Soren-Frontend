@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
 import '../client_css/03-Shop.css'
-import Navbar from './01-Navbar'
 
 class Shop extends Component {
 	state = {
@@ -74,8 +73,6 @@ class Shop extends Component {
 
 		return (
 			<div>
-				<Navbar />
-
 				<section id="shop">
 					<section id="allProducts_header" class="productCategoryPage_header">
 						<p>Soren Apparel</p>
