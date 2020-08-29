@@ -5,6 +5,7 @@ class Controls extends Component {
     state = {
         city: '',
         paymentMethod: '',
+        paymentMethod_account: '',
         size: '',
         color: '',
 
@@ -54,10 +55,17 @@ class Controls extends Component {
             .then(this.cities_fetch)
     }
 
-    paymentMediums_add = paymentMethod => {
-        fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}`)
-            .then(response => response.json())
-            .then(this.paymentMediums_fetch)
+    paymentMediums_add = (paymentMethod, paymentMethod_account) => {
+        if (paymentMethod_account.trim() !== '') {
+            fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}&paymentMethod_account=${paymentMethod_account}`)
+                .then(response => response.json())
+                .then(this.paymentMediums_fetch)
+        }
+        else {
+            fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}`)
+                .then(response => response.json())
+                .then(this.paymentMediums_fetch)
+        }
     }
 
     sizes_add = size => {
@@ -105,7 +113,7 @@ class Controls extends Component {
     }
 
     render() {
-        const { city, paymentMethod, size, color, cities, payment_mediums, sizes, colors } = this.state
+        const { city, paymentMethod, paymentMethod_account, size, color, cities, payment_mediums, sizes, colors } = this.state
 
         return (
             <section id="admin_controls">
@@ -126,14 +134,20 @@ class Controls extends Component {
                 <div class="controls">
                     <form autoComplete="off">
                         <input type="text" value={paymentMethod} name="paymentMethod" onChange={this.handleChange} placeholder="Payment Method" required />
-                        <button type="submit" onClick={() => this.paymentMediums_add(paymentMethod)}>Add</button>
+                        <input type="text" value={paymentMethod_account} name="paymentMethod_account" onChange={this.handleChange} placeholder="Account Number" />
+                        <button type="submit" onClick={() => this.paymentMediums_add(paymentMethod, paymentMethod_account)}>Add</button>
                         <button type="submit" onClick={() => this.paymentMediums_delete(paymentMethod)}>Delete</button>
                     </form>
 
                     <p>PAYMENT METHODS</p>
 
                     <ul>
-                        { payment_mediums.map(item => <li key={item.paymentMethod_id}>{item.paymentMethod_name}</li>) }
+                        { payment_mediums.map(item => {
+                            if (item.paymentMethod_account !== null) {
+                                return <li key={item.paymentMethod_id}>{item.paymentMethod_name}: {item.paymentMethod_account}</li>
+                            }
+                            else return <li key={item.paymentMethod_id}>{item.paymentMethod_name}</li>
+                        }) }
                     </ul>
                 </div>
 

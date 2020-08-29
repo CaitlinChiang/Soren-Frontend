@@ -14,6 +14,8 @@ class Orders extends Component {
         // Data
         orderDetails: [],
         orderItems: [],
+        sizes: [],
+        colors: [],
         cities: [],
         payment_mediums: [],
         statuses_orders: [],
@@ -23,6 +25,8 @@ class Orders extends Component {
     componentDidMount = _ => {
         this.orderDetails_fetch()
         this.orderItems_fetch()
+        this.sizes_fetch()
+        this.colors_fetch()
         this.cities_fetch()
         this.paymentMediums_fetch()
         this.orderStatuses_fetch()
@@ -40,6 +44,18 @@ class Orders extends Component {
         fetch('http://localhost:5000/order_items')
             .then(response => response.json())
             .then(response => this.setState({ orderItems: response.data }) )
+    }
+
+    sizes_fetch = _ => {
+        fetch('http://localhost:5000/product_sizes')
+            .then(response => response.json())
+            .then(response => this.setState({ sizes: response.data }) )
+    }
+
+    colors_fetch = _ => {
+        fetch('http://localhost:5000/product_colors')
+            .then(response => response.json())
+            .then(response => this.setState({ colors: response.data }) )
     }
 
     cities_fetch = _ => {
@@ -68,7 +84,23 @@ class Orders extends Component {
 
     // Render Data
     orders_render = props => {
-        const { orderItems, cities, payment_mediums, statuses_orders, statuses_payments } = this.state
+        const { orderItems, sizes, colors, cities, payment_mediums, statuses_orders, statuses_payments } = this.state
+
+        const size = props => {
+            for (let i = 0; i < sizes.length; i++) {
+                if (sizes[i].size_id == props) {
+                    return sizes[i].size_name
+                }
+            }
+        }
+
+        const color = props => {
+            for (let i = 0; i < colors.length; i++) {
+                if (colors[i].color_id == props) {
+                    return colors[i].color_name
+                }
+            }
+        }
 
         const city = _ => {
             for (let i = 0; i < cities.length; i++) {
@@ -105,7 +137,7 @@ class Orders extends Component {
         return (
             <tr key={props.orderDetail_id}>
                 <td>{props.orderDetail_id} <br /><br /> {props.timestamp} </td>
-                <td>{orderItems.filter(item => item.orderDetail_id === props.orderDetail_id).map(item => <p>{item.product_name} ({item.product_size} - {item.product_color})</p>) }</td>
+                <td>{orderItems.filter(item => item.orderDetail_id === props.orderDetail_id).map(item => <p>{item.product_quantity} {item.product_name} ({size(item.product_size)} - {color(item.product_color)})</p>) }</td>
                 <td>{props.customer_name} <br /><br /> {props.customer_mobile} <br /><br /> {props.customer_email}</td>
                 <td>{props.customer_address} <br /><br /> {city()}</td>
                 <td>{props.delivery_date.substring(0, 10)}</td>

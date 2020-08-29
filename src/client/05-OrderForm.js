@@ -25,7 +25,8 @@ class Order extends Component {
         address: '',
         city: '',
         paymentMethod: '',
-        date: ''
+        date: '',
+        statement: ''
     }
 
     componentDidMount = _ => {
@@ -69,20 +70,35 @@ class Order extends Component {
     }
 
     // Save Data
-    orders_add = () => {
+    order_add = () => {
         const { cart, orderID, name, mobile, email, address, city, paymentMethod, date, price } = this.state
         let timestamp = helpers.timestamp()
 
+        fetch(`http://localhost:5000/order_details/add?timestamp=${timestamp}&name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&paymentMethod=${paymentMethod}&orderDate=${moment(date).format('YYYY-MM-DD')}&price=${price}`)
+            .then(response => response.json())
+
+        for (let i = 0; i < cart.length; i++) {
+            fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}&quantity=${cart[i].quantity}`)
+            .then(response => response.json())
+        }
+
+        alert("Thank you for purchasing from Soren!")
+    }
+
+    order_confirmation = _ => {
+        const { cart, payment_mediums, paymentMethod } = this.state
+
         if (cart.length > 0) {
-            const confirmation = window.confirm("Proceed?")
-
-            if (confirmation) {
-                fetch(`http://localhost:5000/order_details/add?timestamp=${timestamp}&name=${name}&mobile=${mobile}&email=${email}&address=${address}&city=${city}&paymentMethod=${paymentMethod}&orderDate=${moment(date).format('YYYY-MM-DD')}&price=${price}`)
-                    .then(response => response.json())
-
-                for (let i = 0; i < cart.length; i++) {
-                    fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}`)
-                    .then(response => response.json())
+            for (let i = 0; i < payment_mediums.length; i++) {
+                if (payment_mediums[i].paymentMethod_id == paymentMethod) {
+                    if (payment_mediums[i].paymentMethod_account !== null) {
+                        let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Account Number: ${payment_mediums[i].paymentMethod_account}. Would you like to confirm your order?`)
+                        if (confirmation) this.order_add()
+                    }
+                    else {
+                        let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Would you like to confirm your order?`)
+                        if (confirmation) this.order_add()
+                    }
                 }
             }
         }
@@ -141,7 +157,7 @@ class Order extends Component {
                                 <DatePicker inline selected={date} onChange={date => this.setState({ date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.filterDeliveryDates} format='YYYY-MM-DD' required />
                             </div>
 
-                            <button type="submit" onClick={() => this.orders_add()}>Order</button>
+                            <button type="submit" onClick={() => this.order_confirmation()}>Order</button>
                         </form>
                     </div>
 
