@@ -93,7 +93,10 @@ class Order extends Component {
                 if (payment_mediums[i].paymentMethod_id == paymentMethod) {
                     if (payment_mediums[i].paymentMethod_account !== null) {
                         let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Account Number: ${payment_mediums[i].paymentMethod_account}. Would you like to confirm your order?`)
-                        if (confirmation) this.order_add()
+                        if (confirmation) {
+                            alert("Kindly attach a screenshot of your proof of payment to: sorenphilippines@gmail.com")
+                            this.order_add()
+                        }
                     }
                     else {
                         let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Would you like to confirm your order?`)
@@ -103,6 +106,13 @@ class Order extends Component {
             }
         }
         else alert("Your cart is empty.")
+    }
+
+    // Render Data
+    paymentMediums_render = props => {
+        if (props.paymentMethod_account !== null) {
+            return <p>{props.paymentMethod_name}: {props.paymentMethod_account}</p>
+        }
     }
 
     // Helper Functions
@@ -162,6 +172,11 @@ class Order extends Component {
                     </div>
 
                 </section>
+
+                <div id="accountDetails">
+                    { payment_mediums.map(this.paymentMediums_render) }
+                    <br/> <p>Send proof of payment to: sorenphilippines@gmail.com</p>
+                </div>
                 
                 <footer>&#169; 2020 by Soren.</footer>
             </div>

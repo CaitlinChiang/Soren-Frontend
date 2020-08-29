@@ -122,6 +122,17 @@
     color: #000;
 }
 
+/* Account Details Footer */
+#accountDetails {
+    text-align: center;
+    min-height: 70px;
+    background-color: #333333;
+    padding: 10px;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
 /* Responsive Order Form */
 @media(max-width: 900px) {
     #order input, 
