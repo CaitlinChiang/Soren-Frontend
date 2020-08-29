@@ -5,7 +5,6 @@ import Navbar from './01-Navbar'
 
 class Shop extends Component {
 	state = {
-		mask_products: [], 
 		shirt_products: []
 	}
 
@@ -17,10 +16,7 @@ class Shop extends Component {
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].category_id === 1) {
-                        this.setState({ mask_products: this.state.mask_products.concat(response.data[i]) })
-                    }
-                    else if (response.data[i].category_id === 2) {
+                    if (response.data[i].category_id === 2) {
                         this.setState({ shirt_products: this.state.shirt_products.concat(response.data[i]) })
                     }
                 }
@@ -74,7 +70,7 @@ class Shop extends Component {
     }
 
 	render() {
-		const { mask_products, shirt_products } = this.state
+		const { shirt_products } = this.state
 
 		return (
 			<div>
@@ -83,15 +79,9 @@ class Shop extends Component {
 				<section id="shop">
 					<section id="allProducts_header" class="productCategoryPage_header">
 						<p>Soren Apparel</p>
-						<Link to="/products/masks"> <div>Masks</div> </Link>
-						<Link to="/products/shirts"> <div>Shirts</div> </Link>
 					</section>
 
 					<div class="productsDisplay">
-						<div>
-							{ mask_products.map(this.products_render) } 
-						</div>
-
 						<div>
 							{ shirt_products.map(this.products_render) }
 						</div>

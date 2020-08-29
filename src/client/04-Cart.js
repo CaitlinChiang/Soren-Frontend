@@ -7,11 +7,51 @@ import Navbar from './01-Navbar'
 
 class Cart extends Component {
 	state = {
-		cart: this.props.cart
+		cart: this.props.cart,
+
+		// Data
+		sizes: [],
+		colors: []
 	}
+
+	componentDidMount = _ => {
+		this.sizes_fetch()
+		this.colors_fetch()
+	}
+
+	// Fetch Data
+	sizes_fetch = _ => {
+        fetch('http://localhost:5000/product_sizes')
+            .then(response => response.json())
+            .then(response => this.setState({ sizes: response.data }))
+    }
+
+    colors_fetch = _ => {
+        fetch('http://localhost:5000/product_colors')
+            .then(response => response.json())
+            .then(response => this.setState({ colors: response.data }))
+    }
 
 	// Render Data
 	cart_render = props => {
+		const { sizes, colors } = this.state
+
+		const display_size = _ => {
+            for (let i = 0; i < sizes.length; i++) {
+                if (sizes[i].size_id === props.size) {
+                    return sizes[i].size_name
+                }
+            }
+		}
+		
+		const display_color = _ => {
+            for (let i = 0; i < colors.length; i++) {
+                if (colors[i].color_id === props.color) {
+                    return colors[i].color_name
+                }
+            }
+        }
+
 		return (
 			<div key={props.timestamp} class="cartItem">
 				<span class="cartItemClose" onClick={() => this.props.updateCart_delete(props.timestamp)}>&times;</span>
@@ -24,8 +64,8 @@ class Cart extends Component {
 					<p>View Details</p>
 					<div>
 						<p>Total Price: P{props.price}.00</p>
-						<p>Size: {props.size}</p>
-						<p>Color: {props.color}</p>
+						<p>Size: {display_size()}</p>
+						<p>Color: {display_color()}</p>
 					</div>
 				</div>
 

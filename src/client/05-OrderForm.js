@@ -70,8 +70,8 @@ class Order extends Component {
 
     // Save Data
     orders_add = () => {
-        let timestamp = helpers.timestamp()
         const { cart, orderID, name, mobile, email, address, city, paymentMethod, date, price } = this.state
+        let timestamp = helpers.timestamp()
 
         if (cart.length > 0) {
             const confirmation = window.confirm("Proceed?")

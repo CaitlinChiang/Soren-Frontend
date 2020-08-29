@@ -8,7 +8,6 @@ class Products extends Component {
         category: '',
 
         // Data
-        mask_products: [],
         shirt_products: [],
         categories: []
     }
@@ -24,10 +23,7 @@ class Products extends Component {
             .then(response => response.json())
             .then(response => {
                 for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].category_id === 1) {
-                        this.setState({ mask_products: this.state.mask_products.concat(response.data[i]) })
-                    }
-                    else if (response.data[i].category_id === 2) {
+                    if (response.data[i].category_id === 2) {
                         this.setState({ shirt_products: this.state.shirt_products.concat(response.data[i]) })
                     }
                 }
@@ -66,16 +62,13 @@ class Products extends Component {
     }
 
     reverseArrangement = event => {
-        const { mask_products, shirt_products } = this.state
-
         this.handleChange(event)
 
-        mask_products.reverse()
-        shirt_products.reverse()
+        this.state.shirt_products.reverse()
     }
 
     render() {
-        const { arrangement, category, categories, mask_products, shirt_products } = this.state
+        const { arrangement, category, categories, shirt_products } = this.state
 
         return (
             <section id="admin_products">
@@ -93,12 +86,6 @@ class Products extends Component {
                         <option value="">All</option>
                         { categories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
-
-                    { this.state.category === "" || this.state.category === "1" ? 
-                        <div>
-                            { mask_products.map(this.products_render) }
-                        </div>
-                    : null }
                     
                     { this.state.category === "" || this.state.category === "2" ? 
                         <div>

@@ -89,7 +89,7 @@ class ShopItem extends Component {
 
         const display_size = _ => {
             for (let i = 0; i < sizes.length; i++) {
-                if (sizes[i].size_id === this.state.size) {
+                if (sizes[i].size_id === size) {
                     return sizes[i].size_name
                 }
             }
@@ -107,7 +107,7 @@ class ShopItem extends Component {
 
         const display_color = _ => {
             for (let i = 0; i < colors.length; i++) {
-                if (colors[i].color_id === this.state.color) {
+                if (colors[i].color_id === color) {
                     return colors[i].color_name
                 }
             }
@@ -158,9 +158,9 @@ class ShopItem extends Component {
 
     // Save Data
     product_add = (id, name, price) => {
-        let timestamp = helpers.timestamp()
         const { size, color, quantity } = this.state
 
+        let timestamp = helpers.timestamp()
         let finalPrice = price * quantity
 
         let cartItem = {
@@ -173,9 +173,12 @@ class ShopItem extends Component {
             quantity: quantity,
         }
         
-        this.props.updateCart_add(cartItem)
+        if (size !== '' && color !== '' && price !== '') {
+            this.props.updateCart_add(cartItem)
 
-        this.clear()
+            this.clear()
+        }
+        else alert("Please fill in all item details.")
     }
 
     // Helper Functions
