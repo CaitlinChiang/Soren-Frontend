@@ -12,6 +12,18 @@ class Client extends Component {
 		cart: []
 	}
 
+	// Data Management
+	componentWillMount = _ => this.fetchLocalStorage()
+
+	componentDidMount = _ => setInterval(() => { this.updateLocalStorage(); }, 500)
+
+	fetchLocalStorage = _ => {
+		var storedCart = JSON.parse(localStorage.getItem("cart"))
+		this.setState({ cart: storedCart })
+	}
+
+	updateLocalStorage = _ => localStorage.setItem("cart", JSON.stringify(this.state.cart))
+
 	// Update Global Cart State
 	updateCart_add = item => this.setState({ cart: this.state.cart.concat(item) })
 

@@ -21,7 +21,20 @@ class ShopItem extends Component {
         quantity: ''
     }
 
+    componentWillMount = _ => {
+        if (this.props.location.productID === undefined) {
+            var productID = JSON.parse(localStorage.getItem("product_id"))
+            this.setState({ productID })
+        }
+    }
+
     componentDidMount = _ => {
+        const { productID } = this.state
+
+        if (productID !== undefined) {
+            localStorage.setItem("product_id", JSON.stringify(productID))
+        }
+
         this.product_fetch()
         this.productDetails_fetch()
         this.sizes_fetch()
