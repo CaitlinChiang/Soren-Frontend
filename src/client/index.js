@@ -38,6 +38,8 @@ class Client extends Component {
 		}
 	}
 
+	updateCart_clear = _ => this.setState({ cart: [] })
+
 	render() {
 		const { cart } = this.state
 
@@ -49,7 +51,7 @@ class Client extends Component {
 					<Route exact path="/products" component={Shop} />
 					<Route exact path="/products/:id" render={(props) => <ShopItem {...props} cart={cart} updateCart_add={this.updateCart_add} />} />
 					<Route exact path="/cart" render={() => <Cart cart={cart} updateCart_delete={this.updateCart_delete} />} />
-					<Route exact path="/order" render={() => <Order cart={cart} />} />
+					<Route exact path="/order" render={() => <Order cart={cart} updateCart_clear={this.updateCart_clear} />} />
 				</Switch>
 			</Router>
 		)

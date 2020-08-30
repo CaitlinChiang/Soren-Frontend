@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { HashLink as Link } from 'react-router-hash-link'
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
 import Navbar from '../client/01-Navbar'
 import helpers from '../client/helper'
 
@@ -126,9 +128,21 @@ class ShopItem extends Component {
             }
         }
 
+        const responsive = {
+			desktop: {
+				breakpoint: { max: 3000, min: 0 },
+				items: 1,
+				slidesToSlide: 2
+			}
+		}
+
         return (
             <div key={props.product_id} class="individualItem">
-                <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
+                <Carousel containerClass="individualItem_photos" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
+                    <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
+                    <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
+				</Carousel>
+                
                 
                 <div class="orderItem">
                     <div>

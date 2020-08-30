@@ -33,7 +33,7 @@ class Cart extends Component {
 
 	// Render Data
 	cart_render = props => {
-		const { sizes, colors } = this.state
+		const { cart, sizes, colors } = this.state
 
 		const display_size = _ => {
             for (let i = 0; i < sizes.length; i++) {
@@ -73,7 +73,7 @@ class Cart extends Component {
 					<p>x{props.quantity}</p>
 				</div>
 			</div>
-		)	
+		)
 	}
 
 	render() {
@@ -90,14 +90,14 @@ class Cart extends Component {
 		return (
 			<div>
 				<section id="cart">
-					<div class="desktopCartView">
+					<div class="desktopCartView"> 
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
 							{ cart.map(this.cart_render) }
 						</Carousel>
 					</div>
-
+				
 					<div class="mobileCartView">
-						{ cart.map(this.cart_render) }
+						{ cart.length == 0 ? <p>Cart is empty.</p> : cart.map(this.cart_render) }
 					</div>
 
 					<div class="cartOptionButtons">

@@ -162,6 +162,13 @@
     .desktopCartView { display: none; }
     .mobileCartView { display: block; }
 
+    .mobileCartView > p {
+        color: #fff;
+        font-size: 17px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
     .cartItem {
         width: 100%;
         height: 100px;

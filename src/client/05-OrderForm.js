@@ -24,8 +24,7 @@ class Order extends Component {
         address: '',
         city: '',
         paymentMethod: '',
-        date: '',
-        statement: ''
+        date: ''
     }
 
     componentDidMount = _ => {
@@ -69,7 +68,7 @@ class Order extends Component {
     }
 
     // Save Data
-    order_add = () => {
+    order_add = _ => {
         const { cart, orderID, name, mobile, email, address, city, paymentMethod, date, price } = this.state
         let timestamp = helpers.timestamp()
 
@@ -78,10 +77,33 @@ class Order extends Component {
 
         for (let i = 0; i < cart.length; i++) {
             fetch(`http://localhost:5000/order_items/add?orderDetail_id=${orderID}&name=${cart[i].name}&color=${cart[i].color}&size=${cart[i].size}&quantity=${cart[i].quantity}`)
-            .then(response => response.json())
+                .then(response => response.json())
+        }
+    }
+
+    receipt = _ => {
+        const { cities, payment_mediums, email, orderID, name, price, address, city, paymentMethod, date, cart } = this.state
+
+        const city_display = _ => {
+            for (let i = 0; i < cities.length; i++) {
+                if (cities[i].city_id == city) {
+                    return cities[i].city_name
+                }
+            }
         }
 
-        alert("Thank you for purchasing from Soren!")
+        const paymentMethod_display = _ => {
+            for (let i = 0; i < payment_mediums.length; i++) {
+                if (payment_mediums[i].paymentMethod_id == paymentMethod) {
+                    return payment_mediums[i].paymentMethod_name
+                }
+            }
+        }
+
+        fetch(`http://localhost:5000/receipt?email=${email}&orderID=${orderID}&name=${name}&price=${price}&address=${address}&city=${city_display()}&paymentMethod=${paymentMethod_display()}&date=${moment(date).format('YYYY-MM-DD').substring(0, 10)}&order_items=${cart}`)
+            .then(response => response.json())
+
+        alert("Thank you for purchasing from Soren! Kindly check your email for your order details. Have a nice day!")
     }
 
     order_confirmation = _ => {
@@ -95,11 +117,17 @@ class Order extends Component {
                         if (confirmation) {
                             alert("Kindly attach a screenshot of your proof of payment to: sorenphilippines@gmail.com")
                             this.order_add()
+                            this.receipt()
+                            this.props.updateCart_clear()
                         }
                     }
                     else {
                         let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Would you like to confirm your order?`)
-                        if (confirmation) this.order_add()
+                        if (confirmation) {
+                            this.order_add()
+                            this.receipt()
+                            this.props.updateCart_clear()
+                        }
                     }
                 }
             }
