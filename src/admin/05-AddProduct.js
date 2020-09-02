@@ -14,7 +14,11 @@ class AddProduct extends Component {
         category: '',
         price: '',
         productSizes: [],
-        productColors: []
+        productColors: [],
+        photoFront: '',
+        photoFront_image: '',
+        photoBack: '',
+        photoBack_image: ''
     }
 
     componentDidMount = _ => {
@@ -51,7 +55,7 @@ class AddProduct extends Component {
 
     // Save Data
     product_add = _ => {
-        const { name, category, price, productSizes, productColors } = this.state
+        const { name, category, price, productSizes, productColors, photos } = this.state
 
         if (productSizes.length > 0 && productColors.length > 0) {
             const confirmation = window.confirm("Are you sure you would like to add this product?")
@@ -59,8 +63,9 @@ class AddProduct extends Component {
             if (confirmation) {
                 fetch(`http://localhost:5000/products/add?product_category=${category}&name=${name}&price=${price}`)
                     .then(response => response.json())
-               
+                    
                 this.productVariants_add()
+                this.productImages_add()
             }
         }
         else alert("Please fill in all the input fields.")
@@ -88,6 +93,27 @@ class AddProduct extends Component {
         this.setState({ [name]: value })
     }
 
+    handlePhotos = (name, files, image) => {
+        this.setState({ 
+            [name]: files[0],
+            [image]: URL.createObjectURL(files[0])
+        })
+    }
+
+    productImages_add = async _ => {
+        const { photoFront, photoBack } = this.state
+
+        const data = new FormData()
+
+        data.append('file', photoFront)
+        data.append('upload_preset', 'soren_apparel')
+        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+
+        data.append('file', photoBack)
+        data.append('upload_preset', 'soren_apparel')
+        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+    }
+
     clear = _ => {
         this.setState({
             productID: '',
@@ -95,12 +121,16 @@ class AddProduct extends Component {
             category: '',
             price: '',
             productSizes: [],
-            productColors: []
+            productColors: [],
+            photoFront: '',
+            photoFront_image: '',
+            photoBack: '',
+            photoBack_image: ''
         })
     }
 
     render() {
-        const { categories, sizes, colors, name, category, price, productSizes, productColors } = this.state
+        const { categories, sizes, colors, name, category, price, productSizes, productColors, photoFront_image, photoBack_image } = this.state
 
         return (
             <section id="admin_addProduct">
@@ -122,8 +152,15 @@ class AddProduct extends Component {
                     <div>
                         <p>Colors: { productColors.map(item => <p>{item.color_name}</p>) }</p>
                         { colors.map(item => <button onClick={() => this.setState({ productColors: this.state.productColors.concat(item) })} style={{ background: `${item.color_name}` }}></button>) }
-
                     </div> <br/>
+
+                    <div>
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} placeholder="Upload Image Front" />
+                        <img src={photoFront_image} style={{ width: '300px' }} />
+
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} placeholder="Upload Image Back" />
+                        <img src={photoBack_image} style={{ width: '300px' }} />
+                    </div>
 
                     <button onClick={() => this.clear()}>RESTART</button>
                     <button type="submit" onClick={() => this.product_add()}>ADD PRODUCT</button>

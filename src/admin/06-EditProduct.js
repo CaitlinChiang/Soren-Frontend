@@ -20,7 +20,11 @@ class EditProduct extends Component {
         price: '',
         stock: '',
         productSizes: [],
-        productColors: []
+        productColors: [],
+        photoFront: '',
+        photoFront_image: '',
+        photoBack: '',
+        photoBack_image: ''
     }
 
     componentDidMount = () => {
@@ -149,8 +153,9 @@ class EditProduct extends Component {
             if (confirmation) {
                 fetch(`http://localhost:5000/products/update/${productID}?product_category=${category}&name=${name}&price=${price}&stock=${stock}`)
                     .then(response => response.json())
-
+                    
                 this.productVariants_update()
+                this.productImages_add()
             }
         }
         else alert("Please fill in all the input fields.")
@@ -195,6 +200,27 @@ class EditProduct extends Component {
         this.setState({ [name]: value })
     }
 
+    handlePhotos = (name, files, image) => {
+        this.setState({ 
+            [name]: files[0],
+            [image]: URL.createObjectURL(files[0])
+        })
+    }
+
+    productImages_add = async _ => {
+        const { photoFront, photoBack } = this.state
+
+        const data = new FormData()
+
+        data.append('file', photoFront)
+        data.append('upload_preset', 'soren_apparel')
+        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+
+        data.append('file', photoBack)
+        data.append('upload_preset', 'soren_apparel')
+        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+    }
+
     remove = _ => {
         this.setState({ 
             product: [],
@@ -210,12 +236,16 @@ class EditProduct extends Component {
             price: '',
             stock: '',
             productSizes: [],
-            productColors: []
+            productColors: [],
+            photoFront: '',
+            photoFront_image: '',
+            photoBack: '',
+            photoBack_image: ''
         })
     }
 
     render() {
-        const { product, name, category, price, stock, productSizes, productColors, categories, stocks, sizes, colors } = this.state
+        const { product, name, category, price, stock, productSizes, productColors, categories, stocks, sizes, colors, photoFront_image, photoBack_image } = this.state
 
         return (
             <section id="admin_editProduct">
@@ -250,6 +280,14 @@ class EditProduct extends Component {
                         <p>Colors: { productColors.map(item => <p>{item.color_name}</p>) }</p>
                         { colors.map(item => <button onClick={() => this.setState({ productColors: this.state.productColors.concat(item) })} style={{ background: `${item.color_name}` }}></button>) }
                     </div> <br/>
+
+                    <div>
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} placeholder="Upload Image Front" />
+                        <img src={photoFront_image} style={{ width: '300px' }} />
+
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} placeholder="Upload Image Back" />
+                        <img src={photoBack_image} style={{ width: '300px' }} />
+                    </div>
 
                     <button onClick={() => this.clear()}>RESTART</button>
                     <button type="submit" onClick={() => this.product_update()}>SAVE CHANGES</button>
