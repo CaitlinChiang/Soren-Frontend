@@ -161,10 +161,10 @@ class AddProduct extends Component {
                     </div> <br/>
 
                     <div>
-                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} required />
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" required />
                         <img src={photoFront_image} style={{ width: '300px' }} />
 
-                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} required />
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" required />
                         <img src={photoBack_image} style={{ width: '300px' }} />
                     </div>
 

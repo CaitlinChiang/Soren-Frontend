@@ -28,7 +28,20 @@ class EditProduct extends Component {
         photoBack_image: ''
     }
 
+    componentWillMount = _ => {
+        if (this.props.location.productID === undefined) {
+            var productID = JSON.parse(localStorage.getItem("product_id"))
+            this.setState({ productID })
+        }
+    }
+
     componentDidMount = () => {
+        const { productID } = this.state
+
+        if (productID !== undefined) {
+            localStorage.setItem("product_id", JSON.stringify(productID))
+        }
+
         this.product_fetch()
         this.productVariants_fetch()
         this.productImages_fetch()
@@ -307,10 +320,10 @@ class EditProduct extends Component {
                     </div> <br/>
 
                     <div>
-                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} placeholder="Upload Image Front" />
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" required />
                         <img src={photoFront_image} style={{ width: '300px' }} />
 
-                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} placeholder="Upload Image Back" />
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" required />
                         <img src={photoBack_image} style={{ width: '300px' }} />
                     </div>
 
