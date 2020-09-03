@@ -133,7 +133,7 @@
 
 .shopItem img {
 	object-fit: cover;
-	background: #000;
+	background: #818181;
 	transition: all 0.5s ease;
 }
 
@@ -207,7 +207,7 @@
 	width: 550px;
 	margin: 40px 0px 0px 50px;
 	float: left;
-	background: #3f3f3f;
+	background: #818181;
 }
 
 .individualItem > .orderItem {

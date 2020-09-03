@@ -172,7 +172,7 @@ class EditProduct extends Component {
                     .then(response => response.json())
                     
                 this.productVariants_update()
-                this.productImages_add()
+                this.productImages_update()
             }
         }
         else alert("Please fill in all the input fields.")
@@ -196,6 +196,28 @@ class EditProduct extends Component {
         alert("Item has been updated")
         this.product_fetch()
         this.productVariants_fetch()
+    }
+
+    productImages_update = async _ => {
+        const { productID, photoFront, photoBack } = this.state
+
+        fetch(`http://localhost:5000/product_photos/delete/${productID}`)
+
+        const data = new FormData()
+
+        data.append('file', photoFront)
+        data.append('upload_preset', 'soren_apparel')
+        data.append('tags', [productID])
+        const response_front = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_front = await response_front.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=front&photo_url=${url_front.secure_url}`)
+
+        data.append('file', photoBack)
+        data.append('upload_preset', 'soren_apparel')
+        data.append('tags', [productID])
+        const response_back = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_back = await response_back.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=back&photo_url=${url_back.secure_url}`)
     }
 
     // Delete Data
@@ -222,26 +244,6 @@ class EditProduct extends Component {
             [name]: files[0],
             [image]: URL.createObjectURL(files[0])
         })
-    }
-
-    productImages_add = async _ => {
-        const { productID, photoFront, photoBack } = this.state
-
-        const data = new FormData()
-
-        data.append('file', photoFront)
-        data.append('upload_preset', 'soren_apparel')
-        data.append('tags', [productID])
-        const response_front = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
-        const url_front = await response_front.json()
-        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=front&photo_url=${url_front.secure_url}`)
-
-        data.append('file', photoBack)
-        data.append('upload_preset', 'soren_apparel')
-        data.append('tags', [productID])
-        const response_back = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
-        const url_back = await response_back.json()
-        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=back&photo_url=${url_back.secure_url}`)
     }
 
     remove = _ => {

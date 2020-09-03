@@ -168,9 +168,9 @@ class Order extends Component {
                     <div>
                         <form autoComplete="off">
                             <div>
-                                <input type="text" value={name}  name="name"  onChange={this.handleChange} placeholder="First Name, Last Name" required />
-                                <input type="text" value={mobile} name="mobile" onChange={this.handleChange} placeholder="Phone Number" required />
-                                <input type="text" value={email} name="email" onChange={this.handleChange} placeholder="Email Address" required />
+                                <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="First Name, Last Name" required />
+                                <input type="text" value={mobile.trim()} name="mobile" onChange={this.handleChange} placeholder="Phone Number" required />
+                                <input type="text" value={email.trim()} name="email" onChange={this.handleChange} placeholder="Email Address" required />
                             </div>
 
                             <div>
