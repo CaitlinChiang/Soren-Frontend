@@ -9,16 +9,28 @@ class Cart extends Component {
 		cart: this.props.cart,
 
 		// Data
+		productImages: [],
 		sizes: [],
 		colors: []
 	}
 
 	componentDidMount = _ => {
+		this.productImages_fetch()
 		this.sizes_fetch()
 		this.colors_fetch()
 	}
 
 	// Fetch Data
+	productImages_fetch = _ => {
+        fetch('http://localhost:5000/product_photos')
+            .then(response => response.json())
+            .then(response => {
+                for (let i = 0; i < response.data.length; i++) {
+					this.setState({ productImages: this.state.productImages.concat(response.data[i]) })
+                }
+            })
+    }
+
 	sizes_fetch = _ => {
         fetch('http://localhost:5000/product_sizes')
             .then(response => response.json())
@@ -34,6 +46,14 @@ class Cart extends Component {
 	// Render Data
 	cart_render = props => {
 		const { cart, sizes, colors } = this.state
+
+		const image = _ => {
+			return this.state.productImages.map(item => {
+				if (item.product_id === props.id && item.url_photo === "front") {
+					return <img src={item.url_link} width="100%;" />
+				}
+			})
+		}
 
 		const display_size = _ => {
             for (let i = 0; i < sizes.length; i++) {
@@ -56,7 +76,7 @@ class Cart extends Component {
 				<span class="cartItemClose" onClick={() => this.props.updateCart_delete(props.timestamp)}>&times;</span>
 
 				<div class="cartItemImage">
-					<img src="https://image.uniqlo.com/UQ/ST3/us/imagesother/home/L3/200601_pc_L3_w_bestseller.jpg" width="100%;"/>
+					{image()}
 				</div>
 				
 				<div class="cartItemContent">
