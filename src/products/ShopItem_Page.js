@@ -14,6 +14,7 @@ class ShopItem extends Component {
         product: [],
         productVariants_sizes: [],
         productVariants_colors: [],
+        productImages: [],
         sizes: [],
         colors: [],
 
@@ -39,6 +40,7 @@ class ShopItem extends Component {
 
         this.product_fetch()
         this.productDetails_fetch()
+        this.productImages_fetch()
         this.sizes_fetch()
         this.colors_fetch()
     }
@@ -76,6 +78,18 @@ class ShopItem extends Component {
             })
     }
 
+    productImages_fetch = _ => {
+        fetch('http://localhost:5000/product_photos')
+            .then(response => response.json())
+            .then(response => {
+                for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].product_id === this.state.productID) {
+                        this.setState({ productImages: this.state.productImages.concat(response.data[i]) })
+                    }
+                }
+            })
+    }
+
     sizes_fetch = _ => {
         fetch('http://localhost:5000/product_sizes')
             .then(response => response.json())
@@ -90,7 +104,9 @@ class ShopItem extends Component {
 
     // Render Data
     product_render = props => {
-        const { productVariants_sizes, productVariants_colors, sizes, colors, size, color, quantity } = this.state
+        const { productVariants_sizes, productVariants_colors, productImages, sizes, colors, size, color, quantity } = this.state
+
+        const image = _ => productImages.map(item => <img src={item.url_link} width="100%;" />)
 
         const product_sizes = _ => {
             return productVariants_sizes.map(item => {
@@ -139,10 +155,8 @@ class ShopItem extends Component {
         return (
             <div key={props.product_id} class="individualItem">
                 <Carousel containerClass="individualItem_photos" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
-                    <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
-                    <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;"/>
+                    {image()}
 				</Carousel>
-                
                 
                 <div class="orderItem">
                     <div>

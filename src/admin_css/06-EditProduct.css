@@ -45,6 +45,11 @@
     margin: 0px 10px 0px;
 }
 
+.currentDetails img {
+    width: 200px;
+    display: inline-block;
+}
+
 /* Responsive Admin Product Edit Design */
 @media(max-width: 440px) {
     #editProduct div:first-of-type button {

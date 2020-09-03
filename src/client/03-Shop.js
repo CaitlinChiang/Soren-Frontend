@@ -4,10 +4,14 @@ import '../client_css/03-Shop.css'
 
 class Shop extends Component {
 	state = {
-		shirt_products: []
+		shirt_products: [],
+		productImages: []
 	}
 
-	componentDidMount = _ => this.products_fetch()
+	componentDidMount = _ => {
+		this.products_fetch()
+		this.productImages_fetch()
+	}
 
 	// Fetch Data
 	products_fetch = _ => {
@@ -20,10 +24,28 @@ class Shop extends Component {
                     }
                 }
             })
+	}
+	
+	productImages_fetch = _ => {
+        fetch('http://localhost:5000/product_photos')
+            .then(response => response.json())
+            .then(response => {
+                for (let i = 0; i < response.data.length; i++) {
+					this.setState({ productImages: this.state.productImages.concat(response.data[i]) })
+                }
+            })
     }
 	
 	// Render Data
 	products_render = props => {
+		const image = _ => {
+			return this.state.productImages.map(item => {
+				if (item.product_id === props.product_id && item.url_photo === "front") {
+					return <img src={item.url_link} width="100%;" />
+				}
+			})
+		}
+
 		const ImageRedirect = _ => {
 			if (props.stock_id === 1) {
 				return (
@@ -31,11 +53,11 @@ class Shop extends Component {
 						pathname: `/products/${props.product_id}`,
 						productID: props.product_id
 					}}>
-						<img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
+						{image()}
 					</Link>
 				)
 			}
-			else return <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/430130/item/goods_09_430130.jpg?width=2000" width="100%;" />
+			else return image()
 		}
 
 		const ProductDescription = _ => {

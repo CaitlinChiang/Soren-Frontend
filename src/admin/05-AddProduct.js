@@ -55,7 +55,7 @@ class AddProduct extends Component {
 
     // Save Data
     product_add = _ => {
-        const { name, category, price, productSizes, productColors, photos } = this.state
+        const { name, category, price, productSizes, productColors } = this.state
 
         if (productSizes.length > 0 && productColors.length > 0) {
             const confirmation = window.confirm("Are you sure you would like to add this product?")
@@ -101,17 +101,23 @@ class AddProduct extends Component {
     }
 
     productImages_add = async _ => {
-        const { photoFront, photoBack } = this.state
+        const { productID, photoFront, photoBack } = this.state
 
         const data = new FormData()
 
         data.append('file', photoFront)
         data.append('upload_preset', 'soren_apparel')
-        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        data.append('tags', [productID])
+        const response_front = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_front = await response_front.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=front&photo_url=${url_front.secure_url}`)
 
         data.append('file', photoBack)
         data.append('upload_preset', 'soren_apparel')
-        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        data.append('tags', [productID])
+        const response_back = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_back = await response_back.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=back&photo_url=${url_back.secure_url}`)
     }
 
     clear = _ => {
@@ -155,10 +161,10 @@ class AddProduct extends Component {
                     </div> <br/>
 
                     <div>
-                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} placeholder="Upload Image Front" />
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} required />
                         <img src={photoFront_image} style={{ width: '300px' }} />
 
-                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} placeholder="Upload Image Back" />
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} required />
                         <img src={photoBack_image} style={{ width: '300px' }} />
                     </div>
 

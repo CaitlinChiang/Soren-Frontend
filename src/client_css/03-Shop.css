@@ -207,6 +207,7 @@
 	width: 550px;
 	margin: 40px 0px 0px 50px;
 	float: left;
+	background: #3f3f3f;
 }
 
 .individualItem > .orderItem {

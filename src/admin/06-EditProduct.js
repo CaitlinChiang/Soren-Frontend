@@ -8,12 +8,13 @@ class EditProduct extends Component {
         product: [],
         productVariants_sizes: [],
         productVariants_colors: [],
+        productImages: [],
 
         categories: [],
         sizes: [],
         colors: [],
         stocks: [],
-
+        
         // Product Details
         name: '',
         category: '',
@@ -30,6 +31,7 @@ class EditProduct extends Component {
     componentDidMount = () => {
         this.product_fetch()
         this.productVariants_fetch()
+        this.productImages_fetch()
         this.categories_fetch()
         this.stocks_fetch()
         this.sizes_fetch()
@@ -67,6 +69,18 @@ class EditProduct extends Component {
             })
     }
 
+    productImages_fetch = _ => {
+        fetch('http://localhost:5000/product_photos')
+            .then(response => response.json())
+            .then(response => {
+                for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].product_id === this.state.productID) {
+                        this.setState({ productImages: this.state.productImages.concat(response.data[i]) })
+                    }
+                }
+            })
+    }
+
     categories_fetch = _ => {
         fetch('http://localhost:5000/categories')
             .then(response => response.json())
@@ -93,7 +107,7 @@ class EditProduct extends Component {
 
     // Render Data
     product_render = props => {
-        const { productVariants_sizes, productVariants_colors, categories, sizes, colors, stocks } = this.state
+        const { productVariants_sizes, productVariants_colors, productImages, categories, sizes, colors, stocks } = this.state
 
         const category = _ => {
             for (let i = 0; i < categories.length; i++) {
@@ -131,6 +145,8 @@ class EditProduct extends Component {
             })
         }
 
+        const image = _ => productImages.map(item => <img src={item.url_link} /> )
+
         return (
             <div key={props.product_id}>
                 <div>{props.product_name}</div>
@@ -139,6 +155,7 @@ class EditProduct extends Component {
                 <div>{stock()}</div>
                 <div>Sizes: {size()}</div>
                 <div>Colors: {color()}</div>
+                <div>{image()}</div>
             </div>
         )
     }
@@ -208,17 +225,23 @@ class EditProduct extends Component {
     }
 
     productImages_add = async _ => {
-        const { photoFront, photoBack } = this.state
+        const { productID, photoFront, photoBack } = this.state
 
         const data = new FormData()
 
         data.append('file', photoFront)
         data.append('upload_preset', 'soren_apparel')
-        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        data.append('tags', [productID])
+        const response_front = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_front = await response_front.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=front&photo_url=${url_front.secure_url}`)
 
         data.append('file', photoBack)
         data.append('upload_preset', 'soren_apparel')
-        await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        data.append('tags', [productID])
+        const response_back = await fetch('https://api.cloudinary.com/v1_1/duoitsajx/image/upload', { method: 'POST', body: data })
+        const url_back = await response_back.json()
+        fetch(`http://localhost:5000/product_photos/add?product_id=${productID}&photo_type=back&photo_url=${url_back.secure_url}`)
     }
 
     remove = _ => {
