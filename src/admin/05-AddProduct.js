@@ -55,11 +55,11 @@ class AddProduct extends Component {
 
     // Save Data
     product_add = _ => {
-        const { name, category, price, productSizes, productColors } = this.state
+        const { name, category, price, productSizes, productColors, photoFront, photoBack } = this.state
 
-        if (productSizes.length > 0 && productColors.length > 0) {
+        if (name.trim() !== '' && category.trim() !== '' && price.trim() !== '' && productSizes.length > 0 && productColors.length > 0 && photoFront.trim() !== '' && photoBack.trim() !== '') {
             const confirmation = window.confirm("Are you sure you would like to add this product?")
-
+            
             if (confirmation) {
                 fetch(`http://localhost:5000/products/add?product_category=${category}&name=${name}&price=${price}`)
                     .then(response => response.json())
@@ -141,14 +141,14 @@ class AddProduct extends Component {
         return (
             <section id="admin_addProduct">
                 <div class="editProduct">
-                    <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" required />
+                    <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" />
                     
                     <select value={category} name="category" onChange={this.handleChange} required >
                         <option value="">-- Select Product Category --</option>
                         { categories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
-                    <input type="number" step="0.01" value={price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)" required />
+                    <input type="number" step="0.01" value={price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)" />
                     
                     <div>
                         <p>Sizes: { productSizes.map(item => <p>{item.size_name}</p>) }</p>
@@ -161,10 +161,10 @@ class AddProduct extends Component {
                     </div> <br/>
 
                     <div>
-                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" required />
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" />
                         <img src={photoFront_image} style={{ width: '300px' }} />
 
-                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" required />
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" />
                         <img src={photoBack_image} style={{ width: '300px' }} />
                     </div>
 

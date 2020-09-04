@@ -175,9 +175,9 @@ class EditProduct extends Component {
 
     // Update Data
     product_update = _ => {
-        const { productID, name, category, price, stock, productSizes, productColors } = this.state
+        const { productID, name, category, price, stock, productSizes, productColors, photoFront, photoBack } = this.state
 
-        if (productSizes.length > 0 && productColors.length > 0) {
+        if (name.trim() !== '' && category.trim() !== '' && price.trim() !== '' && stock.trim() !== '' && productSizes.length > 0 && productColors.length > 0 && photoFront.trim() !== '' && photoBack.trim() !== '') {
             const confirmation = window.confirm("Are you sure you would like to update this item?")
 
             if (confirmation) {
@@ -295,16 +295,16 @@ class EditProduct extends Component {
                 <div id="editProduct" class="editProduct">
                     <h3>EDIT DETAILS</h3>
 
-                    <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" required />
+                    <input type="text" value={name} name="name" onChange={this.handleChange} placeholder="Product Name" autoComplete="off" />
                     
                     <select value={category} name="category" onChange={this.handleChange} required >
                         <option value="">-- Select Product Category --</option>
                         { categories.map(item => <option value={item.category_id}>{item.category_name}</option>) }
                     </select>
 
-                    <input type="number" step="0.01" value={price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)" required />
+                    <input type="number" step="0.01" value={price} name="price" onChange={this.handleChange} placeholder="Price (ex. 100.00)" />
 
-                    <select value={stock} name="stock" onChange={this.handleChange} required >
+                    <select value={stock} name="stock" onChange={this.handleChange}>
                         <option value="">-- Select Stock Status --</option>
                         { stocks.map(item => <option value={item.stock_id}>{item.stock_status}</option>) }
                     </select>
@@ -320,10 +320,10 @@ class EditProduct extends Component {
                     </div> <br/>
 
                     <div>
-                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" required />
+                        <input type="file" name="photoFront" onChange={(event) => this.handlePhotos('photoFront', event.target.files, 'photoFront_image')} class="fileInput" />
                         <img src={photoFront_image} style={{ width: '300px' }} />
 
-                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" required />
+                        <input type="file" name="photoBack" onChange={(event) => this.handlePhotos('photoBack', event.target.files, 'photoBack_image')} class="fileInput" />
                         <img src={photoBack_image} style={{ width: '300px' }} />
                     </div>
 

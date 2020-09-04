@@ -50,34 +50,46 @@ class Controls extends Component {
 
     // Save Data
     cities_add = city => {
-        fetch(`http://localhost:5000/city_deliveries/add?city=${city}`)
-            .then(response => response.json())
-            .then(this.cities_fetch)
+        if (city.trim() !== '') {
+            fetch(`http://localhost:5000/city_deliveries/add?city=${city}`)
+                .then(response => response.json())
+                .then(this.cities_fetch)
+        }
+        else alert("Kindly fill in a city.")
     }
 
     paymentMediums_add = (paymentMethod, paymentMethod_account) => {
-        if (paymentMethod_account.trim() !== '') {
-            fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}&paymentMethod_account=${paymentMethod_account}`)
-                .then(response => response.json())
-                .then(this.paymentMediums_fetch)
+        if (paymentMethod.trim() !== '') {
+            if (paymentMethod_account.trim() !== '') {
+                fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}&paymentMethod_account=${paymentMethod_account}`)
+                    .then(response => response.json())
+                    .then(this.paymentMediums_fetch)
+            }
+            else {
+                fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}`)
+                    .then(response => response.json())
+                    .then(this.paymentMediums_fetch)
+            }
         }
-        else {
-            fetch(`http://localhost:5000/payment_mediums/add?paymentMethod=${paymentMethod}`)
-                .then(response => response.json())
-                .then(this.paymentMediums_fetch)
-        }
+        else alert("Kindly fill in a payment method.")
     }
 
     sizes_add = size => {
-        fetch(`http://localhost:5000/product_sizes/add?size=${size}`)
-            .then(response => response.json())
-            .then(this.sizes_fetch)
+        if (size.trim() !== '') {
+            fetch(`http://localhost:5000/product_sizes/add?size=${size}`)
+                .then(response => response.json())
+                .then(this.sizes_fetch)
+        }
+        else alert("Please fill in a size.")
     }
 
     colors_add = color => {
-        fetch(`http://localhost:5000/product_colors/add?color=${color}`)
-            .then(response => response.json())
-            .then(this.colors_fetch)
+        if (color.trim() !== '') {
+            fetch(`http://localhost:5000/product_colors/add?color=${color}`)
+                .then(response => response.json())
+                .then(this.colors_fetch)
+        }
+        else alert("Please fill in a color.")
     }
 
     // Delete Data
@@ -119,7 +131,7 @@ class Controls extends Component {
             <section id="admin_controls">
                 <div class="controls">
                     <form autoComplete="off">
-                        <input type="text" value={city} name="city" onChange={this.handleChange} placeholder="City Name" required />
+                        <input type="text" value={city} name="city" onChange={this.handleChange} placeholder="City Name" />
                         <button type="submit" onClick={() => this.cities_add(city)}>Add</button>
                         <button type="submit" onClick={() => this.cities_delete(city)}>Delete</button>
                     </form>
@@ -133,7 +145,7 @@ class Controls extends Component {
 
                 <div class="controls">
                     <form autoComplete="off">
-                        <input type="text" value={paymentMethod} name="paymentMethod" onChange={this.handleChange} placeholder="Payment Method" required />
+                        <input type="text" value={paymentMethod} name="paymentMethod" onChange={this.handleChange} placeholder="Payment Method" />
                         <input type="text" value={paymentMethod_account} name="paymentMethod_account" onChange={this.handleChange} placeholder="Account Number" />
                         <button type="submit" onClick={() => this.paymentMediums_add(paymentMethod, paymentMethod_account)}>Add</button>
                         <button type="submit" onClick={() => this.paymentMediums_delete(paymentMethod)}>Delete</button>
@@ -153,7 +165,7 @@ class Controls extends Component {
 
                 <div class="controls">
                     <form autoComplete="off">
-                        <input type="text" value={size} name="size" onChange={this.handleChange} placeholder="Product Size" required />
+                        <input type="text" value={size} name="size" onChange={this.handleChange} placeholder="Product Size" />
                         <button type="submit" onClick={() => this.sizes_add(size)}>Add</button>
                         <button type="submit" onClick={() => this.sizes_delete(size)}>Delete</button>
                     </form>
@@ -167,7 +179,7 @@ class Controls extends Component {
 
                 <div class="controls">
                     <form autoComplete="off">
-                        <input type="text" value={color} name="color" onChange={this.handleChange} placeholder="Product Color" required />
+                        <input type="text" value={color} name="color" onChange={this.handleChange} placeholder="Product Color" />
                         <button type="submit" onClick={() => this.colors_add(color)}>Add</button>
                         <button type="submit" onClick={() => this.colors_delete(color)}>Delete</button>
                     </form>

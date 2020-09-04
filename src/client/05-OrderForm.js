@@ -107,30 +107,33 @@ class Order extends Component {
     }
 
     order_confirmation = _ => {
-        const { cart, payment_mediums, paymentMethod } = this.state
+        const { cart, name, mobile, email, address, city, date, payment_mediums, paymentMethod } = this.state
 
         if (cart.length > 0) {
-            for (let i = 0; i < payment_mediums.length; i++) {
-                if (payment_mediums[i].paymentMethod_id == paymentMethod) {
-                    if (payment_mediums[i].paymentMethod_account !== null) {
-                        let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Account Number: ${payment_mediums[i].paymentMethod_account}. Would you like to confirm your order?`)
-                        if (confirmation) {
-                            alert("Kindly attach a screenshot of your proof of payment to: sorenphilippines@gmail.com")
-                            this.order_add()
-                            this.receipt()
-                            this.props.updateCart_clear()
+            if (name.trim() !== '' && mobile.trim() !== '' && email.trim() !== '' && address.trim() !== '' && city.trim() !== '' && date.trim() !== '' && paymentMethod.trim() !== '') {
+                for (let i = 0; i < payment_mediums.length; i++) {
+                    if (payment_mediums[i].paymentMethod_id == paymentMethod) {
+                        if (payment_mediums[i].paymentMethod_account !== null) {
+                            let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Account Number: ${payment_mediums[i].paymentMethod_account}. Would you like to confirm your order?`)
+                            if (confirmation) {
+                                alert("Kindly attach a screenshot of your proof of payment to: sorenphilippines@gmail.com")
+                                this.order_add()
+                                this.receipt()
+                                this.props.updateCart_clear()
+                            }
                         }
-                    }
-                    else {
-                        let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Would you like to confirm your order?`)
-                        if (confirmation) {
-                            this.order_add()
-                            this.receipt()
-                            this.props.updateCart_clear()
+                        else {
+                            let confirmation = window.confirm(`You have chosen ${payment_mediums[i].paymentMethod_name} as your mode of payment. Would you like to confirm your order?`)
+                            if (confirmation) {
+                                this.order_add()
+                                this.receipt()
+                                this.props.updateCart_clear()
+                            }
                         }
                     }
                 }
             }
+            else alert("Kindly fill in all input fields.")
         }
         else alert("Your cart is empty.")
     }
