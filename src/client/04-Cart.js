@@ -45,7 +45,7 @@ class Cart extends Component {
 
 	// Render Data
 	cart_render = props => {
-		const { cart, sizes, colors } = this.state
+		const { sizes, colors } = this.state
 
 		const image = _ => {
 			return this.state.productImages.map(item => {
@@ -112,7 +112,7 @@ class Cart extends Component {
 				<section id="cart">
 					<div class="desktopCartView"> 
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
-							{ cart.length > 0 ? cart.map(this.cart_render) : '' }
+							{ cart.length == 0 ? '' : cart.map(this.cart_render) }
 						</Carousel>
 					</div>
 				

@@ -19,7 +19,10 @@ class Client extends Component {
 
 	fetchLocalStorage = _ => {
 		var storedCart = JSON.parse(localStorage.getItem("cart"))
-		this.setState({ cart: storedCart })
+	
+		if (storedCart !== '' || storedCart !== null) {
+			this.setState({ cart: storedCart })
+		}
 	}
 
 	updateLocalStorage = _ => localStorage.setItem("cart", JSON.stringify(this.state.cart))
