@@ -40,13 +40,15 @@ class Order extends Component {
 
         let price = 0
 
-        if (cart.length > 0) {
+        if (cart == null) {
+            this.setState({ price: 0 })
+        }
+        else if (cart.length > 0) {
             for (let i = 0; i < cart.length; i++) {
                 price += cart[i].price
             }
             this.setState({ price })
         }
-        else this.setState({ price: 0 })
     }
 
     orderID_set = _ => {
