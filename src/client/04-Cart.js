@@ -112,12 +112,12 @@ class Cart extends Component {
 				<section id="cart">
 					<div class="desktopCartView"> 
 						<Carousel containerClass="cartContent" responsive={responsive} infinite={false} swipeable={false} draggable={false}>
-							{ cart.length == 0 ? '' : cart.map(this.cart_render) }
+							{ cart == null ? '' : cart.map(this.cart_render) }
 						</Carousel>
 					</div>
 				
 					<div class="mobileCartView">
-						{ cart.length == 0 ? <p>Cart is empty.</p> : cart.map(this.cart_render) }
+						{ cart == null ? <p>Cart is empty.</p> : cart.map(this.cart_render) }
 					</div>
 
 					<div class="cartOptionButtons">
