@@ -23,6 +23,16 @@ button {
 	outline: none;
 }
 
+.fileInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.fileInput::before {
+    content: 'Select Image';
+    border: 1px solid #fff;
+    padding: 5px;
+}
+
 /* Animations */
 .fade-in { 
 	animation: fadeIn 2s; 
