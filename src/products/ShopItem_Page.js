@@ -214,7 +214,7 @@ class ShopItem extends Component {
             quantity: quantity,
         }
         
-        if (size !== '' && color !== '' && price !== '') {
+        if (size !== '' && color !== '' && price !== '' && quantity !== '') {
             this.props.updateCart_add(cartItem)
 
             this.clear()
