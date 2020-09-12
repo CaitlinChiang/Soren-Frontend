@@ -218,6 +218,7 @@ class ShopItem extends Component {
             this.props.updateCart_add(cartItem)
 
             this.clear()
+            alert("Item Added to Cart!")
         }
         else alert("Please fill in all item details.")
     }
